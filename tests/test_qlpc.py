@@ -75,3 +75,37 @@ def test_backtest_runs():
     assert -1.0 < r["max_drawdown"] <= 1.0
     orders = to_orders({"A": 0.6, "B": 0.4}, nav=100000, prices={"A": 50, "B": 25})
     assert len(orders) == 2 and orders[0]["target_notional"] == 60000
+
+
+def test_shrunk_covariance_psd():
+    from qlpc.riskmodels import shrunk_covariance
+    md = _md()
+    cov = shrunk_covariance(md.returns)
+    assert cov.shape == (6, 6)
+    assert (np.linalg.eigvalsh(cov) > -1e-8).all()        # PSD
+
+
+def test_riskfolio_weights_or_none():
+    from qlpc.riskmodels import riskfolio_weights
+    md = _md()
+    w = riskfolio_weights(md.returns, md.tickers, rm="CVaR", obj="Sharpe")
+    if w is not None:                                      # framework present
+        assert abs(sum(w.values()) - 1) < 0.05 and all(v >= -1e-6 for v in w.values())
+
+
+def test_pipeline_reports_weight_engine():
+    r = construct_portfolio("balanced, 3 names", tickers=["A", "B", "C", "D", "E"], allow_live=False)
+    assert r["weight_engine"] in {"riskfolio-cvar-ledoit", "cvxpy-mean-cvar"}
+
+
+def test_mitigation_reduces_or_unavailable():
+    from qlpc.mitigation import readout_mitigation_demo
+    r = readout_mitigation_demo(shots=2048)
+    if r.get("method") == "mthree-readout-mitigation":
+        assert r["err_mitigated"] <= r["err_noisy"] + 1e-6   # mitigation must not make it worse
+
+
+def test_warm_start_study_runs():
+    from qlpc.benchmark import warm_start_study
+    r = warm_start_study(n_problems=4, n_assets=5, budget=2)
+    assert 0 <= r["cold_optimality_rate"] <= 1 and "verdict" in r

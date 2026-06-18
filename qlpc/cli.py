@@ -51,6 +51,8 @@ def main() -> None:
     bt.add_argument("--tickers", nargs="*")
     bt.add_argument("--live", action="store_true")
     bt.add_argument("--quantum", action="store_true")
+    sub.add_parser("benchmark").add_argument("--live", action="store_true")
+    sub.add_parser("mitigation")
     a = ap.parse_args()
 
     if a.cmd == "construct":
@@ -65,6 +67,27 @@ def main() -> None:
                   "max_drawdown", "avg_turnover", "final_equity", "quantum_per_rebalance"):
             print(f"     {k:20s}: {r[k]}")
         print()
+    elif a.cmd == "benchmark":
+        from .benchmark import run_benchmark
+        b = run_benchmark(allow_live=getattr(a, "live", False))
+        print("\n  STRATEGY BACKTEST (QLPC vs proven baselines)")
+        print(f"     {'strategy':18s}{'Sharpe':>8s}{'ann.ret':>9s}{'max-DD':>9s}{'turnover':>10s}")
+        for s, m in b["strategy_backtest"].items():
+            print(f"     {s:18s}{m['sharpe']:>8.2f}{m['annualized_return']:>9.2%}"
+                  f"{m['max_drawdown']:>9.2%}{m['avg_turnover']:>10.2f}")
+        ws = b["warm_start_study"]
+        print(f"\n  WARM-START QAOA study ({ws['n_problems']} problems): "
+              f"cold opt-rate {ws['cold_optimality_rate']} (gap {ws['cold_mean_obj_gap']}) → "
+              f"warm opt-rate {ws['warm_optimality_rate']} (gap {ws['warm_mean_obj_gap']})")
+        em = b["error_mitigation"]
+        print(f"  ERROR MITIGATION (mthree): target {em.get('target_p1')} | "
+              f"noisy {em.get('p_noisy')} (err {em.get('err_noisy')}) → "
+              f"mitigated {em.get('p_mitigated')} (err {em.get('err_mitigated')}); "
+              f"reduction {em.get('error_reduction')}")
+        print()
+    elif a.cmd == "mitigation":
+        from .mitigation import readout_mitigation_demo
+        print(json.dumps(readout_mitigation_demo(), indent=2))
     else:  # demo
         _report(construct_portfolio("conservative, low-drawdown, about 4 names, tail-aware",
                                     allow_live=False))

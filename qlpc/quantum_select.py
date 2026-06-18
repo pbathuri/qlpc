@@ -34,7 +34,8 @@ def _classical_best(mu, sigma, budget, q) -> tuple[list[int], float]:
 
 
 def quantum_select(mu: np.ndarray, sigma: np.ndarray, budget: int, risk_factor: float = 0.5,
-                   reps: int = 2, maxiter: int = 150, quantum: bool = True) -> dict:
+                   reps: int = 2, maxiter: int = 150, quantum: bool = True,
+                   warm_start: bool = False) -> dict:
     """Select `budget` assets via QAOA (QUBO) with an exact classical fallback. Returns
     {selected, method, objective, classical_objective, optimal}. `quantum=False` forces the classical
     exact path (used by the backtest loop for speed; single constructions use QAOA)."""
@@ -55,7 +56,12 @@ def quantum_select(mu: np.ndarray, sigma: np.ndarray, budget: int, risk_factor: 
         po = PortfolioOptimization(expected_returns=np.asarray(mu), covariances=np.asarray(sigma),
                                    risk_factor=risk_factor, budget=budget)
         qp = po.to_quadratic_program()
-        qaoa = QAOA(sampler=StatevectorSampler(), optimizer=COBYLA(maxiter=maxiter), reps=reps)
+        init = None
+        if warm_start:
+            from .warmstart import warm_start_state
+            init = warm_start_state(mu, sigma, risk_factor)
+        qaoa = QAOA(sampler=StatevectorSampler(), optimizer=COBYLA(maxiter=maxiter), reps=reps,
+                    initial_state=init)
         result = MinimumEigenOptimizer(qaoa).solve(qp)
         x = np.array(result.x, dtype=int)               # raw binary selection vector
         selected = [i for i, b in enumerate(x) if b == 1]
@@ -64,7 +70,7 @@ def quantum_select(mu: np.ndarray, sigma: np.ndarray, budget: int, risk_factor: 
             raise ValueError(f"QAOA returned {len(selected)} assets, expected {budget}")
         q_obj = _objective(x.astype(float), mu, sigma, risk_factor)
         out.update(method="quantum-qaoa", selected=selected, objective=round(q_obj, 6),
-                   optimal=(set(selected) == set(cls_sel)))
+                   optimal=(set(selected) == set(cls_sel)), warm_start=bool(warm_start and init is not None))
         return out
     except Exception as e:  # noqa: BLE001
         out.update(method="classical-exact", selected=cls_sel, objective=round(cls_obj, 6),

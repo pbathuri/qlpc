@@ -41,7 +41,17 @@ def construct_portfolio(brief: str, tickers: list[str] | None = None, *,
     sub_mu, sub_sig = md.mu[idx], md.sigma[np.ix_(idx, idx)]
 
     scenarios = simulate_scenarios(sub_mu, sub_sig, n_scenarios=12000)
-    w = convex.mean_cvar(sub_mu, scenarios, alpha=cons["alpha"], lam=cons["lam"])
+    # weight engine: proven Riskfolio-Lib CVaR (Ledoit-Wolf) on the selected subset, CVXPY fallback.
+    from .riskmodels import riskfolio_weights
+    rf_w = riskfolio_weights(md.returns[:, idx], sub_tickers, rm="CVaR", obj="Sharpe",
+                             alpha=1 - cons["alpha"])
+    if rf_w and sum(rf_w.values()) > 0:
+        w = np.array([rf_w.get(t, 0.0) for t in sub_tickers], dtype=float)
+        w = w / (w.sum() or 1.0)
+        weight_engine = "riskfolio-cvar-ledoit"
+    else:
+        w = convex.mean_cvar(sub_mu, scenarios, alpha=cons["alpha"], lam=cons["lam"])
+        weight_engine = "cvxpy-mean-cvar"
     losses = portfolio_losses(w, scenarios)
     risk = quantum_cvar(losses, alpha=cons["alpha"], n_qubits=n_qubits, quantum=quantum)
 
@@ -54,6 +64,7 @@ def construct_portfolio(brief: str, tickers: list[str] | None = None, *,
         "selection": {"method": selection["method"], "tickers": sub_tickers,
                       "optimal_vs_classical": selection.get("optimal")},
         "weights": weights,
+        "weight_engine": weight_engine,
         "expected_return": round(float(sub_mu @ w), 4),
         "risk": risk,
         "graph": {"source": graph_ctx["source"], "context_used": len(graph_ctx["context"])},

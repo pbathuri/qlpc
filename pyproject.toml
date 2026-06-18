@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qlpc"
+version = "0.1.0"
+description = "Quantum-LLM Personalized portfolio Constructor — hybrid QAOA selection + IQAE risk + convex weights + graph-grounded LLM reasoning."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["numpy>=1.26", "scipy>=1.11", "cvxpy>=1.5", "pandas>=2.0"]
+
+[project.optional-dependencies]
+quantum = ["qiskit>=2.0", "qiskit-aer>=0.15", "qiskit-algorithms>=0.3", "qiskit-optimization>=0.6", "qiskit-finance>=0.4"]
+data = ["yfinance>=0.2"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+qlpc = "qlpc.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["qlpc*"]

@@ -47,11 +47,24 @@ def main() -> None:
     c.add_argument("--tickers", nargs="*")
     c.add_argument("--live", action="store_true")
     c.add_argument("--json", action="store_true")
+    bt = sub.add_parser("backtest")
+    bt.add_argument("--tickers", nargs="*")
+    bt.add_argument("--live", action="store_true")
+    bt.add_argument("--quantum", action="store_true")
     a = ap.parse_args()
 
     if a.cmd == "construct":
         r = construct_portfolio(a.brief, a.tickers, allow_live=a.live)
         print(json.dumps(r, indent=2)) if a.json else _report(r)
+    elif a.cmd == "backtest":
+        from .backtest import backtest
+        from .pipeline import DEFAULT_UNIVERSE
+        r = backtest(a.tickers or DEFAULT_UNIVERSE, allow_live=a.live, quantum=a.quantum)
+        print("\n  QLPC dynamic rebalancing backtest")
+        for k in ("data_source", "n_rebalances", "annualized_return", "annualized_vol", "sharpe",
+                  "max_drawdown", "avg_turnover", "final_equity", "quantum_per_rebalance"):
+            print(f"     {k:20s}: {r[k]}")
+        print()
     else:  # demo
         _report(construct_portfolio("conservative, low-drawdown, about 4 names, tail-aware",
                                     allow_live=False))

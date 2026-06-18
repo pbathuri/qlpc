@@ -39,6 +39,7 @@ python -m venv .venv && .venv/Scripts/activate     # (already set up here)
 pip install -r requirements.txt                     # numpy scipy cvxpy qiskit qiskit-finance ...
 python -m qlpc demo                                 # full pipeline on a synthetic market
 python -m qlpc construct "conservative, ~4 names, tail-aware" --tickers AAPL MSFT NVDA JPM XOM JNJ --live
+python -m qlpc backtest                             # DYNAMIC rolling-rebalance backtest (track record)
 pytest -q                                           # tests (pass with or without qiskit)
 ```
 Every quantum module prints which path ran (`quantum-qaoa` / `quantum-iqae` vs the classical fallback) and

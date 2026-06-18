@@ -25,16 +25,17 @@ DEFAULT_UNIVERSE = ["AAPL", "MSFT", "NVDA", "JPM", "JNJ", "GLD"]
 
 def construct_portfolio(brief: str, tickers: list[str] | None = None, *,
                         allow_live: bool = False, n_qubits: int = 6, risk_factor: float = 0.5,
-                        select_reps: int = 1, select_maxiter: int = 80) -> dict:
+                        select_reps: int = 1, select_maxiter: int = 80, quantum: bool = True,
+                        md=None, ground: bool = True) -> dict:
     tickers = tickers or DEFAULT_UNIVERSE
-    graph_ctx = graph.ground(f"portfolio risk preferences {brief}")
+    graph_ctx = graph.ground(f"portfolio risk preferences {brief}") if ground else {"context": [], "source": "off"}
     cons = llm.elicit_constraints(brief)
 
-    md = get_market_data(tickers, allow_live=allow_live)
+    md = md or get_market_data(tickers, allow_live=allow_live)
     budget = int(np.clip(cons["budget"], 2, md.n - 1))
 
     selection = quantum_select(md.mu, md.sigma, budget=budget, risk_factor=risk_factor,
-                               reps=select_reps, maxiter=select_maxiter)
+                               reps=select_reps, maxiter=select_maxiter, quantum=quantum)
     idx = selection["selected"]
     sub_tickers = [md.tickers[i] for i in idx]
     sub_mu, sub_sig = md.mu[idx], md.sigma[np.ix_(idx, idx)]
@@ -42,7 +43,7 @@ def construct_portfolio(brief: str, tickers: list[str] | None = None, *,
     scenarios = simulate_scenarios(sub_mu, sub_sig, n_scenarios=12000)
     w = convex.mean_cvar(sub_mu, scenarios, alpha=cons["alpha"], lam=cons["lam"])
     losses = portfolio_losses(w, scenarios)
-    risk = quantum_cvar(losses, alpha=cons["alpha"], n_qubits=n_qubits)
+    risk = quantum_cvar(losses, alpha=cons["alpha"], n_qubits=n_qubits, quantum=quantum)
 
     weights = {sub_tickers[i]: round(float(w[i]), 4) for i in range(len(idx))}
     result = {

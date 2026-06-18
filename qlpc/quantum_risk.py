@@ -29,10 +29,14 @@ def _discretise(losses: np.ndarray, n_qubits: int) -> tuple[np.ndarray, np.ndarr
     return pmf, centers, lo, hi
 
 
-def quantum_cvar(losses: np.ndarray, alpha: float = 0.95, n_qubits: int = 5) -> dict:
-    """CVaR via IQAE with a classical-MC fallback. Returns {cvar, var, method, classical_cvar, ...}."""
+def quantum_cvar(losses: np.ndarray, alpha: float = 0.95, n_qubits: int = 5, quantum: bool = True) -> dict:
+    """CVaR via IQAE with a classical-MC fallback. Returns {cvar, var, method, classical_cvar, ...}.
+    `quantum=False` forces the classical-MC path (backtest loop speed)."""
     var_c, cvar_c = var_cvar(losses, alpha)                      # classical oracle / fallback
     out = {"var": round(var_c, 6), "classical_cvar": round(cvar_c, 6), "alpha": alpha, "n_qubits": n_qubits}
+    if not quantum:
+        out.update(method="classical-mc", cvar=round(cvar_c, 6))
+        return out
     try:
         from qiskit import QuantumCircuit
         from qiskit.circuit.library import IntegerComparator, StatePreparation

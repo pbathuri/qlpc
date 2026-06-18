@@ -66,3 +66,12 @@ def test_end_to_end_pipeline():
     assert len(r["weights"]) == 3
     assert abs(sum(r["weights"].values()) - 1) < 1e-6
     assert r["risk"]["cvar"] > 0 and r["explanation"]
+
+
+def test_backtest_runs():
+    from qlpc.backtest import backtest, to_orders
+    r = backtest(["A", "B", "C", "D", "E", "F"], lookback=120, rebalance_every=30, quantum=False)
+    assert r["n_rebalances"] >= 2 and r["final_equity"] > 0
+    assert -1.0 < r["max_drawdown"] <= 1.0
+    orders = to_orders({"A": 0.6, "B": 0.4}, nav=100000, prices={"A": 50, "B": 25})
+    assert len(orders) == 2 and orders[0]["target_notional"] == 60000

@@ -34,13 +34,17 @@ def _classical_best(mu, sigma, budget, q) -> tuple[list[int], float]:
 
 
 def quantum_select(mu: np.ndarray, sigma: np.ndarray, budget: int, risk_factor: float = 0.5,
-                   reps: int = 2, maxiter: int = 150) -> dict:
+                   reps: int = 2, maxiter: int = 150, quantum: bool = True) -> dict:
     """Select `budget` assets via QAOA (QUBO) with an exact classical fallback. Returns
-    {selected, method, objective, classical_objective, optimal}."""
+    {selected, method, objective, classical_objective, optimal}. `quantum=False` forces the classical
+    exact path (used by the backtest loop for speed; single constructions use QAOA)."""
     n = len(mu)
     cls_sel, cls_obj = _classical_best(mu, sigma, budget, risk_factor)
     out = {"n": n, "budget": budget, "risk_factor": risk_factor,
            "classical_selected": cls_sel, "classical_objective": round(cls_obj, 6)}
+    if not quantum:
+        out.update(method="classical-exact", selected=cls_sel, objective=round(cls_obj, 6), optimal=True)
+        return out
     try:
         from qiskit.primitives import StatevectorSampler  # qiskit 2.x V2 primitive
         from qiskit_algorithms import QAOA

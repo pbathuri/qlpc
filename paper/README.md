@@ -10,16 +10,25 @@ Track fit: **Quantum Computing for AI → Quantum Optimization**, with a **QNLP*
 Deadline: **June 21, 2026 (AoE)** · Submission: **OpenReview**
 (`https://openreview.net/group?id=qnlp.ai/QNLPAI/2026/Conference`).
 
+### Format requirements (from the CFP)
+- **Short paper: 4 pages max** (LNCS), excluding references and an optional appendix.
+  (Full papers are 8 pages — we target the short-paper track.)
+- **Template: Springer Nature LNCS** (`llncs.cls` + `splncs04.bst`), via the Overleaf LNCS template or
+  the Word template.
+- **Student Poster Session:** a **2-page** LNCS abstract **+** a draft poster PDF.
+- **Poster size:** ≤ **24" wide × 36" high** (portrait). `poster.pdf` is generated at exactly 24×36.
+
 ## Files
 | file | what |
 |------|------|
 | `circuits.py` | Instrumented QAOA (QUBO→Ising, per-layer statevector snapshots, language tilt) + IQAE CVaR |
 | `experiments.py` | Generates every figure + `results.json` (deterministic, fixed seeds) |
-| `poster.py` | Assembles `poster.pdf` / `poster.png` (A2) from the figures + headline numbers |
-| `paper.tex` | Overleaf-ready short paper (numbers as macros at the top) |
-| `paper.md` | Readable full draft of the same paper |
-| `abstract_1page.md` | 1-page abstract for the student-poster track |
-| `references.bib` | Bibliography |
+| `poster.py` | Assembles `poster.pdf` / `poster.png` at **24"×36"** from the figures + headline numbers |
+| `paper.tex` | **LNCS** short paper — 4-page body + appendix (numbers as macros at the top) |
+| `abstract.tex` | **LNCS** 2-page abstract for the student-poster track |
+| `paper.md` | Readable full draft of the paper (Markdown mirror) |
+| `abstract_1page.md` | Plain-text condensed abstract (reference; the LNCS one is `abstract.tex`) |
+| `references.bib` | Bibliography (LNCS `splncs04` style) |
 | `figures/*.png` | fig1 state evolution · fig2 depth · fig3 process · fig4 language · fig5 risk |
 | `results.json` | All numbers, for reproducibility |
 
@@ -27,13 +36,17 @@ Deadline: **June 21, 2026 (AoE)** · Submission: **OpenReview**
 ```bash
 # from the qlpc repo root, using the qlpc venv (qiskit 2.x + aer + matplotlib + scipy)
 python -m paper.experiments      # -> figures/*.png + results.json   (~1 min)
-python -m paper.poster           # -> poster.pdf + poster.png
+python -m paper.poster           # -> poster.pdf + poster.png (24x36)
 ```
 
-## Compiling the paper
-No LaTeX engine is installed locally. Compile `paper.tex` + `references.bib` on **Overleaf**
-(New Project → Upload, add the `figures/` folder), or install MiKTeX/TeX Live and run
-`pdflatex paper && bibtex paper && pdflatex paper && pdflatex paper`.
+## Compiling the paper (no local LaTeX engine)
+Use the **Overleaf "Springer Nature LNCS" template** (it provides `llncs.cls` + `splncs04.bst`):
+1. New Project → from the LNCS template (or upload `paper.tex`, `abstract.tex`, `references.bib`).
+2. Upload the `figures/` folder.
+3. Compile. `paper.tex` and `abstract.tex` already use `\documentclass{llncs}`.
+
+Keep the **body ≤ 4 pages**; the three supporting figures are in the appendix (allowed as extra pages).
+Check the compiled length before submitting and trim prose if the body spills past page 4.
 
 ## Headline results (see `results.json`)
 - **State evolution (p=2):** P(optimum) 0.062 → 0.625 (10.0× a uniform guess), approx-ratio 0.92, exact
@@ -48,7 +61,10 @@ the oracle. The language tilt is a simple additive mechanism; the IQAE advantage
 The contribution is **transparency + a language↔quantum↔finance bridge**, not a performance record.
 
 ## Submission checklist (you do these — I can't submit for you)
-- [ ] Compile `paper.tex` → `paper.pdf` (Overleaf).
-- [ ] Confirm the chosen track on OpenReview (full paper vs. 1-page abstract + poster).
-- [ ] Add author name/affiliation in `paper.tex` (currently anonymous placeholder).
-- [ ] Upload `paper.pdf` (and `poster.pdf` if submitting to the poster track) before Jun 21 AoE.
+- [ ] Create an **OpenReview profile** (the CFP asks for this ≥2 weeks ahead — do it now).
+- [ ] Fill in author name / affiliation / ORCID / email in `paper.tex` (and `abstract.tex`) — currently
+      placeholders (`First Author`, `author@example.com`).
+- [ ] Compile on Overleaf with the **LNCS** template → `paper.pdf`; **verify the body is ≤ 4 pages**.
+- [ ] Pick the track: **short paper** (`paper.pdf`) for the main conference, **or** the **poster
+      session** (`abstract.pdf` from `abstract.tex`, ≤ 2 pages, **plus** `poster.pdf`).
+- [ ] Upload the PDF(s) on OpenReview before **June 21, 2026 (AoE)**.

@@ -1,0 +1,66 @@
+% QNLPAI 2026 — STUDENT POSTER SESSION ABSTRACT (max 2 pages, Springer LNCS).
+% Submit together with the draft poster (poster.pdf). Compile on Overleaf with the
+% "Springer Nature LNCS" template.
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\title{Watching Language Steer a Quantum Optimizer: State-Evolution Visualization of
+LLM-Conditioned QAOA for Portfolio Selection}
+\titlerunning{Watching Language Steer a Quantum Optimizer}
+\author{First Author\inst{1}}
+\authorrunning{First Author}
+\institute{Affiliation, City, Country \\ \email{author@example.com}}
+\maketitle
+
+\begin{abstract}
+We present a fully state-resolved, IBM-Qiskit implementation of the quantum core of QLPC, a personalized
+portfolio constructor, and use it to make a NISQ optimizer's working process legible and to bridge
+natural language with quantum optimization in finance.
+\keywords{QAOA \and Quantum optimization \and LLM-conditioning \and Quantum finance.}
+\end{abstract}
+
+\section{Problem and Approach}
+Variational quantum optimizers (QAOA) are reported as black boxes---one bitstring, one approximation
+ratio---hiding \emph{how} the quantum state decides, and offering no port for the language-shaped views
+that drive real allocation. We re-implement QLPC's quantum core, instrumented so every intermediate state
+is observable. (1)~\textbf{State-evolution visualization.} Cardinality-constrained Markowitz selection is
+mapped to a diagonal Ising Hamiltonian and solved with QAOA~\cite{farhi2014qaoa}; we snapshot the full
+statevector after the initial superposition and after every cost/mixer layer, rendering the probability
+over all $2^n$ candidate portfolios as it concentrates onto the optimum. (2)~\textbf{Language-conditioned
+QAOA (the QNLP bridge).} An LLM emits a signed per-asset conviction from natural-language views; we tilt
+the expected-return vector by it, deforming the cost Hamiltonian, so that rising linguistic conviction
+continuously migrates the quantum ground state across portfolios. (3)~\textbf{Quantum risk.} An Iterative
+Quantum Amplitude Estimation circuit~\cite{woerner2019risk,grant2021iqae} loads a fat-tailed loss
+distribution and estimates the tail/CVaR.
+
+\section{Results}
+All experiments are exact on the statevector simulator with fixed seeds (well-separated 4-asset instance,
+hold 2). \emph{State evolution:} QAOA at depth $p{=}2$ drives P(optimum) from $1/16=0.062$ to $0.63$
+(layers $0.062\!\to\!0.25\!\to\!0.63$)---a $10\times$ concentration over a uniform guess---with
+approximation ratio $0.92$ and best-sample recovery of the exact optimum; $p{=}4$ reaches P(opt)$=0.75$.
+\emph{Language steering:} a graded LLM bullish view on the two lower-return assets migrates the optimum
+$\{$A,B$\}\!\to\!\{$A,C$\}\!\to\!\{$C,D$\}$, and the QAOA modal selection tracks the language-shifted
+optimum in all three regimes---the selection is a continuous function of language (Fig.~\ref{fig:lang}).
+\emph{Risk:} IQAE recovers the tail-exceedance probability to within $0.07\%$ of the loaded distribution.
+To our knowledge this is the first demonstration of a natural-language view \emph{visibly} deforming the
+state evolution of a quantum portfolio optimizer.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.86\textwidth]{figures/fig4_language.png}
+\caption{Rising LLM conviction deforms the quantum ground state; the QAOA modal selection ($\star$) tracks
+the language-shifted optimum across feasible portfolios.}\label{fig:lang}
+\end{figure}
+
+\paragraph{Scope (stated up front).} Small, well-separated, exactly-simulated instances; no scaling or
+supremacy claim (brute force is the oracle); additive language tilt; asymptotic (not wall-clock) IQAE
+advantage. The contribution is transparency and a language$\leftrightarrow$quantum$\leftrightarrow$finance
+bridge. Code and figures are reproducible from \texttt{python -m paper.experiments} (Qiskit~2.x + Aer).
+
+\bibliographystyle{splncs04}
+\bibliography{references}
+\end{document}

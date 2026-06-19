@@ -25,8 +25,8 @@ def panel(ax, name):
 
 def main():
     fig = plt.figure(figsize=(24, 36), facecolor=BG)            # QNLPAI max poster size 24" x 36" portrait
-    gs = GridSpec(6, 2, figure=fig, height_ratios=[1.15, 0.5, 1.25, 1.25, 1.25, 0.55],
-                  hspace=0.18, wspace=0.06, left=0.04, right=0.96, top=0.97, bottom=0.03)
+    gs = GridSpec(6, 2, figure=fig, height_ratios=[1.05, 0.92, 1.30, 1.30, 0.78, 0.45],
+                  hspace=0.22, wspace=0.06, left=0.04, right=0.96, top=0.97, bottom=0.03)
 
     # --- title band ---
     t = fig.add_subplot(gs[0, :]); t.axis("off"); t.set_facecolor(BG)
@@ -38,46 +38,45 @@ def main():
     t.text(0.5, 0.16, "QNLPAI 2026  ·  Quantum Computing for AI — Quantum Optimization (QNLP bridge)  ·  "
                       "QLPC Project", ha="center", va="center", color="#8a93a3", fontsize=19)
 
-    # --- problem / approach text ---
+    # --- problem / approach text (two objectives; risk module is out of scope here) ---
     txt = fig.add_subplot(gs[1, :]); txt.axis("off")
-    f1, lang, risk = R["fig1"], R["fig4_language"], R["fig5_risk"]
+    f1, lang = R["fig1"], R["fig4_language"]
     traj = " → ".join("{" + ",".join("ABCD"[i] for i in o) + "}" for o in lang["optimum_trajectory"])
     txt.text(0.01, 0.5,
              "PROBLEM   QAOA is reported as a black box — one bitstring, one ratio — hiding HOW the state\n"
              "decides, with no port for the language-shaped views that drive real allocation.\n\n"
-             "APPROACH   Instrument the quantum core of QLPC on IBM Qiskit so every state is observable:\n"
-             "(1) snapshot the statevector each QAOA layer;  (2) encode an LLM natural-language view as a\n"
-             "tilt on expected returns that deforms the cost Hamiltonian;  (3) IQAE for tail / CVaR risk.",
+             "GAP   LLM views exist for CLASSICAL Black-Litterman (Lee+ 2025); quantum views exist but are\n"
+             "QML-predicted numbers solved by VQE (Chen+ 2023) — no language, no view of the quantum state.\n\n"
+             "TWO OBJECTIVES   O1  encode an LLM natural-language view as a tilt on expected returns that\n"
+             "deforms the QAOA cost Hamiltonian;   O2  snapshot the statevector each layer to make the\n"
+             "language-steering auditable.   (Exact statevector simulation; IBM Qiskit.)",
              ha="left", va="center", color=INK, fontsize=18, family="monospace")
 
-    panel(fig.add_subplot(gs[2, 0]), "fig1_state_evolution.png")
-    panel(fig.add_subplot(gs[2, 1]), "fig4_language.png")
-    panel(fig.add_subplot(gs[3, 0]), "fig2_depth.png")
-    panel(fig.add_subplot(gs[3, 1]), "fig3_process.png")
-    panel(fig.add_subplot(gs[4, 0]), "fig5_risk.png")
+    panel(fig.add_subplot(gs[2, 0]), "fig1_state_evolution.png")   # O2: state evolution
+    panel(fig.add_subplot(gs[2, 1]), "fig4_language.png")          # O1: language steering
+    panel(fig.add_subplot(gs[3, 0]), "fig2_depth.png")             # support: depth
+    panel(fig.add_subplot(gs[3, 1]), "fig3_process.png")           # support: working process
 
-    # --- results box (right of fig5) ---
-    rb = fig.add_subplot(gs[4, 1]); rb.axis("off")
+    # --- results box (full width, replaces the dropped risk panel) ---
+    rb = fig.add_subplot(gs[4, :]); rb.axis("off")
     lines = [
-        ("RESULTS  (exact statevector, fixed seeds)", HI, 22, "bold"),
-        (f"• State concentrates on the optimum: P(opt) 0.062 → {f1['p_opt']:.2f} at p=2", INK, 18, "normal"),
-        (f"   = {f1['concentration_x']:.1f}× a uniform guess;  approx-ratio {f1['approx_ratio']:.2f};", INK, 18, "normal"),
-        ("   exact optimum recovered by best sample.", INK, 18, "normal"),
-        (f"• Language steers the ground state: optimum {traj}", ACC, 18, "bold"),
-        ("   QAOA modal selection tracks it in all 3 regimes.", INK, 18, "normal"),
-        (f"• IQAE tail-prob within {risk['rel_err_tail']*100:.2f}% of the loaded", INK, 18, "normal"),
-        ("   distribution (the quantum-estimated quantity).", INK, 18, "normal"),
+        ("RESULTS  (exact statevector, fixed seeds)", HI, 24, "bold"),
+        (f"O2  State concentrates on the optimum:  P(opt) 0.062 → {f1['p_opt']:.2f} at p=2  "
+         f"= {f1['concentration_x']:.1f}× a uniform guess;  approx-ratio {f1['approx_ratio']:.2f};  "
+         "exact optimum recovered.", INK, 19, "normal"),
+        (f"O1  Language steers the ground state:  optimum {traj}  as LLM conviction rises;  "
+         "the QAOA modal selection tracks it in all 3 regimes.", ACC, 19, "bold"),
         ("", INK, 10, "normal"),
-        ("HONEST LIMITS  small, well-separated, simulated", "#8a93a3", 15, "italic"),
-        ("instances; no scaling/supremacy claim; additive tilt.", "#8a93a3", 15, "italic"),
+        ("HONEST LIMITS   small (n=4), well-separated, exactly-simulated instances;  no scaling / hardware /"
+         " quantum-advantage claim (brute force is the oracle);  additive language tilt.", "#8a93a3", 16, "italic"),
     ]
-    y = 0.97
+    y = 0.95
     for s, c, fs, w in lines:
         style = "italic" if w == "italic" else "normal"
         wt = "bold" if w == "bold" else "normal"
         rb.text(0.0, y, s, ha="left", va="top", color=c, fontsize=fs, family="monospace",
-                fontstyle=style, fontweight=wt)
-        y -= 0.088
+                fontstyle=style, fontweight=wt, wrap=True)
+        y -= 0.16
 
     # --- footer ---
     ft = fig.add_subplot(gs[5, :]); ft.axis("off")

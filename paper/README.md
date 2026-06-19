@@ -1,10 +1,19 @@
 # QNLPAI 2026 paper — instrumented quantum circuits for QLPC
 
-This folder contains a submission-ready short paper + a draft poster for **QNLPAI 2026** (Quantum AI
-2026, Indiana University Indianapolis), built on the quantum core of **QLPC**. It re-implements QLPC's
-QAOA portfolio selection and IQAE risk estimation on IBM Qiskit, *instrumented so the quantum state
-evolution and the optimizer's working process are fully visible*, and adds **language-conditioned QAOA**
-— an LLM natural-language view that visibly steers the quantum ground state.
+This folder contains the **QNLPAI 2026** Student-Poster-Session submission (2-page LNCS abstract + draft
+poster) built on the quantum core of **QLPC**, plus a longer short-paper draft for later. It re-implements
+QLPC's QAOA portfolio selection on IBM Qiskit, *instrumented so the quantum state evolution is fully
+visible*, and adds **language-conditioned QAOA** — an LLM natural-language view that visibly steers the
+quantum ground state.
+
+**Target track: Student Poster Session.** Submit `abstract.pdf` (from `abstract.tex`) + `poster.pdf`.
+
+**Scope — exactly two objectives** (see `AUTHORING_NOTES.md`):
+- **O1** Language-conditioned QAOA: an LLM view tilts μ, deforming the cost Hamiltonian.
+- **O2** State-evolution visualization: per-layer statevector snapshots make the steering auditable.
+
+The IQAE/CVaR **risk module is out of scope for the poster** (it is replication, not the language bridge);
+it stays in the repo (`circuits.py:iqae_cvar`, `experiments.py:fig_risk`) for a future full paper.
 
 Track fit: **Quantum Computing for AI → Quantum Optimization**, with a **QNLP** bridge (LLM views).
 Deadline: **June 21, 2026 (AoE)** · Submission: **OpenReview**
@@ -24,8 +33,9 @@ Deadline: **June 21, 2026 (AoE)** · Submission: **OpenReview**
 | `circuits.py` | Instrumented QAOA (QUBO→Ising, per-layer statevector snapshots, language tilt) + IQAE CVaR |
 | `experiments.py` | Generates every figure + `results.json` (deterministic, fixed seeds) |
 | `poster.py` | Assembles `poster.pdf` / `poster.png` at **24"×36"** from the figures + headline numbers |
-| `paper.tex` | **LNCS** short paper — 4-page body + appendix (numbers as macros at the top) |
-| `abstract.tex` | **LNCS** 2-page abstract for the student-poster track |
+| `paper.tex` | **LNCS** short paper — 4-page body + appendix (longer story, all 3 modules) |
+| `abstract.tex` | **LNCS** 2-page poster-track abstract — **the submission** (2 objectives, lit-positioned) |
+| `AUTHORING_NOTES.md` | Peer-review simulation, scope rationale, human/machine split, reading list (not submitted) |
 | `paper.md` | Readable full draft of the paper (Markdown mirror) |
 | `abstract_1page.md` | Plain-text condensed abstract (reference; the LNCS one is `abstract.tex`) |
 | `references.bib` | Bibliography (LNCS `splncs04` style) |

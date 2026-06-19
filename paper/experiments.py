@@ -34,6 +34,13 @@ N = len(MU)
 RESTARTS, MAXITER = 10, 200          # enough for clean p=2 results; keeps the suite to ~1 min
 
 
+def save(fig, stem):
+    """Write each figure as raster PNG (poster/preview) AND vector PDF (Springer prefers vector)."""
+    fig.savefig(os.path.join(FIG, stem + ".png"))
+    fig.savefig(os.path.join(FIG, stem + ".pdf"))   # vector — used by the LNCS .tex
+    plt.close(fig)
+
+
 def bitlabel(idx, n=N):
     return "".join(str((idx >> k) & 1) for k in range(n))         # asset A (bit0) leftmost
 
@@ -77,7 +84,7 @@ def fig_state_evolution(reps=2):
     ax.set_title(f"State evolution: probability concentrating on the optimal selection (QAOA p={reps})",
                  pad=12)
     fig.colorbar(im, ax=ax, label="probability", fraction=0.025)
-    fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig1_state_evolution.png")); plt.close(fig)
+    fig.tight_layout(); save(fig, "fig1_state_evolution")
 
     RESULTS["fig1"] = {"reps": reps, "p_opt_layers": run.p_opt_layers, "p_opt": run.p_opt,
                        "concentration_x": run.concentration, "approx_ratio": run.approx_ratio,
@@ -106,7 +113,7 @@ def fig_depth(max_reps=4):
     ax.set_ylim(0, 1.02); ax.set_ylabel("ratio / probability")
     ax.set_title("Deeper circuits → sharper concentration on the optimum")
     ax.legend(fontsize=8, loc="center right")
-    fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig2_depth.png")); plt.close(fig)
+    fig.tight_layout(); save(fig, "fig2_depth")
     RESULTS["fig2_depth"] = {"reps": reps_list, "approx_ratio": ARs, "p_opt": Pops, "concentration": concs}
 
 
@@ -125,7 +132,7 @@ def fig_process(run):
     a2.plot(range(len(ent)), ent, "o-", color="#39d0c4")
     a2.set_xlabel("layer"); a2.set_ylabel("entropy of qubit A (bits)")
     a2.set_title("Entanglement builds, then localises")
-    fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig3_process.png")); plt.close(fig)
+    fig.tight_layout(); save(fig, "fig3_process")
     RESULTS["fig3_process"] = {"energy_history_len": len(hist), "energy_min": float(min(hist)),
                                "entropy_by_layer": [float(x) for x in ent]}
 
@@ -162,7 +169,7 @@ def fig_language(reps=2):
     ax.set_ylabel("P(selection | feasible)")
     ax.set_title("Language steers the optimiser: rising LLM conviction deforms the quantum ground state")
     ax.legend(fontsize=8, title="A B C D")
-    fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig4_language.png")); plt.close(fig)
+    fig.tight_layout(); save(fig, "fig4_language")
     RESULTS["fig4_language"] = {"scenarios": rows,
                                 "optimum_trajectory": [r["optimum"] for r in rows]}
 
@@ -191,7 +198,7 @@ def fig_risk(seed=0, n_qubits=5, alpha=0.95):
     a2.set_title(f"IQAE vs classical  (tail err {res['rel_err_tail']*100:.1f}%, "
                  f"CVaR err {res['rel_err_cvar']*100:.1f}%)")
     a2.set_ylabel("value")
-    fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig5_risk.png")); plt.close(fig)
+    fig.tight_layout(); save(fig, "fig5_risk")
 
     RESULTS["fig5_risk"] = {k: (v if not isinstance(v, np.ndarray) else None)
                             for k, v in res.items() if k not in ("pmf", "centers", "amplitudes")}

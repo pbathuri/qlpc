@@ -55,7 +55,7 @@ The language effect is measured at the exact optimum to separate it from optimiz
 
 \section{Results}
 \begin{figure}[t]\centering
-\includegraphics[width=0.74\textwidth]{compare_clean_vs_contaminated.pdf}
+\includegraphics[width=0.66\textwidth]{compare_clean_vs_contaminated.pdf}
 \caption{The out-of-sample premium of LLM-conditioned tilts over matched random tilts collapses from
 $+0.76\%$ ($p\!\approx\!0$) with a training-overlapping LLM to $-0.23\%$ ($p=0.94$) with a pre-cutoff LLM
 on the same headlines (left); per-quarter effects over four decision dates (right).}
@@ -68,9 +68,8 @@ training-overlapping LLM beats matched random tilts by a language-specific premi
 training-overlapping model. The conditioning has real mechanism leverage (a $\pm10\%$ view changes the
 exact optimum in $47$--$68\%$ of instances), yet QAOA at depth $p{=}4$ recovers the true optimum only
 $7.7\%$ of the time; we make no quantum-advantage claim. Limitations: four decision dates (instance-level
-$p$ is
-pseudo-replicated); the clean and contaminated LLMs differ in capability as well as training cutoff, so
-the two are not fully separated; small-$n$ exact simulation; large-cap US; no transaction costs. None
+$p$ is pseudo-replicated); the clean and contaminated LLMs differ in capability as well as cutoff, so the
+two are not fully separated; small-$n$ simulation; large-cap US; no costs. None
 overturn the robust finding---the apparent benefit is absent for a pre-cutoff model. The takeaway is a
 transparent language$\to$quantum pipeline and a quantified warning: an LLM whose training overlaps the
 test period can show out-of-sample ``alpha'' that a pre-cutoff model does not, a likely training-horizon

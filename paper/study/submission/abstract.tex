@@ -1,6 +1,6 @@
 % QNLPAI 2026 — STUDENT POSTER SESSION ABSTRACT (<= 2 pages, Springer LNCS).
-% Compile on the Overleaf "Springer Nature LNCS" template (provides llncs.cls + splncs04.bst).
-% Submit with the draft poster (poster.pdf). Keep compare_clean_vs_contaminated.pdf next to this .tex.
+% Overleaf "Springer Nature LNCS" template (provides llncs.cls + splncs04.bst).
+% Keep compare_clean_vs_contaminated.pdf next to this .tex. Submit with poster.pdf.
 \documentclass[runningheads]{llncs}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
@@ -9,8 +9,8 @@
 
 \begin{document}
 
-\title{Does Language Really Help a Quantum Portfolio Optimizer? A Bias-Controlled Study and a
-Training-Horizon Confound in LLM-Conditioned QAOA}
+\title{Does Language Really Help a Quantum Portfolio Optimizer? A Training-Horizon Confound in
+LLM-Conditioned QAOA}
 \titlerunning{A Training-Horizon Confound in LLM-Conditioned QAOA}
 \author{Pradyot Bathuri\inst{1}}
 \authorrunning{P. Bathuri}
@@ -18,73 +18,64 @@ Training-Horizon Confound in LLM-Conditioned QAOA}
 \maketitle
 
 \begin{abstract}
-Large language models (LLMs) are increasingly used to turn financial text into views that drive
-allocation, and quantum optimizers are proposed for the discrete selection these allocations require. We
-build a bias-controlled pipeline that bridges the two---an LLM reads point-in-time news into per-asset
-convictions that tilt the cost Hamiltonian of a cardinality-constrained Quantum Approximate Optimization
-Algorithm (QAOA) portfolio optimizer---and ask whether the language adds genuine out-of-sample value. It
-appears to: an LLM whose training overlaps the evaluation window beats matched random tilts by $+0.76\%$
-per quarter ($p\!\approx\!0$). But with a \emph{genuinely out-of-sample} LLM (Llama~2, cutoff Sept.\ 2022)
-on the \emph{same} headlines, the premium collapses to $-0.23\%$ ($p=0.94$, indistinguishable from
-random): the apparent signal is the model's \emph{training-horizon hindsight}, not prediction. We
-contribute the reproducible methodology and a concrete warning about a subtle, pervasive confound in
-LLM-for-finance backtests.
+Large language models (LLMs) increasingly turn financial text into views that drive allocation, and
+quantum optimizers are proposed for the discrete selection these require. We build a bias-controlled
+pipeline bridging the two---an LLM reads point-in-time news into per-asset convictions that tilt the cost
+Hamiltonian of a cardinality-constrained Quantum Approximate Optimization Algorithm (QAOA) portfolio
+optimizer---and ask whether the language adds out-of-sample value. It appears to: an LLM whose training
+overlaps the evaluation window beats matched random tilts by $+0.76\%$/quarter ($p\!\approx\!0$). But a
+\emph{genuinely out-of-sample} LLM (Llama~2, cutoff Sept.\ 2022) on the \emph{same} headlines yields
+$-0.23\%$ ($p=0.94$, indistinguishable from random): the apparent signal is the model's
+\emph{training-horizon hindsight}, not prediction. We contribute the reproducible methodology and a
+concrete warning about a subtle, pervasive confound in LLM-for-finance backtests.
 \keywords{QAOA \and Quantum optimization \and LLM-conditioning \and Look-ahead bias \and Quantum finance.}
 \end{abstract}
 
-\section{Motivation}
+\section{Motivation and Method}
 Two recent lines sit either side of a gap: Lee et al.~\cite{lee2025llmbl} drive Black--Litterman views
 with an LLM but optimize \emph{classically}, while Chen et al.~\cite{chen2023qbl} bring numerically
-predicted views into a \emph{quantum} pipeline with no natural language. We occupy the middle---an LLM
-reads real news into a tilt on a QAOA~\cite{farhi2014qaoa} cost Hamiltonian---and treat ``do LLM news
-views help?'' as a \emph{measurement problem}: is a positive backtest signal, or an artifact?
+predicted views into a \emph{quantum} pipeline with no language. We occupy the middle and treat ``do LLM
+news views help?'' as a \emph{measurement problem}. The universe is an index (Dow~30), not author-chosen;
+returns are CRSP total returns with Ledoit--Wolf covariance~\cite{ledoit2004}. Holding $B$ of $n$ assets
+to maximize $\mu^\top x - q\,x^\top\Sigma x$~\cite{markowitz1952}, we map the penalized binary problem to
+a diagonal Ising Hamiltonian solved by QAOA~\cite{farhi2014qaoa}. An LLM reads RavenPack headlines
+time-stamped \emph{strictly before} each quarterly decision date into convictions $v_i\in[-1,1]$; a
+$\pm10\%$ view tilts $\mu\to\mu+s\,v$ (the sentiment-to-view convention~\cite{black1992litterman}).
+Estimation uses the train window only; evaluation the held-out next quarter. Bias controls: hundreds of
+(subset $\times$ rolling-window) instances from a fixed seed; pre-registered metrics; a \emph{placebo} of
+matched random tilts; an ablation against RavenPack's own sentiment; and, decisively, two LLMs on the
+\emph{same} headlines---\textbf{qwen2.5-14B} (released 2024, training \emph{overlaps} the window) and
+\textbf{Llama~2} (cutoff Sept.\ 2022, \emph{before} it). The language effect is measured at the exact
+optimum to separate it from optimizer noise.
 
-\section{Method}
-The universe is an index (Dow~30), not author-chosen; returns are CRSP total returns with Ledoit--Wolf
-covariance~\cite{ledoit2004}. Holding $B$ of $n$ assets to maximize $\mu^\top x - q\,x^\top\Sigma x$
-\cite{markowitz1952}, we map the penalized binary problem to a diagonal Ising Hamiltonian solved by QAOA.
-An LLM reads RavenPack headlines time-stamped \emph{strictly before} each quarterly decision date into
-convictions $v_i\in[-1,1]$; a $\pm10\%$ annual view tilts $\mu\to\mu+s\,v$ (the sentiment-to-view
-convention~\cite{black1992litterman}). Estimation uses the train window only; evaluation uses the
-held-out next quarter. Bias controls---the point of the paper---are: hundreds of (subset $\times$
-rolling-window) instances from a fixed seed; pre-registered metrics; a \emph{placebo} of matched random
-tilts (does the \emph{language} matter, or any tilt?); an ablation against RavenPack's own sentiment
-score; and, decisively, two LLMs on the \emph{same} headlines---\textbf{qwen2.5-14B} (released 2024,
-training \emph{overlaps} the evaluation window) and \textbf{Llama~2} (cutoff Sept.\ 2022, \emph{before}
-it). The language effect is measured at the exact optimum to separate it from optimizer noise.
-
-\section{Results}
+\section{Results and Contribution}
 \begin{figure}[t]\centering
-\includegraphics[width=0.94\textwidth]{compare_clean_vs_contaminated.pdf}
+\includegraphics[width=0.80\textwidth]{compare_clean_vs_contaminated.pdf}
 \caption{The out-of-sample premium of LLM-conditioned tilts over matched random tilts collapses from
 $+0.76\%$ ($p\!\approx\!0$) with a training-overlapping LLM to $-0.23\%$ ($p=0.94$) with a pre-cutoff LLM
-on the same headlines (left); per-quarter effects, over only four decision dates (right).}
+on the same headlines (left); per-quarter effects over four decision dates (right).}
 \label{fig:main}
 \end{figure}
 Over 1{,}600 instances (Dow~30, $n{=}14$ qubits, hold~5, four quarterly dates 2023-12--2024-09), the
-training-overlapping LLM beats matched random tilts by a language-specific premium of $+0.76\%$/quarter
-($p\!\approx\!0$, positive in 3/4 quarters). The pre-cutoff LLM, on identical headlines, yields $-0.23\%$
-($p=0.94$, 2/4): statistically indistinguishable from random (Fig.~\ref{fig:main}). The signal does not
-survive removal of the model's hindsight. The language does have mechanism leverage---a $\pm10\%$ view
-changes the exact optimal portfolio in $47$--$68\%$ of instances---yet shallow QAOA is a \emph{weak}
-exact optimizer, recovering the true optimum in only $7.7\%$ of instances. We make no quantum-advantage
-claim; QAOA is the studied object, and the economic test is run at the exact optimum because the solver
-is too noisy to rely on. \emph{Scope:} four decision dates (instance-level $p$ is pseudo-replicated; the
-honest unit is the quarter), small-$n$ exact simulation (no hardware), large-cap US only, no transaction
-costs---none of which inflate the central result: the premium's disappearance under a clean LLM.
-
-\section{Contribution}
-We provide (i)~a transparent, bias-controlled pipeline linking natural language to a quantum portfolio
-optimizer, and (ii)~a quantified warning---LLM training-horizon look-ahead can manufacture out-of-sample
-``alpha'' that vanishes with a pre-cutoff model. LLM-for-finance studies should date their model against
-their backtest. All results are reproducible from released code with fixed seeds and committed data
-caches, and the instance sweep scales on HPC for the many-period study that significance ultimately needs.
+training-overlapping LLM beats matched random tilts by $+0.76\%$/quarter ($p\!\approx\!0$, positive in
+3/4 quarters); the pre-cutoff LLM, on identical headlines, yields $-0.23\%$ ($p=0.94$, 2/4)---%
+indistinguishable from random (Fig.~\ref{fig:main}). The signal does not survive removing the model's
+hindsight. The language does have leverage (a $\pm10\%$ view changes the exact optimum in $47$--$68\%$ of
+instances), yet shallow QAOA is a \emph{weak} optimizer, recovering the true optimum only $7.7\%$ of the
+time; we make no quantum-advantage claim, and run the economic test at the exact optimum because the
+solver is too noisy. \emph{Scope:} four decision dates (instance-level $p$ is pseudo-replicated; the
+honest unit is the quarter), small-$n$ exact simulation (no hardware), large-cap US, no transaction
+costs---none of which inflate the central result. \textbf{We contribute} a transparent, bias-controlled
+pipeline linking language to a quantum portfolio optimizer, and a quantified warning: LLM
+training-horizon look-ahead can manufacture out-of-sample ``alpha'' that vanishes with a pre-cutoff
+model. LLM-for-finance studies should date their model against their backtest. All results are
+reproducible from released code (fixed seeds, committed data caches) and scale on HPC for the many-period
+study significance ultimately needs.
 
 \begin{credits}
-\subsubsection{\ackname} The author thanks Professor Yuxi Hong for helpful guidance and discussions.
-Implementation and figures were produced with the assistance of an AI coding tool; the research
-questions, design, interpretation, and all claims are the author's own, and every result is reproducible
-from the released code.
+\subsubsection{\ackname} The author thanks Professor Yuxi Hong for helpful guidance. Implementation and
+figures used an AI coding tool; the questions, design, interpretation, and claims are the author's own,
+and every result is reproducible from the released code.
 \subsubsection{\discintname} The author has no competing interests to declare.
 \end{credits}
 

@@ -22,11 +22,14 @@ source "$HOME/qlpc-qaoa-env/bin/activate"
 export QLPC_DEVICE=gpu                   # backend.get_xp() -> cupy on the A100
 cd "$SLURM_SUBMIT_DIR"                    # submit from the repo root (parent of paper/)
 
-# Full-scale knobs (edit freely). n up to ~26 fits an A100-40GB; ~30 on A100-80GB.
-N=22
-BUDGET=6
+# Scale knobs. NOTE on statistical validity: drawing n of the 30 Dow names — keep n modest so subsets are
+# DIVERSE (n=14 of 30 overlaps ~47%; n=22 overlaps ~73% and the instances stop being independent).
+# Statistical power comes from MANY diverse instances × decision dates, not from heroic n. To go to large
+# n with diversity, switch to a bigger universe (S&P 100): re-pull CRSP + rebuild RavenPack for 100 names.
+N=14
+BUDGET=5
 REPS=4
-INSTANCES=200                            # per rolling window, per shard-set (sharded below)
+INSTANCES=400                            # subsets per rolling window, per shard-set (sharded below)
 Q=2.0
 
 python -m paper.study.run_study \

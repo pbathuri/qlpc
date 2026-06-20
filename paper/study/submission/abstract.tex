@@ -26,8 +26,8 @@ optimizer---and ask whether the language adds out-of-sample value. It appears to
 overlaps the evaluation window beats matched random tilts by $+0.76\%$/quarter ($p\!\approx\!0$). But a
 \emph{genuinely out-of-sample} LLM (Llama~2, cutoff Sept.\ 2022) on the \emph{same} headlines yields
 $-0.23\%$ ($p=0.94$, indistinguishable from random): the apparent signal is the model's
-\emph{training-horizon hindsight}, not prediction. We contribute the reproducible methodology and a
-concrete warning about a subtle, pervasive confound in LLM-for-finance backtests.
+\emph{training-horizon hindsight}, not prediction. We contribute the methodology and a concrete warning
+about a subtle, pervasive confound in LLM-for-finance backtests.
 \keywords{QAOA \and Quantum optimization \and LLM-conditioning \and Look-ahead bias \and Quantum finance.}
 \end{abstract}
 
@@ -42,15 +42,15 @@ a diagonal Ising Hamiltonian solved by QAOA~\cite{farhi2014qaoa}. An LLM reads R
 time-stamped \emph{strictly before} each quarterly decision date into convictions $v_i\in[-1,1]$; a
 $\pm10\%$ view tilts $\mu\to\mu+s\,v$ (the sentiment-to-view convention~\cite{black1992litterman}).
 Estimation uses the train window only; evaluation the held-out next quarter. Bias controls: hundreds of
-(subset $\times$ rolling-window) instances from a fixed seed; pre-registered metrics; a \emph{placebo} of
-matched random tilts; an ablation against RavenPack's own sentiment; and, decisively, two LLMs on the
-\emph{same} headlines---\textbf{qwen2.5-14B} (released 2024, training \emph{overlaps} the window) and
-\textbf{Llama~2} (cutoff Sept.\ 2022, \emph{before} it). The language effect is measured at the exact
-optimum to separate it from optimizer noise.
+(subset $\times$ window) instances from a fixed seed, pre-registered metrics, a matched-random-tilt
+\emph{placebo}, a RavenPack-sentiment ablation, and---decisively---two LLMs on the \emph{same}
+headlines: \textbf{qwen2.5-14B} (released 2024, training \emph{overlaps} the window) and \textbf{Llama~2}
+(cutoff Sept.\ 2022, \emph{before} it). The language effect is measured at the exact optimum to separate
+it from optimizer noise.
 
 \section{Results and Contribution}
 \begin{figure}[t]\centering
-\includegraphics[width=0.80\textwidth]{compare_clean_vs_contaminated.pdf}
+\includegraphics[width=0.72\textwidth]{compare_clean_vs_contaminated.pdf}
 \caption{The out-of-sample premium of LLM-conditioned tilts over matched random tilts collapses from
 $+0.76\%$ ($p\!\approx\!0$) with a training-overlapping LLM to $-0.23\%$ ($p=0.94$) with a pre-cutoff LLM
 on the same headlines (left); per-quarter effects over four decision dates (right).}
@@ -59,18 +59,16 @@ on the same headlines (left); per-quarter effects over four decision dates (righ
 Over 1{,}600 instances (Dow~30, $n{=}14$ qubits, hold~5, four quarterly dates 2023-12--2024-09), the
 training-overlapping LLM beats matched random tilts by $+0.76\%$/quarter ($p\!\approx\!0$, positive in
 3/4 quarters); the pre-cutoff LLM, on identical headlines, yields $-0.23\%$ ($p=0.94$, 2/4)---%
-indistinguishable from random (Fig.~\ref{fig:main}). The signal does not survive removing the model's
+indistinguishable from random (Fig.~\ref{fig:main}): the signal does not survive removing the model's
 hindsight. The language does have leverage (a $\pm10\%$ view changes the exact optimum in $47$--$68\%$ of
-instances), yet shallow QAOA is a \emph{weak} optimizer, recovering the true optimum only $7.7\%$ of the
-time; we make no quantum-advantage claim, and run the economic test at the exact optimum because the
-solver is too noisy. \emph{Scope:} four decision dates (instance-level $p$ is pseudo-replicated; the
-honest unit is the quarter), small-$n$ exact simulation (no hardware), large-cap US, no transaction
-costs---none of which inflate the central result. \textbf{We contribute} a transparent, bias-controlled
-pipeline linking language to a quantum portfolio optimizer, and a quantified warning: LLM
-training-horizon look-ahead can manufacture out-of-sample ``alpha'' that vanishes with a pre-cutoff
-model. LLM-for-finance studies should date their model against their backtest. All results are
-reproducible from released code (fixed seeds, committed data caches) and scale on HPC for the many-period
-study significance ultimately needs.
+instances), yet shallow QAOA recovers the true optimum only $7.7\%$ of the time; we make no
+quantum-advantage claim and run the economic test at the exact optimum because the solver is too noisy.
+Limitations: four decision dates (instance-level $p$ is pseudo-replicated), small-$n$ exact simulation,
+large-cap US, no transaction costs---none inflating the central result. \textbf{We contribute} a
+transparent, bias-controlled pipeline linking language to a quantum portfolio optimizer and a quantified
+warning: LLM training-horizon look-ahead can manufacture out-of-sample ``alpha'' that vanishes with a
+pre-cutoff model---LLM-for-finance studies should date their model against their backtest. All results
+are reproducible from released code and scale on HPC for the many-period study significance needs.
 
 \begin{credits}
 \subsubsection{\ackname} The author thanks Professor Yuxi Hong for helpful guidance. Implementation and

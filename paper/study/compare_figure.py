@@ -9,6 +9,8 @@ import os
 
 import matplotlib
 matplotlib.use("Agg")
+matplotlib.rcParams["pdf.fonttype"] = 42   # embed TrueType (not Type 3) -> selectable text, no Type-3 fonts
+matplotlib.rcParams["ps.fonttype"] = 42
 import matplotlib.pyplot as plt
 import numpy as np
 

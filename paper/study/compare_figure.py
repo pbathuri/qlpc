@@ -40,7 +40,7 @@ def main():
                 f"{v:+.2f}%\n(p={p:.2f})", ha="center", fontsize=9,
                 color="#11151f", fontweight="bold")
     a1.set_ylabel("OOS premium over random tilts (%)")
-    a1.set_title("Apparent 'language signal' is the LLM's hindsight", fontsize=10)
+    a1.set_title("Apparent 'signal' appears only with a training-overlapping LLM", fontsize=9)
     a1.set_ylim(min(prem) - 0.4, max(prem) + 0.5)
 
     # Panel B — per-decision-date OOS effect, both models

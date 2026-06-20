@@ -1,0 +1,9 @@
+# LaTeX build artifacts (keep sources + final PDFs only)
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz

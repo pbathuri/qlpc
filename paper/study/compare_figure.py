@@ -67,8 +67,7 @@ def main():
     for b, p, v in zip(bars, ps, prem):
         ax.text(b.get_x() + b.get_width() / 2, v + (0.04 if v >= 0 else -0.10),
                 f"{v:+.2f}%\n(p={p:.2f})", ha="center", fontsize=9, fontweight="bold")
-    ax.set_ylabel("OOS premium over random tilts (%)")
-    ax.set_title("Out-of-sample 'alpha' vanishes with a pre-cutoff LLM", fontsize=10)
+    ax.set_ylabel("OOS premium over random tilts (%)")  # title omitted: the LaTeX caption describes it
     ax.set_ylim(min(prem) - 0.45, max(prem) + 0.5)
     f2.tight_layout()
     for ext in ("png", "pdf"):

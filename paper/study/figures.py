@@ -32,7 +32,9 @@ def main():
     # Q1 — optimizer quality across instances
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 3.3))
     a1.hist(rank, bins=20, color="#7c9cff", edgecolor="#11151f")
-    a1.axvline(np.median(rank), color="#f0683c", lw=2, label=f"median {np.median(rank):.0f}th pct")
+    _med = int(round(np.median(rank)))
+    _suf = "th" if 10 <= _med % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(_med % 10, "th")
+    a1.axvline(np.median(rank), color="#f0683c", lw=2, label=f"median {_med}{_suf} pct")
     a1.set_title("Q1  QAOA pick: rank-percentile among feasible"); a1.set_xlabel("percentile (100=optimum)")
     a1.legend(fontsize=8)
     a2.hist(conc, bins=20, color="#39d0c4", edgecolor="#11151f")

@@ -1,0 +1,499 @@
+{
+  "lookback_days": 30,
+  "decision_dates": [
+    "2023-12-01",
+    "2024-03-05",
+    "2024-06-04",
+    "2024-09-04"
+  ],
+  "views": {
+    "2023-12-01": {
+      "AAPL": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "AMGN": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "AMZN": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "AXP": {
+        "conviction": 0.0,
+        "n_headlines": 2
+      },
+      "BA": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "CAT": {
+        "conviction": 0.0,
+        "n_headlines": 11
+      },
+      "CRM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "CSCO": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "CVX": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "DIS": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "GS": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "HD": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "HON": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "IBM": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "JNJ": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "JPM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "KO": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MCD": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MMM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MRK": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MSFT": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "NKE": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "NVDA": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "PG": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "TRV": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "UNH": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "V": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "VZ": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "WMT": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "DOW": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      }
+    },
+    "2024-03-05": {
+      "AAPL": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "AMGN": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "AMZN": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "AXP": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "BA": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "CAT": {
+        "conviction": 0.0,
+        "n_headlines": 2
+      },
+      "CRM": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "CSCO": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "CVX": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "DIS": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "GS": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "HD": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "HON": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "IBM": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "JNJ": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "JPM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "KO": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MCD": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MMM": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "MRK": {
+        "conviction": -1.0,
+        "n_headlines": 4
+      },
+      "MSFT": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "NKE": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "NVDA": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "PG": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "TRV": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "UNH": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "V": {
+        "conviction": 0.0,
+        "n_headlines": 2
+      },
+      "VZ": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "WMT": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "DOW": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      }
+    },
+    "2024-06-04": {
+      "AAPL": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "AMGN": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "AMZN": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "AXP": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "BA": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "CAT": {
+        "conviction": 1.0,
+        "n_headlines": 4
+      },
+      "CRM": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "CSCO": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "CVX": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "DIS": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "GS": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "HD": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "HON": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "IBM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "JNJ": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "JPM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "KO": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MCD": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MMM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "MRK": {
+        "conviction": -1.0,
+        "n_headlines": 5
+      },
+      "MSFT": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "NKE": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "NVDA": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "PG": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "TRV": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "UNH": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "V": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "VZ": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "WMT": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "DOW": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      }
+    },
+    "2024-09-04": {
+      "AAPL": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "AMGN": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "AMZN": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "AXP": {
+        "conviction": 0.0,
+        "n_headlines": 1
+      },
+      "BA": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "CAT": {
+        "conviction": 1.0,
+        "n_headlines": 3
+      },
+      "CRM": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "CSCO": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "CVX": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "DIS": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "GS": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "HD": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "HON": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "IBM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "JNJ": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "JPM": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "KO": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "MCD": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "MMM": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "MRK": {
+        "conviction": 0.0,
+        "n_headlines": 7
+      },
+      "MSFT": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "NKE": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "NVDA": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "PG": {
+        "conviction": -1.0,
+        "n_headlines": 12
+      },
+      "TRV": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "UNH": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "V": {
+        "conviction": 0.0,
+        "n_headlines": 0
+      },
+      "VZ": {
+        "conviction": 1.0,
+        "n_headlines": 12
+      },
+      "WMT": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      },
+      "DOW": {
+        "conviction": 0.0,
+        "n_headlines": 12
+      }
+    }
+  }
+}

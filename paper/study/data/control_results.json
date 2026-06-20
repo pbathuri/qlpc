@@ -29,6 +29,17 @@
     ],
     "changed_frac_mean": 0.6203
   },
+  "ess_ablation": {
+    "oos_diff_mean": -0.0020083062847918555,
+    "changed_frac": 0.17,
+    "per_date_oos_effect": {
+      "2023-12-01": 0.006704204798078972,
+      "2024-03-05": -0.004169956327471091,
+      "2024-06-04": 0.010755731700385787,
+      "2024-09-04": -0.023192351434248516
+    },
+    "positive_dates": "2/4"
+  },
   "permutation_p_instance_level": 0.0,
   "caveat": "Instance-level p is OPTIMISTIC: only 4 independent decision dates (subsets within a date are correlated). The honest unit is the date; the effect is MIXED across dates (3/4 dates positive). More dates (longer history / HPC) are required before claiming significance.",
   "verdict": "LLM tilt beats matched random tilts at the instance level (p=0.00) and is MIXED across dates across the 4 dates (3/4 positive) \u2014 promising but NOT yet robust with so few periods",

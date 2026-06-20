@@ -62,6 +62,16 @@ magnitude, language removed), drawn 300×. On 1,600 instances (point-in-time new
   **regime-dependent and NOT yet statistically robust** with only 4 periods. This is a pro-and-con finding,
   not a win — and it directly motivates more decision dates.
 
+## Ablation: LLM vs RavenPack's own sentiment (ESS)
+Same pipeline, but tilt by RavenPack's off-the-shelf **event_sentiment_score** instead of the LLM:
+- **LLM** (reads headline text): changes 64% of optima, **+1.29%** OOS.
+- **ESS** (averaged sentiment score): changes only **17%**, **−0.20%** OOS. → **LLM > ESS.**
+The LLM extracts stronger, more actionable directional views from the text than the averaged score.
+**Honest caveat:** ESS is window-averaged so its magnitude is smaller (hence it rarely crosses the
+±10% tilt that flips the optimum); a magnitude-matched ESS would be a fairer test. As-is, the result is
+"at equal tilt strength, language understanding beats the off-the-shelf sentiment number" — subject to
+the same 4-period robustness caveat.
+
 ## What makes Q3 valid (the BigRed200 run)
 Point-in-time news keyed to each decision date — **WRDS RavenPack** news analytics — plus the large
 `(subset × window)` sweep at higher `n` on A100s. Submit `slurm/run_array.slurm`; aggregate with

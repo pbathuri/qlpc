@@ -54,6 +54,10 @@ a tilt on the QAOA cost Hamiltonian, evaluated with a rigor designed to *resist*
   `[HPC: refine at n=14, p=4 over ~1,600 instances]`. Useful as a sampler, not a solver, at this depth.
 - **Q2 (language has leverage):** a realistic ±10% LLM view changes the *exact* optimal portfolio in ~99%
   of instances. The language moves decisions.
+- **Ablation (LLM vs off-the-shelf sentiment):** tilting by RavenPack's own averaged event-sentiment
+  score changes only ~17% of optima (−0.2% OOS) vs the LLM's 64% (+1.3%) — at equal tilt strength, the
+  LLM reading headline *text* extracts more actionable signal than the sentiment number. (Caveat: ESS is
+  window-averaged and thus weaker in magnitude; a magnitude-matched test is future work.)
 - **Q3 / placebo (the nuanced core):** the LLM tilt's out-of-sample effect (+1.29%) sits **outside the
   entire distribution of 300 matched random tilts** (which average +0.35%) — so ~+0.9% is
   *language-specific*, beyond a generic tilt effect. **But** clustered by the honest unit — the decision

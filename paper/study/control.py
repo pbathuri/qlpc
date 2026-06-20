@@ -82,9 +82,15 @@ def main():
     allc = [abs(v["conviction"]) > 0.01 for d in pit.values() for v in d.values()]
     p_nonzero = float(np.mean(allc))
 
+    has_ess = any("ess" in v for d in pit.values() for v in d.values())
+
     def llm_cv(inst):
         vmap = pit.get(inst["window"][1], {}); a = inst["assets"]
         return {i: float(vmap.get(a[i], {}).get("conviction", 0.0)) for i in range(len(a))}
+
+    def ess_cv(inst):
+        vmap = pit.get(inst["window"][1], {}); a = inst["assets"]
+        return {i: float(vmap.get(a[i], {}).get("ess", 0.0)) for i in range(len(a))}
 
     pre = precompute(prices, instances, a.budget, a.q)        # tilt-independent work, done once
     inst_date = np.array([p["inst"]["window"][1] for p in pre])
@@ -102,6 +108,19 @@ def main():
     print("LLM per-date OOS effect (%):", {k: round(v * 100, 2) for k, v in per_date.items()}, flush=True)
     print(f"  -> positive in {int((dvals>0).sum())}/{len(dvals)} dates; date-level mean "
           f"{dvals.mean()*100:+.2f}% (the effective N is ~{len(dvals)} periods, NOT {len(d_llm)})", flush=True)
+
+    # ABLATION: RavenPack's own sentiment (ESS) vs the LLM — does the LLM add value over off-the-shelf?
+    ess_block = None
+    if has_ess:
+        ch_e, df_e = tilt_effect(prices, pre, ess_cv, a.budget, a.q, a.strength)
+        e_mean = float(df_e[ch_e].mean()) if ch_e.any() else 0.0
+        e_per_date = {dt: (float(df_e[(ch_e) & (inst_date == dt)].mean())
+                           if ((ch_e) & (inst_date == dt)).any() else 0.0) for dt in sorted(set(inst_date))}
+        ess_block = {"oos_diff_mean": e_mean, "changed_frac": float(ch_e.mean()),
+                     "per_date_oos_effect": e_per_date,
+                     "positive_dates": f"{int((np.array(list(e_per_date.values()))>0).sum())}/{len(e_per_date)}"}
+        print(f"ESS (RavenPack sentiment): changed {ch_e.mean()*100:.0f}% | OOS {e_mean*100:+.3f}% | "
+              f"LLM {'>' if llm_mean>e_mean else '<='} ESS", flush=True)
 
     rand_means, rand_changed = [], []
     for k in range(a.random_draws):
@@ -130,6 +149,7 @@ def main():
                        "oos_diff_mean_std": float(rand_means.std()),
                        "ci95": [float(np.percentile(rand_means, 2.5)), float(np.percentile(rand_means, 97.5))],
                        "changed_frac_mean": float(np.mean(rand_changed))},
+           "ess_ablation": ess_block,
            "permutation_p_instance_level": p_two,
            "caveat": (f"Instance-level p is OPTIMISTIC: only {n_dates} independent decision dates "
                       f"(subsets within a date are correlated). The honest unit is the date; the effect is "

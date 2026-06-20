@@ -111,6 +111,43 @@ def build(db, tickers, lookback=30):
     print("wrote", PIT, flush=True)
 
 
+def add_ess(db, tickers, lookback=30):
+    """Augment the EXISTING cache with RavenPack's own Event Sentiment Score (no LLM, no rebuild).
+    Enables the ablation 'does the LLM beat off-the-shelf sentiment?' Adds an 'ess' field per
+    (date,ticker), normalized to [-1,1] to match the LLM conviction scale."""
+    pit = json.load(open(PIT)); views = pit["views"]
+    emap, _ = entity_map(db, tickers)
+    yr = pd.Timestamp(list(views)[-1]).year
+    eq_cols = _cols(db, EQUITY_LIB, f"rpa_full_equities_{yr}")
+    ts = _pick(eq_cols, "timestamp_utc", "rpa_date_utc", "timestamp", "date")
+    eid = _pick(eq_cols, "rp_entity_id", "entity_id")
+    rel = _pick(eq_cols, "relevance")
+    ess = _pick(eq_cols, "event_sentiment_score", "css", "ess")
+    print("using ESS column:", ess, flush=True)
+    raw = {}
+    for date in views:
+        asof = pd.Timestamp(date); y = asof.year
+        start = (asof - pd.Timedelta(days=lookback)).strftime("%Y-%m-%d"); end = asof.strftime("%Y-%m-%d")
+        for t in tickers:
+            e = emap.get(t.upper())
+            m = None
+            if e:
+                df = db.raw_sql(f"select avg({ess}) as m from {EQUITY_LIB}.rpa_full_equities_{y} "
+                                f"where {eid}='{e}' and {ts} >= '{start}' and {ts} < '{end}' "
+                                f"and {rel} >= 90")
+                m = df["m"].iloc[0]
+            raw[(date, t)] = float(m) if m is not None else None
+    # detect scale: RavenPack ESS is usually 0-100 (50 neutral); some feeds give [-1,1]
+    vals = [v for v in raw.values() if v is not None]
+    hi = max(abs(v) for v in vals) if vals else 1.0
+    norm = (lambda x: (x - 50.0) / 50.0) if hi > 1.5 else (lambda x: x)
+    for (date, t), v in raw.items():
+        views[date][t]["ess"] = float(max(-1.0, min(1.0, norm(v)))) if v is not None else 0.0
+    json.dump(pit, open(PIT, "w"), indent=2)
+    nz = sum(1 for d in views.values() for x in d.values() if abs(x.get("ess", 0)) > 0.01)
+    print(f"added ESS to {PIT}: {nz} nonzero (scale {'0-100' if hi>1.5 else '[-1,1]'})", flush=True)
+
+
 def inspect(db):
     print("MAP table cols:", _cols(db, MAP_LIB, "wrds_rpa_company_mappings"))
     yr = pd.Timestamp(load_prices().index[-1]).year
@@ -124,6 +161,7 @@ def main():
     ap.add_argument("--user", required=True)
     ap.add_argument("--inspect", action="store_true")
     ap.add_argument("--build", action="store_true")
+    ap.add_argument("--add-ess", action="store_true", help="add RavenPack ESS to the existing cache (no LLM)")
     ap.add_argument("--lookback", type=int, default=30)
     a = ap.parse_args()
     import wrds
@@ -133,6 +171,8 @@ def main():
             inspect(db)
         if a.build:
             build(db, DOW30, a.lookback)
+        if a.add_ess:
+            add_ess(db, DOW30, a.lookback)
     finally:
         db.close()
 

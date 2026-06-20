@@ -1,0 +1,141 @@
+"""Point-in-time news via WRDS RavenPack -> per-(date,ticker) LLM conviction. Makes Q3 a VALID backtest.
+
+The local-validation `news_views.py` used recent headlines (look-ahead). This module pulls headlines
+TIMESTAMPED BEFORE each rolling-window decision date from RavenPack News Analytics (IU has the full
+subscription: ravenpack_full / ravenpack_dj), so the language the optimizer sees at time t is only what
+was knowable at t. A local LLM (Ollama) reads those headlines -> conviction, exactly as before; only the
+news source (point-in-time, not recent) changes.
+
+You run this (needs your WRDS credentials + Ollama). Two steps:
+    python -m paper.study.ravenpack_news --user pbathuri --inspect      # confirm schema (fast)
+    python -m paper.study.ravenpack_news --user pbathuri --build        # build the PIT cache (slow)
+
+Writes paper/study/data/pit_news_views.json keyed by decision date; the study then reads it per window.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+
+import pandas as pd
+
+from paper.study.news_views import conviction_from_headlines
+from paper.study.universe import DOW30, load_prices
+
+HERE = os.path.dirname(__file__)
+PIT = os.path.join(HERE, "data", "pit_news_views.json")
+EQUITY_LIB = "ravenpack_full"            # full edition; rpa_full_equities_<YEAR>
+MAP_LIB = "ravenpack_common"
+
+
+def _cols(db, lib, table):
+    try:
+        return list(db.describe_table(lib, table)["name"])
+    except Exception:  # noqa: BLE001
+        return list(db.get_table(lib, table, obs=1).columns)
+
+
+def _pick(cols, *cands):
+    low = {c.lower(): c for c in cols}
+    for cand in cands:
+        for lc, orig in low.items():
+            if cand in lc:
+                return orig
+    return None
+
+
+def decision_dates(prices, train=378, test=63):
+    """Train-window END dates = the points at which a portfolio is chosen (news must precede these)."""
+    d = prices.index; out = []
+    for s in range(0, len(d) - train - test, test):
+        out.append(d[s + train])
+    return out
+
+
+def entity_map(db, tickers):
+    """ticker -> rp_entity_id via the WRDS-curated RavenPack company mapping (schema-adaptive)."""
+    tbl = "wrds_rpa_company_mappings"
+    cols = _cols(db, MAP_LIB, tbl)
+    eid = _pick(cols, "rp_entity_id", "entity_id")
+    tk = _pick(cols, "ticker")
+    if tk:                                                   # wide form: a ticker column
+        tkl = ",".join(f"'{t}'" for t in tickers)
+        df = db.raw_sql(f"select distinct {eid}, {tk} from {MAP_LIB}.{tbl} where upper({tk}) in ({tkl})")
+        return {r[1].upper(): r[0] for r in df.itertuples(index=False)}, cols
+    # long form: data_type/data_value
+    dt = _pick(cols, "data_type"); dv = _pick(cols, "data_value")
+    tkl = ",".join(f"'{t}'" for t in tickers)
+    df = db.raw_sql(f"select distinct {eid}, {dv} from {MAP_LIB}.{tbl} "
+                    f"where upper({dt})='TICKER' and upper({dv}) in ({tkl})")
+    return {r[1].upper(): r[0] for r in df.itertuples(index=False)}, cols
+
+
+def headlines_asof(db, entity_id, asof, year, schema, lookback=30, min_rel=90, limit=12):
+    tbl = f"rpa_full_equities_{year}"
+    ts, hl, eid, rel = schema["ts"], schema["headline"], schema["eid"], schema["relevance"]
+    start = (pd.Timestamp(asof) - pd.Timedelta(days=lookback)).strftime("%Y-%m-%d")
+    end = pd.Timestamp(asof).strftime("%Y-%m-%d")
+    relclause = f"and {rel} >= {min_rel}" if rel else ""
+    df = db.raw_sql(
+        f"select {ts} as ts, {hl} as headline from {EQUITY_LIB}.{tbl} "
+        f"where {eid}='{entity_id}' and {ts} >= '{start}' and {ts} < '{end}' {relclause} "
+        f"order by {ts} desc limit {limit}")
+    return [h for h in df["headline"].tolist() if isinstance(h, str) and h.strip()]
+
+
+def build(db, tickers, lookback=30):
+    prices = load_prices()
+    dates = decision_dates(prices)
+    emap, _ = entity_map(db, tickers)
+    print(f"mapped {len(emap)}/{len(tickers)} tickers to RavenPack entities", flush=True)
+    eq_cols = _cols(db, EQUITY_LIB, f"rpa_full_equities_{pd.Timestamp(dates[-1]).year}")
+    schema = {"ts": _pick(eq_cols, "timestamp_utc", "rpa_date_utc", "timestamp", "date"),
+              "headline": _pick(eq_cols, "headline", "news_text", "title"),
+              "eid": _pick(eq_cols, "rp_entity_id", "entity_id"),
+              "relevance": _pick(eq_cols, "relevance")}
+    print("equities schema ->", schema, flush=True)
+
+    cache = {}
+    for asof in dates:
+        y = pd.Timestamp(asof).year; key = pd.Timestamp(asof).strftime("%Y-%m-%d")
+        cache[key] = {}
+        for t in tickers:
+            eid = emap.get(t.upper())
+            hls = headlines_asof(db, eid, asof, y, schema, lookback) if eid else []
+            cache[key][t] = {"conviction": conviction_from_headlines(t, hls), "n_headlines": len(hls)}
+        nz = sum(1 for t in tickers if abs(cache[key][t]["conviction"]) > 0.01)
+        print(f"  {key}: {nz}/{len(tickers)} nonzero convictions", flush=True)
+    json.dump({"lookback_days": lookback, "decision_dates": list(cache), "views": cache},
+              open(PIT, "w"), indent=2)
+    print("wrote", PIT, flush=True)
+
+
+def inspect(db):
+    print("MAP table cols:", _cols(db, MAP_LIB, "wrds_rpa_company_mappings"))
+    yr = pd.Timestamp(load_prices().index[-1]).year
+    print(f"EQUITIES rpa_full_equities_{yr} cols:", _cols(db, EQUITY_LIB, f"rpa_full_equities_{yr}"))
+    emap, _ = entity_map(db, DOW30[:5])
+    print("sample ticker->entity:", emap)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--user", required=True)
+    ap.add_argument("--inspect", action="store_true")
+    ap.add_argument("--build", action="store_true")
+    ap.add_argument("--lookback", type=int, default=30)
+    a = ap.parse_args()
+    import wrds
+    db = wrds.Connection(wrds_username=a.user)
+    try:
+        if a.inspect:
+            inspect(db)
+        if a.build:
+            build(db, DOW30, a.lookback)
+    finally:
+        db.close()
+
+
+if __name__ == "__main__":
+    main()

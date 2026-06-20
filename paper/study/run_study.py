@@ -84,7 +84,12 @@ def run(n=12, budget=4, n_inst=20, reps=3, q=2.0, strength=0.10, seed=0, shard=N
     windows = []
     for s in range(0, L - tr - te, te):
         windows.append((str(dates[s])[:10], str(dates[s + tr])[:10], str(dates[s + tr + te])[:10]))
-    views = build_views(pool)                          # real-headline LLM convictions (cached)
+    # Prefer POINT-IN-TIME news (RavenPack, keyed to each decision date) -> valid Q3. Fall back to recent
+    # headlines (look-ahead; Q3 then preliminary only).
+    pit_path = os.path.join(OUT, "pit_news_views.json")
+    pit = json.load(open(pit_path))["views"] if os.path.exists(pit_path) else None
+    views = None if pit else build_views(pool)
+    news_mode = "point-in-time(ravenpack)" if pit else "recent(lookahead-confounded)"
     instances = make_instances(pool, n, n_inst, windows, seed)
     if shard:
         k, total = shard
@@ -101,7 +106,11 @@ def run(n=12, budget=4, n_inst=20, reps=3, q=2.0, strength=0.10, seed=0, shard=N
 
         # LANGUAGE EFFECT measured at the EXACT optimum (clean of QAOA stochasticity). QAOA quality is
         # reported separately in Q1; the economic question should not inherit optimizer noise.
-        cv = conviction_vector(views, assets)
+        if pit:
+            vmap = pit.get(inst["window"][1], {})          # convictions known AT the decision date
+            cv = {i: float(vmap.get(assets[i], {}).get("conviction", 0.0)) for i in range(n)}
+        else:
+            cv = conviction_vector(views, assets)
         tilt = np.array([cv.get(i, 0.0) for i in range(n)])
         mu_v = mu + strength * tilt
         cls0 = [assets[i] for i in classical_best(mu, sigma, budget, q)[0]]          # neutral optimum
@@ -123,7 +132,7 @@ def run(n=12, budget=4, n_inst=20, reps=3, q=2.0, strength=0.10, seed=0, shard=N
             print(f"  instance {j+1}/{len(instances)} done", flush=True)
     return {"config": {"n": n, "budget": budget, "reps": reps, "q": q, "strength": strength,
                        "device": dev, "n_instances": len(instances), "windows": windows,
-                       "universe": "Dow30-snapshot", "seed": seed},
+                       "universe": "Dow30-CRSP", "news_mode": news_mode, "seed": seed},
             "rows": rows}
 
 

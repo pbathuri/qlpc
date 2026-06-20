@@ -34,7 +34,7 @@ def main():
            color=INK, fontsize=46, fontweight="bold")
     t.text(0.5, 0.42, "A Bias-Controlled Study and a Training-Horizon Confound in LLM-Conditioned QAOA",
            ha="center", color=ACC, fontsize=27)
-    t.text(0.5, 0.12, "Pradyot Bathuri  ·  Indiana University  ·  QNLPAI 2026 Student Poster Session",
+    t.text(0.5, 0.12, "QNLPAI 2026 Student Poster Session  ·  author details withheld for double-blind review",
            ha="center", color="#8a93a3", fontsize=19)
 
     txt = fig.add_subplot(gs[1]); txt.axis("off")

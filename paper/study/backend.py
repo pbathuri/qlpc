@@ -73,6 +73,24 @@ def to_numpy(a, xp=np):
     return a.get() if xp.__name__ == "cupy" else np.asarray(a)
 
 
+def objective(x, mu, sigma, q):
+    """Markowitz objective mu·x - q xᵀΣx (higher better). Pure numpy — keeps the study qiskit-free on HPC."""
+    x = np.asarray(x, float)
+    return float(np.asarray(mu) @ x - q * x @ np.asarray(sigma) @ x)
+
+
+def classical_best(mu, sigma, budget, q):
+    """Exact best feasible subset (brute force) — the oracle. Returns (indices, objective)."""
+    import itertools
+    n = len(mu); best, bo = None, -np.inf
+    for c in itertools.combinations(range(n), budget):
+        x = np.zeros(n); x[list(c)] = 1
+        o = objective(x, mu, sigma, q)
+        if o > bo:
+            best, bo = list(c), o
+    return best, bo
+
+
 def optimize_qaoa(diag, reps, restarts=10, maxiter=150, seed=0, xp=np):
     """Restarted COBYLA over (gammas, betas) minimizing ⟨H_C⟩. Returns (best_gammas, best_betas, history)."""
     from scipy.optimize import minimize

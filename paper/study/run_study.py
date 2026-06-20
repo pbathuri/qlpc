@@ -22,8 +22,8 @@ import os
 
 import numpy as np
 
-from paper.circuits import classical_best, objective
 from paper.study import backend as BK
+from paper.study.backend import classical_best, objective
 from paper.study.news_views import build_views, conviction_vector
 from paper.study.universe import load_prices, window_moments
 

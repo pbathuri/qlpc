@@ -6,7 +6,7 @@
     "q": 2.0,
     "strength": 2.0,
     "device": "cpu",
-    "n_instances": 64,
+    "n_instances": 96,
     "windows": [
       [
         "2022-06-01",
@@ -29,7 +29,8 @@
         "2024-12-03"
       ]
     ],
-    "universe": "Dow30-snapshot",
+    "universe": "Dow30-CRSP",
+    "news_mode": "point-in-time(ravenpack)",
     "seed": 0
   },
   "rows": [
@@ -61,9 +62,9 @@
       ],
       "view_opt": [
         "AMGN",
+        "BA",
         "DOW",
-        "HD",
-        "JPM"
+        "MCD"
       ],
       "qaoa_sel": [
         "AMGN",
@@ -76,11 +77,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 9.577725410461426,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.000923528113751404,
-      "Q3_ret_view": 0.1300639154641623,
-      "Q3_ret_diff": 0.1291403873504109,
-      "nonzero_views": 5
+      "Q3_ret_view": 0.00388918326017329,
+      "Q3_ret_diff": 0.002965655146421886,
+      "nonzero_views": 4
     },
     {
       "assets": [
@@ -110,8 +111,8 @@
       ],
       "view_opt": [
         "BA",
-        "HD",
-        "MCD",
+        "PG",
+        "VZ",
         "WMT"
       ],
       "qaoa_sel": [
@@ -127,9 +128,9 @@
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.027640001701098704,
-      "Q3_ret_view": 0.061091501812735594,
-      "Q3_ret_diff": 0.03345150011163689,
-      "nonzero_views": 2
+      "Q3_ret_view": 0.03634753445708361,
+      "Q3_ret_diff": 0.008707532755984904,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -158,10 +159,10 @@
         "V"
       ],
       "view_opt": [
-        "DIS",
-        "HD",
-        "HON",
-        "MRK"
+        "KO",
+        "MRK",
+        "V",
+        "VZ"
       ],
       "qaoa_sel": [
         "CAT",
@@ -174,11 +175,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 0.4169454574584961,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.28519502008502906,
-      "Q3_ret_view": 0.15156693101247654,
-      "Q3_ret_diff": -0.13362808907255252,
-      "nonzero_views": 4
+      "Q3_ret_view": 0.09150304602535209,
+      "Q3_ret_diff": -0.19369197405967697,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -208,8 +209,8 @@
       ],
       "view_opt": [
         "AMGN",
-        "DIS",
         "DOW",
+        "IBM",
         "MRK"
       ],
       "qaoa_sel": [
@@ -223,10 +224,10 @@
       "Q1_best_is_opt": true,
       "Q1_conc": 28.962841033935547,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.6666666666666667,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.1256572416878028,
-      "Q3_ret_view": 0.13640118549932345,
-      "Q3_ret_diff": 0.010743943811520662,
+      "Q3_ret_view": 0.13221199760213698,
+      "Q3_ret_diff": 0.006554755914334187,
       "nonzero_views": 5
     },
     {
@@ -256,10 +257,10 @@
         "MSFT"
       ],
       "view_opt": [
-        "AMGN",
-        "DIS",
+        "BA",
         "DOW",
-        "HON"
+        "IBM",
+        "VZ"
       ],
       "qaoa_sel": [
         "AMGN",
@@ -272,11 +273,11 @@
       "Q1_best_is_opt": true,
       "Q1_conc": 36.01458740234375,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": 0.04170599286236287,
-      "Q3_ret_view": 0.08824938669650129,
-      "Q3_ret_diff": 0.04654339383413841,
-      "nonzero_views": 5
+      "Q3_ret_view": 0.05835280279075383,
+      "Q3_ret_diff": 0.01664680992839096,
+      "nonzero_views": 8
     },
     {
       "assets": [
@@ -305,10 +306,10 @@
         "MCD"
       ],
       "view_opt": [
-        "AMGN",
-        "HON",
+        "BA",
+        "IBM",
         "JNJ",
-        "JPM"
+        "UNH"
       ],
       "qaoa_sel": [
         "DOW",
@@ -321,11 +322,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 3.3432443141937256,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": 0.02964368171388143,
-      "Q3_ret_view": 0.06345750749638124,
-      "Q3_ret_diff": 0.03381382578249981,
-      "nonzero_views": 5
+      "Q3_ret_view": -0.012788099490719684,
+      "Q3_ret_diff": -0.042431781204601116,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -355,8 +356,8 @@
       ],
       "view_opt": [
         "DOW",
-        "HD",
-        "HON",
+        "IBM",
+        "PG",
         "UNH"
       ],
       "qaoa_sel": [
@@ -370,11 +371,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 42.427879333496094,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.05320060324162079,
-      "Q3_ret_view": 0.038843638216240706,
-      "Q3_ret_diff": -0.014356965025380086,
-      "nonzero_views": 5
+      "Q3_ret_view": 0.056166258388042456,
+      "Q3_ret_diff": 0.002965655146421664,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -403,10 +404,10 @@
         "MSFT"
       ],
       "view_opt": [
-        "DIS",
+        "CAT",
         "DOW",
-        "HD",
-        "MMM"
+        "GS",
+        "IBM"
       ],
       "qaoa_sel": [
         "AMZN",
@@ -419,11 +420,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 0.07578129321336746,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
+      "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": 0.15151629014751844,
-      "Q3_ret_view": 0.11348834481533521,
-      "Q3_ret_diff": -0.03802794533218323,
-      "nonzero_views": 5
+      "Q3_ret_view": 0.18608645518071754,
+      "Q3_ret_diff": 0.034570165033199096,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -452,10 +453,10 @@
         "WMT"
       ],
       "view_opt": [
-        "AMGN",
-        "DIS",
-        "JPM",
-        "MMM"
+        "BA",
+        "IBM",
+        "PG",
+        "WMT"
       ],
       "qaoa_sel": [
         "AAPL",
@@ -468,11 +469,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 0.011709286831319332,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.10841146528035495,
-      "Q3_ret_view": 0.09985779173928133,
-      "Q3_ret_diff": -0.008553673541073614,
-      "nonzero_views": 4
+      "Q3_ret_view": 0.07201156721762247,
+      "Q3_ret_diff": -0.03639989806273247,
+      "nonzero_views": 5
     },
     {
       "assets": [
@@ -502,9 +503,9 @@
       ],
       "view_opt": [
         "AMGN",
-        "AXP",
-        "HD",
-        "JNJ"
+        "JNJ",
+        "PG",
+        "V"
       ],
       "qaoa_sel": [
         "AMGN",
@@ -517,11 +518,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 139.9486541748047,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.04501109394856284,
-      "Q3_ret_view": 0.11977627559892468,
-      "Q3_ret_diff": 0.07476518165036183,
-      "nonzero_views": 7
+      "Q3_ret_view": 0.04568893882321978,
+      "Q3_ret_diff": 0.000677844874656941,
+      "nonzero_views": 4
     },
     {
       "assets": [
@@ -550,10 +551,10 @@
         "WMT"
       ],
       "view_opt": [
-        "AMGN",
         "DOW",
-        "HD",
-        "JPM"
+        "MCD",
+        "VZ",
+        "WMT"
       ],
       "qaoa_sel": [
         "AMZN",
@@ -566,10 +567,10 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 1.1639549732208252,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
+      "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": 0.11830421570184502,
-      "Q3_ret_view": 0.1300639154641623,
-      "Q3_ret_diff": 0.011759699762317277,
+      "Q3_ret_view": 0.09181726033625681,
+      "Q3_ret_diff": -0.026486955365588205,
       "nonzero_views": 4
     },
     {
@@ -601,8 +602,8 @@
       "view_opt": [
         "BA",
         "JNJ",
-        "JPM",
-        "WMT"
+        "PG",
+        "VZ"
       ],
       "qaoa_sel": [
         "AMZN",
@@ -615,11 +616,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 0.6390889883041382,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.6666666666666667,
+      "Q2_jaccard": 0.8571428571428572,
       "Q3_ret_neutral": 0.06403989976383118,
-      "Q3_ret_view": 0.06467659700432993,
-      "Q3_ret_diff": 0.0006366972404987514,
-      "nonzero_views": 3
+      "Q3_ret_view": -0.0020724238686498087,
+      "Q3_ret_diff": -0.06611232363248098,
+      "nonzero_views": 5
     },
     {
       "assets": [
@@ -648,10 +649,10 @@
         "V"
       ],
       "view_opt": [
-        "AMGN",
-        "HON",
+        "BA",
         "JNJ",
-        "MMM"
+        "MRK",
+        "VZ"
       ],
       "qaoa_sel": [
         "AMGN",
@@ -664,11 +665,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 14.096574783325195,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": 0.04267277214965892,
-      "Q3_ret_view": -0.003063337824228185,
-      "Q3_ret_diff": -0.04573610997388711,
-      "nonzero_views": 4
+      "Q3_ret_view": 0.03432747419408266,
+      "Q3_ret_diff": -0.008345297955576259,
+      "nonzero_views": 5
     },
     {
       "assets": [
@@ -697,10 +698,10 @@
         "NVDA"
       ],
       "view_opt": [
-        "AMGN",
+        "AAPL",
         "IBM",
         "JNJ",
-        "NVDA"
+        "VZ"
       ],
       "qaoa_sel": [
         "AAPL",
@@ -713,11 +714,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 0.24578595161437988,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.4,
+      "Q2_jaccard": 0.8571428571428572,
       "Q3_ret_neutral": 0.2707814083911799,
-      "Q3_ret_view": 0.27145925326583686,
-      "Q3_ret_diff": 0.000677844874656941,
-      "nonzero_views": 3
+      "Q3_ret_view": 0.04461003120985918,
+      "Q3_ret_diff": -0.22617137718132074,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -747,8 +748,8 @@
       ],
       "view_opt": [
         "DOW",
-        "MMM",
         "MRK",
+        "VZ",
         "WMT"
       ],
       "qaoa_sel": [
@@ -764,8 +765,8 @@
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": 0.30517762644112967,
-      "Q3_ret_view": 0.10351000762521512,
-      "Q3_ret_diff": -0.20166761881591455,
+      "Q3_ret_view": 0.1335665043721641,
+      "Q3_ret_diff": -0.17161112206896556,
       "nonzero_views": 3
     },
     {
@@ -795,10 +796,10 @@
         "NVDA"
       ],
       "view_opt": [
-        "AMGN",
-        "AXP",
-        "JPM",
-        "MRK"
+        "IBM",
+        "MCD",
+        "MRK",
+        "PG"
       ],
       "qaoa_sel": [
         "AXP",
@@ -811,11 +812,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 18.34499740600586,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.3173789586130553,
-      "Q3_ret_view": 0.17068249493290466,
-      "Q3_ret_diff": -0.14669646368015066,
-      "nonzero_views": 3
+      "Q3_ret_view": 0.12032879777056826,
+      "Q3_ret_diff": -0.19705016084248705,
+      "nonzero_views": 4
     },
     {
       "assets": [
@@ -833,9 +834,9 @@
         "WMT"
       ],
       "window": [
-        "2022-08-31",
-        "2024-03-05",
-        "2024-06-04"
+        "2022-06-01",
+        "2023-12-01",
+        "2024-03-05"
       ],
       "neutral_opt": [
         "IBM",
@@ -844,26 +845,26 @@
         "WMT"
       ],
       "view_opt": [
-        "AXP",
-        "DIS",
-        "JNJ",
-        "NVDA"
-      ],
-      "qaoa_sel": [
         "IBM",
-        "MRK",
-        "NVDA",
+        "JNJ",
+        "UNH",
         "WMT"
       ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.04597725346684456,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 188.3228302001953,
+      "qaoa_sel": [
+        "AXP",
+        "DIS",
+        "NKE",
+        "NVDA"
+      ],
+      "Q1_rank_pct": 0.00202020202020202,
+      "Q1_p_opt": 2.426567516522482e-05,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 0.09939220547676086,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.09959994774341352,
-      "Q3_ret_view": 0.07431274791683196,
-      "Q3_ret_diff": -0.025287199826581563,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.35301297688554945,
+      "Q3_ret_view": 0.06504792357130729,
+      "Q3_ret_diff": -0.28796505331424216,
       "nonzero_views": 5
     },
     {
@@ -882,38 +883,38 @@
         "WMT"
       ],
       "window": [
-        "2022-08-31",
-        "2024-03-05",
-        "2024-06-04"
+        "2022-06-01",
+        "2023-12-01",
+        "2024-03-05"
       ],
       "neutral_opt": [
-        "NVDA",
-        "PG",
-        "V",
-        "WMT"
-      ],
-      "view_opt": [
-        "DIS",
-        "DOW",
-        "HON",
-        "JNJ"
-      ],
-      "qaoa_sel": [
         "JNJ",
         "NVDA",
         "PG",
         "WMT"
       ],
-      "Q1_rank_pct": 0.997979797979798,
-      "Q1_p_opt": 0.019423026591539383,
+      "view_opt": [
+        "DOW",
+        "JNJ",
+        "PG",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "DIS",
+        "DOW",
+        "JNJ",
+        "NVDA"
+      ],
+      "Q1_rank_pct": 0.08888888888888889,
+      "Q1_p_opt": 0.0009738900698721409,
       "Q1_best_is_opt": false,
-      "Q1_conc": 79.55671691894531,
+      "Q1_conc": 3.989053726196289,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
-      "Q3_ret_neutral": 0.12580234662953593,
-      "Q3_ret_view": -0.029460128083923065,
-      "Q3_ret_diff": -0.155262474713459,
-      "nonzero_views": 5
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.26945557325305414,
+      "Q3_ret_view": 0.08567313350020767,
+      "Q3_ret_diff": -0.18378243975284647,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -931,38 +932,38 @@
         "WMT"
       ],
       "window": [
-        "2022-08-31",
-        "2024-03-05",
-        "2024-06-04"
+        "2022-06-01",
+        "2023-12-01",
+        "2024-03-05"
       ],
       "neutral_opt": [
+        "AMGN",
+        "BA",
         "MCD",
-        "MSFT",
-        "V",
         "WMT"
       ],
       "view_opt": [
-        "AMGN",
+        "BA",
         "DOW",
-        "HD",
-        "MMM"
+        "UNH",
+        "WMT"
       ],
       "qaoa_sel": [
         "AMGN",
         "MCD",
-        "V",
+        "UNH",
         "WMT"
       ],
-      "Q1_rank_pct": 0.9939393939393939,
-      "Q1_p_opt": 0.026917090639472008,
+      "Q1_rank_pct": 0.9575757575757575,
+      "Q1_p_opt": 0.0027480456046760082,
       "Q1_best_is_opt": false,
-      "Q1_conc": 110.25240325927734,
+      "Q1_conc": 11.25599479675293,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
-      "Q3_ret_neutral": 0.00818946939080778,
-      "Q3_ret_view": 0.06133360262498577,
-      "Q3_ret_diff": 0.05314413323417799,
-      "nonzero_views": 5
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.02090613446985201,
+      "Q3_ret_view": -0.00012263961869452,
+      "Q3_ret_diff": -0.02102877408854653,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -980,38 +981,38 @@
         "WMT"
       ],
       "window": [
-        "2022-08-31",
-        "2024-03-05",
-        "2024-06-04"
+        "2022-06-01",
+        "2023-12-01",
+        "2024-03-05"
       ],
       "neutral_opt": [
-        "CRM",
         "JPM",
         "MRK",
+        "MSFT",
         "WMT"
       ],
       "view_opt": [
-        "AMGN",
-        "AXP",
         "JNJ",
-        "JPM"
-      ],
-      "qaoa_sel": [
-        "JPM",
-        "MRK",
         "V",
+        "VZ",
         "WMT"
       ],
-      "Q1_rank_pct": 0.9959595959595959,
-      "Q1_p_opt": 0.0054786307737231255,
+      "qaoa_sel": [
+        "AMGN",
+        "AMZN",
+        "MRK",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.8606060606060606,
+      "Q1_p_opt": 0.003420198569074273,
       "Q1_best_is_opt": false,
-      "Q1_conc": 22.440471649169922,
+      "Q1_conc": 14.009133338928223,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.005267623622275952,
-      "Q3_ret_view": 0.05218882132609681,
-      "Q3_ret_diff": 0.04692119770382086,
-      "nonzero_views": 5
+      "Q3_ret_neutral": 0.16347609703149013,
+      "Q3_ret_view": 0.08606566513659608,
+      "Q3_ret_diff": -0.07741043189489405,
+      "nonzero_views": 3
     },
     {
       "assets": [
@@ -1029,37 +1030,37 @@
         "WMT"
       ],
       "window": [
-        "2022-08-31",
-        "2024-03-05",
-        "2024-06-04"
+        "2022-06-01",
+        "2023-12-01",
+        "2024-03-05"
       ],
       "neutral_opt": [
-        "CRM",
         "IBM",
         "MRK",
+        "V",
         "WMT"
       ],
       "view_opt": [
-        "AMGN",
         "DOW",
-        "HD",
-        "MRK"
-      ],
-      "qaoa_sel": [
-        "CRM",
         "IBM",
-        "MRK",
+        "PG",
         "WMT"
       ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.05489577353000641,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 224.85308837890625,
+      "qaoa_sel": [
+        "IBM",
+        "MRK",
+        "PG",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.9959595959595959,
+      "Q1_p_opt": 0.0023600240238010883,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 9.666658401489258,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": -0.042229527820419444,
-      "Q3_ret_view": 0.007924634020692212,
-      "Q3_ret_diff": 0.050154161841111655,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.1662648819862813,
+      "Q3_ret_view": 0.1328306390699705,
+      "Q3_ret_diff": -0.03343424291631081,
       "nonzero_views": 4
     },
     {
@@ -1078,38 +1079,38 @@
         "WMT"
       ],
       "window": [
-        "2022-08-31",
-        "2024-03-05",
-        "2024-06-04"
+        "2022-06-01",
+        "2023-12-01",
+        "2024-03-05"
       ],
       "neutral_opt": [
         "IBM",
-        "JPM",
+        "MCD",
         "MRK",
         "WMT"
       ],
       "view_opt": [
         "IBM",
-        "JPM",
-        "MRK",
-        "WMT"
-      ],
-      "qaoa_sel": [
-        "AAPL",
-        "GS",
-        "TRV",
+        "PG",
+        "UNH",
         "VZ"
       ],
-      "Q1_rank_pct": 0.00202020202020202,
-      "Q1_p_opt": 0.0005224248743616045,
+      "qaoa_sel": [
+        "MCD",
+        "MRK",
+        "PG",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.9696969696969697,
+      "Q1_p_opt": 0.009899238124489784,
       "Q1_best_is_opt": false,
-      "Q1_conc": 2.139852285385132,
-      "Q2_selection_changed": false,
-      "Q2_jaccard": 0.0,
-      "Q3_ret_neutral": 0.026598791698370094,
-      "Q3_ret_view": 0.026598791698370094,
-      "Q3_ret_diff": 0.0,
-      "nonzero_views": 1
+      "Q1_conc": 40.547279357910156,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.8571428571428572,
+      "Q3_ret_neutral": 0.1506134700698878,
+      "Q3_ret_view": 0.04625672408121195,
+      "Q3_ret_diff": -0.10435674598867584,
+      "nonzero_views": 5
     },
     {
       "assets": [
@@ -1127,38 +1128,38 @@
         "VZ"
       ],
       "window": [
-        "2022-08-31",
-        "2024-03-05",
-        "2024-06-04"
+        "2022-06-01",
+        "2023-12-01",
+        "2024-03-05"
       ],
       "neutral_opt": [
         "JNJ",
         "NVDA",
         "PG",
-        "V"
+        "UNH"
       ],
       "view_opt": [
         "DOW",
         "JNJ",
-        "NVDA",
-        "PG"
+        "PG",
+        "UNH"
       ],
       "qaoa_sel": [
+        "AMZN",
         "JNJ",
-        "NVDA",
         "PG",
-        "V"
+        "UNH"
       ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.008872874081134796,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 36.343292236328125,
+      "Q1_rank_pct": 0.9050505050505051,
+      "Q1_p_opt": 0.01299587357789278,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 53.23109817504883,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.4,
-      "Q3_ret_neutral": 0.07946355683989892,
-      "Q3_ret_view": 0.08014696491303908,
-      "Q3_ret_diff": 0.0006834080731401571,
-      "nonzero_views": 3
+      "Q3_ret_neutral": 0.1927911925711261,
+      "Q3_ret_view": 0.00900875281827962,
+      "Q3_ret_diff": -0.18378243975284647,
+      "nonzero_views": 7
     },
     {
       "assets": [
@@ -1176,38 +1177,38 @@
         "WMT"
       ],
       "window": [
-        "2022-08-31",
-        "2024-03-05",
-        "2024-06-04"
+        "2022-06-01",
+        "2023-12-01",
+        "2024-03-05"
       ],
       "neutral_opt": [
-        "CRM",
-        "NVDA",
+        "AAPL",
+        "BA",
         "PG",
         "WMT"
       ],
       "view_opt": [
-        "DIS",
+        "BA",
         "DOW",
-        "HD",
-        "HON"
-      ],
-      "qaoa_sel": [
-        "CRM",
-        "NVDA",
         "PG",
         "WMT"
       ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.06890931725502014,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 282.2525634765625,
+      "qaoa_sel": [
+        "AAPL",
+        "BA",
+        "CVX",
+        "HD"
+      ],
+      "Q1_rank_pct": 0.7434343434343434,
+      "Q1_p_opt": 0.00047418836038559675,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 1.9422755241394043,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
-      "Q3_ret_neutral": 0.07836929763028944,
-      "Q3_ret_view": -0.042706292756570896,
-      "Q3_ret_diff": -0.12107559038686033,
-      "nonzero_views": 4
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": -0.006901767553273985,
+      "Q3_ret_view": 0.04625706876391433,
+      "Q3_ret_diff": 0.05315883631718832,
+      "nonzero_views": 7
     },
     {
       "assets": [
@@ -1238,8 +1239,8 @@
       "view_opt": [
         "DIS",
         "JPM",
-        "MRK",
-        "NVDA"
+        "NVDA",
+        "PG"
       ],
       "qaoa_sel": [
         "IBM",
@@ -1252,11 +1253,11 @@
       "Q1_best_is_opt": true,
       "Q1_conc": 59.155853271484375,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.4,
+      "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": 0.08600775612028255,
-      "Q3_ret_view": 0.0967531858969839,
-      "Q3_ret_diff": 0.010745429776701343,
-      "nonzero_views": 3
+      "Q3_ret_view": 0.09685370385995373,
+      "Q3_ret_diff": 0.01084594773967118,
+      "nonzero_views": 5
     },
     {
       "assets": [
@@ -1285,10 +1286,10 @@
         "NVDA"
       ],
       "view_opt": [
-        "AMGN",
         "DIS",
-        "HD",
-        "HON"
+        "GS",
+        "HON",
+        "NVDA"
       ],
       "qaoa_sel": [
         "AMGN",
@@ -1303,9 +1304,9 @@
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.8571428571428572,
       "Q3_ret_neutral": 0.100133263908597,
-      "Q3_ret_view": -0.007868922521853339,
-      "Q3_ret_diff": -0.10800218643045034,
-      "nonzero_views": 5
+      "Q3_ret_view": 0.12433809505831506,
+      "Q3_ret_diff": 0.024204831149718053,
+      "nonzero_views": 9
     },
     {
       "assets": [
@@ -1334,10 +1335,10 @@
         "PG"
       ],
       "view_opt": [
-        "AMGN",
-        "AXP",
-        "HD",
-        "JPM"
+        "JPM",
+        "MCD",
+        "PG",
+        "V"
       ],
       "qaoa_sel": [
         "IBM",
@@ -1350,11 +1351,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 16.06766700744629,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": -0.055721201480580684,
-      "Q3_ret_view": 0.03894265665344898,
-      "Q3_ret_diff": 0.09466385813402967,
-      "nonzero_views": 7
+      "Q3_ret_view": -0.0004510599026334994,
+      "Q3_ret_diff": 0.055270141577947185,
+      "nonzero_views": 5
     },
     {
       "assets": [
@@ -1385,8 +1386,8 @@
       "view_opt": [
         "AXP",
         "DIS",
-        "DOW",
-        "JNJ"
+        "KO",
+        "MCD"
       ],
       "qaoa_sel": [
         "DIS",
@@ -1401,9 +1402,9 @@
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": -0.07042506484500177,
-      "Q3_ret_view": -0.019400270574614575,
-      "Q3_ret_diff": 0.0510247942703872,
-      "nonzero_views": 5
+      "Q3_ret_view": -0.0005043351625907411,
+      "Q3_ret_diff": 0.06992072968241103,
+      "nonzero_views": 4
     },
     {
       "assets": [
@@ -1432,10 +1433,10 @@
         "V"
       ],
       "view_opt": [
-        "AMGN",
-        "JNJ",
+        "CAT",
         "JPM",
-        "MMM"
+        "KO",
+        "V"
       ],
       "qaoa_sel": [
         "JPM",
@@ -1448,11 +1449,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 51.72261047363281,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.019920411636135782,
-      "Q3_ret_view": 0.09529162974403649,
-      "Q3_ret_diff": 0.0753712181079007,
-      "nonzero_views": 5
+      "Q3_ret_view": 0.02699674688282272,
+      "Q3_ret_diff": 0.007076335246686938,
+      "nonzero_views": 4
     },
     {
       "assets": [
@@ -1482,9 +1483,9 @@
       ],
       "view_opt": [
         "AXP",
-        "HD",
         "HON",
-        "JNJ"
+        "MCD",
+        "NVDA"
       ],
       "qaoa_sel": [
         "BA",
@@ -1497,11 +1498,11 @@
       "Q1_best_is_opt": false,
       "Q1_conc": 2.4261109828948975,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
+      "Q2_jaccard": 0.6666666666666667,
       "Q3_ret_neutral": 0.025016529180193814,
-      "Q3_ret_view": -0.009661948207903226,
-      "Q3_ret_diff": -0.03467847738809704,
-      "nonzero_views": 5
+      "Q3_ret_view": 0.1024185099788053,
+      "Q3_ret_diff": 0.07740198079861149,
+      "nonzero_views": 7
     },
     {
       "assets": [
@@ -1530,10 +1531,10 @@
         "WMT"
       ],
       "view_opt": [
-        "AMGN",
-        "DOW",
-        "HD",
-        "JNJ"
+        "CAT",
+        "V",
+        "VZ",
+        "WMT"
       ],
       "qaoa_sel": [
         "CAT",
@@ -1546,11 +1547,11 @@
       "Q1_best_is_opt": true,
       "Q1_conc": 84.39269256591797,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
+      "Q2_jaccard": 0.4,
       "Q3_ret_neutral": 0.0286614588925469,
-      "Q3_ret_view": -0.022843162562236397,
-      "Q3_ret_diff": -0.051504621454783295,
-      "nonzero_views": 6
+      "Q3_ret_view": 0.03156060557915974,
+      "Q3_ret_diff": 0.0028991466866128413,
+      "nonzero_views": 4
     },
     {
       "assets": [
@@ -1579,7 +1580,7 @@
         "NVDA"
       ],
       "view_opt": [
-        "HON",
+        "CAT",
         "JPM",
         "MCD",
         "NVDA"
@@ -1594,11 +1595,11 @@
       "Q1_p_opt": 0.013869008980691433,
       "Q1_best_is_opt": false,
       "Q1_conc": 56.80746078491211,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.4,
+      "Q2_selection_changed": false,
+      "Q2_jaccard": 0.0,
       "Q3_ret_neutral": 0.0766355809203052,
-      "Q3_ret_view": 0.09409115137602875,
-      "Q3_ret_diff": 0.017455570455723546,
+      "Q3_ret_view": 0.0766355809203052,
+      "Q3_ret_diff": 0.0,
       "nonzero_views": 3
     },
     {
@@ -1617,38 +1618,38 @@
         "WMT"
       ],
       "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
       ],
       "neutral_opt": [
-        "AMZN",
+        "CRM",
         "JPM",
         "MRK",
         "WMT"
       ],
       "view_opt": [
         "DIS",
-        "DOW",
         "JPM",
-        "MMM"
+        "KO",
+        "WMT"
       ],
       "qaoa_sel": [
-        "AMZN",
+        "JPM",
         "KO",
         "MRK",
         "WMT"
       ],
-      "Q1_rank_pct": 0.9737373737373738,
-      "Q1_p_opt": 0.04155345633625984,
+      "Q1_rank_pct": 0.9858585858585859,
+      "Q1_p_opt": 0.01694461703300476,
       "Q1_best_is_opt": false,
-      "Q1_conc": 170.2029571533203,
+      "Q1_conc": 69.4051513671875,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.035528341191549906,
-      "Q3_ret_view": 0.06748184833995041,
-      "Q3_ret_diff": 0.031953507148400506,
-      "nonzero_views": 6
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.005267623622275952,
+      "Q3_ret_view": 0.044420556721758375,
+      "Q3_ret_diff": 0.03915293309948242,
+      "nonzero_views": 4
     },
     {
       "assets": [
@@ -1666,9 +1667,9 @@
         "WMT"
       ],
       "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
       ],
       "neutral_opt": [
         "AXP",
@@ -1677,26 +1678,26 @@
         "WMT"
       ],
       "view_opt": [
-        "AXP",
         "DIS",
         "NVDA",
+        "PG",
         "WMT"
       ],
       "qaoa_sel": [
-        "AAPL",
-        "DIS",
-        "GS",
-        "UNH"
+        "KO",
+        "NVDA",
+        "PG",
+        "WMT"
       ],
-      "Q1_rank_pct": 0.2606060606060606,
-      "Q1_p_opt": 0.0005018358933739364,
+      "Q1_rank_pct": 0.9959595959595959,
+      "Q1_p_opt": 0.015012923628091812,
       "Q1_best_is_opt": false,
-      "Q1_conc": 2.0555198192596436,
+      "Q1_conc": 61.49293518066406,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.4,
-      "Q3_ret_neutral": 0.049760360644622637,
-      "Q3_ret_view": 0.001808310256034673,
-      "Q3_ret_diff": -0.04795205038858796,
+      "Q3_ret_neutral": 0.15552497575185553,
+      "Q3_ret_view": 0.11044589548308492,
+      "Q3_ret_diff": -0.04507908026877061,
       "nonzero_views": 3
     },
     {
@@ -1715,38 +1716,38 @@
         "VZ"
       ],
       "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
       ],
       "neutral_opt": [
-        "MSFT",
+        "CAT",
+        "JNJ",
         "NVDA",
-        "PG",
-        "VZ"
+        "PG"
       ],
       "view_opt": [
+        "CAT",
         "DIS",
-        "HON",
-        "JNJ",
-        "NVDA"
+        "NVDA",
+        "PG"
       ],
       "qaoa_sel": [
+        "AMZN",
+        "DIS",
         "JNJ",
-        "KO",
-        "PG",
-        "VZ"
+        "NKE"
       ],
-      "Q1_rank_pct": 0.2404040404040404,
-      "Q1_p_opt": 0.0011918898671865463,
+      "Q1_rank_pct": 0.01818181818181818,
+      "Q1_p_opt": 0.0004354226985014975,
       "Q1_best_is_opt": false,
-      "Q1_conc": 4.881980895996094,
+      "Q1_conc": 1.7834913730621338,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": -0.007367798780913537,
-      "Q3_ret_view": -0.020457104163990936,
-      "Q3_ret_diff": -0.013089305383077399,
-      "nonzero_views": 5
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.0816707579971867,
+      "Q3_ret_view": 0.07766563449769848,
+      "Q3_ret_diff": -0.004005123499488228,
+      "nonzero_views": 4
     },
     {
       "assets": [
@@ -1764,38 +1765,38 @@
         "VZ"
       ],
       "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
       ],
       "neutral_opt": [
-        "AMZN",
+        "IBM",
         "MRK",
         "MSFT",
         "PG"
       ],
       "view_opt": [
-        "AMGN",
+        "CSCO",
         "DOW",
-        "HD",
-        "MSFT"
+        "PG",
+        "UNH"
       ],
       "qaoa_sel": [
-        "AAPL",
-        "AMZN",
+        "IBM",
         "MRK",
-        "MSFT"
+        "MSFT",
+        "PG"
       ],
-      "Q1_rank_pct": 0.9818181818181818,
-      "Q1_p_opt": 0.01143550593405962,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 46.8398323059082,
+      "Q1_rank_pct": 1.0,
+      "Q1_p_opt": 0.0543748140335083,
+      "Q1_best_is_opt": true,
+      "Q1_conc": 222.71923828125,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": -0.021080497850667235,
-      "Q3_ret_view": 0.033242340916552315,
-      "Q3_ret_diff": 0.05432283876721955,
-      "nonzero_views": 3
+      "Q3_ret_neutral": 0.004298370504334237,
+      "Q3_ret_view": 0.020967099708787407,
+      "Q3_ret_diff": 0.01666872920445317,
+      "nonzero_views": 6
     },
     {
       "assets": [
@@ -1813,6 +1814,741 @@
         "UNH"
       ],
       "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "CRM",
+        "KO",
+        "MCD",
+        "NVDA"
+      ],
+      "view_opt": [
+        "DIS",
+        "KO",
+        "MCD",
+        "NVDA"
+      ],
+      "qaoa_sel": [
+        "KO",
+        "MCD",
+        "NVDA",
+        "UNH"
+      ],
+      "Q1_rank_pct": 0.9858585858585859,
+      "Q1_p_opt": 0.0130280377343297,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 53.36284255981445,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.03209286442688075,
+      "Q3_ret_view": 0.06416946227967624,
+      "Q3_ret_diff": 0.032076597852795485,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AAPL",
+        "AMZN",
+        "BA",
+        "CRM",
+        "CSCO",
+        "DOW",
+        "HD",
+        "IBM",
+        "JPM",
+        "KO",
+        "MMM",
+        "WMT"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "CRM",
+        "IBM",
+        "JPM",
+        "WMT"
+      ],
+      "view_opt": [
+        "CSCO",
+        "JPM",
+        "KO",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "CRM",
+        "IBM",
+        "JPM",
+        "WMT"
+      ],
+      "Q1_rank_pct": 1.0,
+      "Q1_p_opt": 0.05534610152244568,
+      "Q1_best_is_opt": true,
+      "Q1_conc": 226.6976318359375,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": -0.04025072623684234,
+      "Q3_ret_view": 0.05972553861781704,
+      "Q3_ret_diff": 0.09997626485465938,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "BA",
+        "CAT",
+        "DIS",
+        "DOW",
+        "GS",
+        "JPM",
+        "MCD",
+        "MMM",
+        "MSFT",
+        "NKE",
+        "V",
+        "WMT"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "CAT",
+        "JPM",
+        "MSFT",
+        "WMT"
+      ],
+      "view_opt": [
+        "CAT",
+        "DIS",
+        "JPM",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "JPM",
+        "MCD",
+        "NKE",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.8161616161616162,
+      "Q1_p_opt": 0.004776020534336567,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 19.562580108642578,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.05005672941208994,
+      "Q3_ret_view": 0.020134953696393287,
+      "Q3_ret_diff": -0.029921775715696652,
+      "nonzero_views": 3
+    },
+    {
+      "assets": [
+        "AXP",
+        "BA",
+        "CRM",
+        "CSCO",
+        "DIS",
+        "DOW",
+        "GS",
+        "JPM",
+        "MCD",
+        "MSFT",
+        "TRV",
+        "UNH"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "CRM",
+        "JPM",
+        "MCD",
+        "MSFT"
+      ],
+      "view_opt": [
+        "CSCO",
+        "DIS",
+        "JPM",
+        "MCD"
+      ],
+      "qaoa_sel": [
+        "CSCO",
+        "JPM",
+        "MCD",
+        "UNH"
+      ],
+      "Q1_rank_pct": 0.8909090909090909,
+      "Q1_p_opt": 0.009890018031001091,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 40.50951385498047,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": -0.052835771231569906,
+      "Q3_ret_view": -0.035375967198412406,
+      "Q3_ret_diff": 0.0174598040331575,
+      "nonzero_views": 3
+    },
+    {
+      "assets": [
+        "AMGN",
+        "BA",
+        "CAT",
+        "JPM",
+        "KO",
+        "MCD",
+        "MMM",
+        "MSFT",
+        "NKE",
+        "PG",
+        "TRV",
+        "UNH"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "CAT",
+        "JPM",
+        "MSFT",
+        "PG"
+      ],
+      "view_opt": [
+        "CAT",
+        "JPM",
+        "MCD",
+        "PG"
+      ],
+      "qaoa_sel": [
+        "CAT",
+        "JPM",
+        "MSFT",
+        "PG"
+      ],
+      "Q1_rank_pct": 1.0,
+      "Q1_p_opt": 0.012353052385151386,
+      "Q1_best_is_opt": true,
+      "Q1_conc": 50.59810256958008,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.03458625416835148,
+      "Q3_ret_view": 0.0017561412546540645,
+      "Q3_ret_diff": -0.03283011291369742,
+      "nonzero_views": 3
+    },
+    {
+      "assets": [
+        "AMGN",
+        "BA",
+        "DOW",
+        "GS",
+        "MMM",
+        "MRK",
+        "MSFT",
+        "NVDA",
+        "PG",
+        "UNH",
+        "V",
+        "WMT"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "MRK",
+        "NVDA",
+        "PG",
+        "WMT"
+      ],
+      "view_opt": [
+        "NVDA",
+        "PG",
+        "V",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "MMM",
+        "MRK",
+        "NVDA",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.9111111111111111,
+      "Q1_p_opt": 0.04015626013278961,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 164.48004150390625,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.14521881556550187,
+      "Q3_ret_view": 0.12580234662953593,
+      "Q3_ret_diff": -0.019416468935965936,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AMGN",
+        "CSCO",
+        "DIS",
+        "DOW",
+        "HD",
+        "IBM",
+        "JNJ",
+        "JPM",
+        "MCD",
+        "MMM",
+        "PG",
+        "TRV"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "IBM",
+        "JPM",
+        "MCD",
+        "PG"
+      ],
+      "view_opt": [
+        "DIS",
+        "JPM",
+        "MCD",
+        "PG"
+      ],
+      "qaoa_sel": [
+        "CSCO",
+        "DOW",
+        "HD",
+        "TRV"
+      ],
+      "Q1_rank_pct": 0.24242424242424243,
+      "Q1_p_opt": 6.0377740737749264e-05,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 0.24730722606182098,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": -0.026552940825785853,
+      "Q3_ret_view": -0.0158075110490844,
+      "Q3_ret_diff": 0.010745429776701454,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "BA",
+        "CAT",
+        "CVX",
+        "DIS",
+        "GS",
+        "HON",
+        "JPM",
+        "KO",
+        "NVDA",
+        "PG",
+        "UNH",
+        "VZ"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "CAT",
+        "JPM",
+        "NVDA",
+        "PG"
+      ],
+      "view_opt": [
+        "DIS",
+        "JPM",
+        "NVDA",
+        "PG"
+      ],
+      "qaoa_sel": [
+        "BA",
+        "CVX",
+        "DIS",
+        "NVDA"
+      ],
+      "Q1_rank_pct": 0.42828282828282827,
+      "Q1_p_opt": 0.002439898205921054,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 9.993823051452637,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.11441735616369231,
+      "Q3_ret_view": 0.09685370385995373,
+      "Q3_ret_diff": -0.017563652303738575,
+      "nonzero_views": 2
+    },
+    {
+      "assets": [
+        "AMGN",
+        "AXP",
+        "BA",
+        "GS",
+        "HD",
+        "JNJ",
+        "JPM",
+        "MMM",
+        "MSFT",
+        "NVDA",
+        "PG",
+        "VZ"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "AMGN",
+        "JPM",
+        "NVDA",
+        "PG"
+      ],
+      "view_opt": [
+        "JPM",
+        "NVDA",
+        "PG",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "JNJ",
+        "MMM",
+        "NVDA",
+        "PG"
+      ],
+      "Q1_rank_pct": 0.7797979797979798,
+      "Q1_p_opt": 0.015046926215291023,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 61.63220977783203,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.14773093331426246,
+      "Q3_ret_view": 0.12967462626226323,
+      "Q3_ret_diff": -0.018056307051999232,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "BA",
+        "CSCO",
+        "DOW",
+        "GS",
+        "HD",
+        "IBM",
+        "JNJ",
+        "MSFT",
+        "NVDA",
+        "V",
+        "VZ",
+        "WMT"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "IBM",
+        "NVDA",
+        "V",
+        "WMT"
+      ],
+      "view_opt": [
+        "NVDA",
+        "V",
+        "VZ",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "IBM",
+        "JNJ",
+        "NVDA",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.997979797979798,
+      "Q1_p_opt": 0.007634954061359167,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 31.27277183532715,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.0801834788074478,
+      "Q3_ret_view": 0.12374983098645864,
+      "Q3_ret_diff": 0.04356635217901084,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "BA",
+        "CAT",
+        "CSCO",
+        "DIS",
+        "HD",
+        "JNJ",
+        "MCD",
+        "MRK",
+        "MSFT",
+        "NKE",
+        "TRV",
+        "V"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "CAT",
+        "MRK",
+        "MSFT",
+        "V"
+      ],
+      "view_opt": [
+        "CAT",
+        "DIS",
+        "MCD",
+        "V"
+      ],
+      "qaoa_sel": [
+        "BA",
+        "DIS",
+        "NKE",
+        "TRV"
+      ],
+      "Q1_rank_pct": 0.00202020202020202,
+      "Q1_p_opt": 0.0004191226908005774,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 1.716726541519165,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.013090465685838604,
+      "Q3_ret_view": -0.05451256731027554,
+      "Q3_ret_diff": -0.06760303299611414,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AXP",
+        "BA",
+        "CRM",
+        "CSCO",
+        "CVX",
+        "DIS",
+        "GS",
+        "IBM",
+        "JPM",
+        "MMM",
+        "V",
+        "VZ"
+      ],
+      "window": [
+        "2022-08-31",
+        "2024-03-05",
+        "2024-06-04"
+      ],
+      "neutral_opt": [
+        "CRM",
+        "IBM",
+        "JPM",
+        "V"
+      ],
+      "view_opt": [
+        "DIS",
+        "JPM",
+        "V",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "AXP",
+        "DIS",
+        "GS",
+        "MMM"
+      ],
+      "Q1_rank_pct": 0.012121212121212121,
+      "Q1_p_opt": 0.0010520617943257093,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 4.3092451095581055,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": -0.07523818837951646,
+      "Q3_ret_view": 0.0004047616522899755,
+      "Q3_ret_diff": 0.07564295003180643,
+      "nonzero_views": 4
+    },
+    {
+      "assets": [
+        "AMGN",
+        "AXP",
+        "CAT",
+        "CRM",
+        "CVX",
+        "HON",
+        "JNJ",
+        "MSFT",
+        "NVDA",
+        "PG",
+        "TRV",
+        "WMT"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "NVDA",
+        "PG",
+        "WMT"
+      ],
+      "view_opt": [
+        "CAT",
+        "JNJ",
+        "NVDA",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "MSFT",
+        "NVDA",
+        "PG",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.9939393939393939,
+      "Q1_p_opt": 0.009428934194147587,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 38.620914459228516,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.049760360644622637,
+      "Q3_ret_view": 0.062104699040087974,
+      "Q3_ret_diff": 0.012344338395465337,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AMGN",
+        "AMZN",
+        "AXP",
+        "BA",
+        "CSCO",
+        "HON",
+        "IBM",
+        "MCD",
+        "MRK",
+        "MSFT",
+        "NVDA",
+        "VZ"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "MRK",
+        "NVDA",
+        "VZ"
+      ],
+      "view_opt": [
+        "AMZN",
+        "BA",
+        "NVDA",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "BA",
+        "CSCO",
+        "HON",
+        "IBM"
+      ],
+      "Q1_rank_pct": 0.00808080808080808,
+      "Q1_p_opt": 0.0006826984463259578,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 2.796332836151123,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": -0.0260436777559363,
+      "Q3_ret_view": -0.06042569966247302,
+      "Q3_ret_diff": -0.03438202190653672,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "CAT",
+        "DIS",
+        "DOW",
+        "JNJ",
+        "KO",
+        "MCD",
+        "MMM",
+        "MRK",
+        "NKE",
+        "PG",
+        "TRV",
+        "UNH"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "CAT",
+        "MRK",
+        "PG",
+        "TRV"
+      ],
+      "view_opt": [
+        "CAT",
+        "JNJ",
+        "NKE",
+        "PG"
+      ],
+      "qaoa_sel": [
+        "DIS",
+        "DOW",
+        "MMM",
+        "NKE"
+      ],
+      "Q1_rank_pct": 0.00202020202020202,
+      "Q1_p_opt": 0.0004418030730448663,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 1.8096253871917725,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.0014171799928954787,
+      "Q3_ret_view": 0.02293971363220293,
+      "Q3_ret_diff": 0.02152253363930745,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AMGN",
+        "AMZN",
+        "CVX",
+        "DOW",
+        "GS",
+        "HON",
+        "KO",
+        "MCD",
+        "MRK",
+        "NVDA",
+        "TRV",
+        "V"
+      ],
+      "window": [
         "2022-11-30",
         "2024-06-04",
         "2024-09-04"
@@ -1820,291 +2556,242 @@
       "neutral_opt": [
         "AMZN",
         "KO",
+        "MRK",
+        "NVDA"
+      ],
+      "view_opt": [
+        "AMZN",
+        "KO",
+        "NVDA",
+        "V"
+      ],
+      "qaoa_sel": [
+        "AMZN",
+        "MRK",
         "NVDA",
         "TRV"
       ],
-      "view_opt": [
+      "Q1_rank_pct": 0.98989898989899,
+      "Q1_p_opt": 0.0034034086856991053,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 13.940361976623535,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": -0.018131360460991397,
+      "Q3_ret_view": 0.013508181398457886,
+      "Q3_ret_diff": 0.03163954185944928,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AAPL",
+        "AXP",
+        "CAT",
         "DIS",
         "DOW",
-        "HD",
-        "MMM"
+        "IBM",
+        "KO",
+        "MCD",
+        "MMM",
+        "UNH",
+        "V",
+        "VZ"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AAPL",
+        "AXP",
+        "V",
+        "VZ"
+      ],
+      "view_opt": [
+        "AAPL",
+        "CAT",
+        "V",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "DIS",
+        "KO",
+        "MMM",
+        "VZ"
+      ],
+      "Q1_rank_pct": 0.050505050505050504,
+      "Q1_p_opt": 0.0009263872634619474,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 3.7944822311401367,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.06194997160378235,
+      "Q3_ret_view": 0.053941111715780865,
+      "Q3_ret_diff": -0.008008859888001485,
+      "nonzero_views": 2
+    },
+    {
+      "assets": [
+        "AMZN",
+        "AXP",
+        "CVX",
+        "GS",
+        "IBM",
+        "JPM",
+        "MCD",
+        "NKE",
+        "NVDA",
+        "TRV",
+        "UNH",
+        "VZ"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "JPM",
+        "NVDA",
+        "VZ"
+      ],
+      "view_opt": [
+        "AMZN",
+        "JPM",
+        "NKE",
+        "NVDA"
+      ],
+      "qaoa_sel": [
+        "CVX",
+        "GS",
+        "NKE",
+        "TRV"
+      ],
+      "Q1_rank_pct": 0.00404040404040404,
+      "Q1_p_opt": 1.0161033060285263e-05,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 0.041619591414928436,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.02453937184512256,
+      "Q3_ret_view": -0.03868333083359987,
+      "Q3_ret_diff": -0.06322270267872243,
+      "nonzero_views": 4
+    },
+    {
+      "assets": [
+        "AXP",
+        "BA",
+        "CAT",
+        "CSCO",
+        "CVX",
+        "DIS",
+        "DOW",
+        "JNJ",
+        "MMM",
+        "MRK",
+        "PG",
+        "TRV"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "CAT",
+        "MRK",
+        "PG"
+      ],
+      "view_opt": [
+        "BA",
+        "CAT",
+        "JNJ",
+        "PG"
       ],
       "qaoa_sel": [
         "BA",
+        "CVX",
         "DIS",
+        "MMM"
+      ],
+      "Q1_rank_pct": 0.00202020202020202,
+      "Q1_p_opt": 0.0002270555851282552,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 0.9300196766853333,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.015271582788632276,
+      "Q3_ret_view": 0.02450526721243329,
+      "Q3_ret_diff": 0.009233684423801014,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AAPL",
+        "AXP",
+        "CAT",
+        "CVX",
+        "HON",
+        "IBM",
+        "MCD",
+        "MMM",
+        "NVDA",
+        "TRV",
+        "UNH",
+        "V"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "IBM",
+        "NVDA",
+        "V"
+      ],
+      "view_opt": [
+        "AXP",
+        "CAT",
+        "NVDA",
+        "V"
+      ],
+      "qaoa_sel": [
+        "CVX",
+        "HON",
         "MMM",
         "NVDA"
       ],
       "Q1_rank_pct": 0.6686868686868687,
-      "Q1_p_opt": 0.0023787394165992737,
+      "Q1_p_opt": 0.00021019630366936326,
       "Q1_best_is_opt": false,
-      "Q1_conc": 9.743316650390625,
+      "Q1_conc": 0.8609640598297119,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 1.0,
-      "Q3_ret_neutral": 0.007788548198724765,
-      "Q3_ret_view": 0.07004940655121827,
-      "Q3_ret_diff": 0.06226085835249351,
-      "nonzero_views": 5
-    },
-    {
-      "assets": [
-        "AAPL",
-        "AMZN",
-        "BA",
-        "CRM",
-        "CSCO",
-        "DOW",
-        "HD",
-        "IBM",
-        "JPM",
-        "KO",
-        "MMM",
-        "WMT"
-      ],
-      "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
-      ],
-      "neutral_opt": [
-        "AAPL",
-        "AMZN",
-        "JPM",
-        "WMT"
-      ],
-      "view_opt": [
-        "DOW",
-        "HD",
-        "JPM",
-        "MMM"
-      ],
-      "qaoa_sel": [
-        "AMZN",
-        "JPM",
-        "KO",
-        "WMT"
-      ],
-      "Q1_rank_pct": 0.9959595959595959,
-      "Q1_p_opt": 0.050456468015909195,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 206.66969299316406,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.09366069824362722,
-      "Q3_ret_view": 0.1299813208199847,
-      "Q3_ret_diff": 0.036320622576357486,
-      "nonzero_views": 5
-    },
-    {
-      "assets": [
-        "BA",
-        "CAT",
-        "DIS",
-        "DOW",
-        "GS",
-        "JPM",
-        "MCD",
-        "MMM",
-        "MSFT",
-        "NKE",
-        "V",
-        "WMT"
-      ],
-      "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
-      ],
-      "neutral_opt": [
-        "JPM",
-        "MSFT",
-        "V",
-        "WMT"
-      ],
-      "view_opt": [
-        "DIS",
-        "DOW",
-        "JPM",
-        "MMM"
-      ],
-      "qaoa_sel": [
-        "JPM",
-        "MSFT",
-        "V",
-        "WMT"
-      ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.108553446829319,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 444.6349182128906,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.07167421008658503,
-      "Q3_ret_view": 0.06748184833995041,
-      "Q3_ret_diff": -0.004192361746634621,
-      "nonzero_views": 5
-    },
-    {
-      "assets": [
-        "AXP",
-        "BA",
-        "CRM",
-        "CSCO",
-        "DIS",
-        "DOW",
-        "GS",
-        "JPM",
-        "MCD",
-        "MSFT",
-        "TRV",
-        "UNH"
-      ],
-      "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
-      ],
-      "neutral_opt": [
-        "AXP",
-        "JPM",
-        "MCD",
-        "MSFT"
-      ],
-      "view_opt": [
-        "AXP",
-        "DIS",
-        "DOW",
-        "JPM"
-      ],
-      "qaoa_sel": [
-        "AXP",
-        "JPM",
-        "MSFT",
-        "UNH"
-      ],
-      "Q1_rank_pct": 0.9939393939393939,
-      "Q1_p_opt": 0.0068503436632454395,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 28.05900764465332,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.6666666666666667,
-      "Q3_ret_neutral": 0.06473881633859624,
-      "Q3_ret_view": -0.003273528207392018,
-      "Q3_ret_diff": -0.06801234454598826,
-      "nonzero_views": 4
-    },
-    {
-      "assets": [
-        "AMGN",
-        "BA",
-        "CAT",
-        "JPM",
-        "KO",
-        "MCD",
-        "MMM",
-        "MSFT",
-        "NKE",
-        "PG",
-        "TRV",
-        "UNH"
-      ],
-      "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
-      ],
-      "neutral_opt": [
-        "CAT",
-        "JPM",
-        "MSFT",
-        "PG"
-      ],
-      "view_opt": [
-        "AMGN",
-        "JPM",
-        "MMM",
-        "MSFT"
-      ],
-      "qaoa_sel": [
-        "CAT",
-        "JPM",
-        "MSFT",
-        "PG"
-      ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.0308585986495018,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 126.39682006835938,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.6666666666666667,
-      "Q3_ret_neutral": 0.04592732564383328,
-      "Q3_ret_view": 0.13061512934912378,
-      "Q3_ret_diff": 0.0846878037052905,
-      "nonzero_views": 5
-    },
-    {
-      "assets": [
-        "AMGN",
-        "BA",
-        "DOW",
-        "GS",
-        "MMM",
-        "MRK",
-        "MSFT",
-        "NVDA",
-        "PG",
-        "UNH",
-        "V",
-        "WMT"
-      ],
-      "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
-      ],
-      "neutral_opt": [
-        "MRK",
-        "NVDA",
-        "PG",
-        "WMT"
-      ],
-      "view_opt": [
-        "AMGN",
-        "DOW",
-        "MMM",
-        "NVDA"
-      ],
-      "qaoa_sel": [
-        "MRK",
-        "MSFT",
-        "V",
-        "WMT"
-      ],
-      "Q1_rank_pct": 0.6767676767676768,
-      "Q1_p_opt": 0.013533499091863632,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 55.43321228027344,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.009986049189169677,
-      "Q3_ret_view": 0.07255266594923349,
-      "Q3_ret_diff": 0.06256661676006381,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.06246829678017951,
+      "Q3_ret_view": 0.010086188479009106,
+      "Q3_ret_diff": -0.052382108301170405,
       "nonzero_views": 3
     },
     {
       "assets": [
-        "AMGN",
-        "CSCO",
+        "BA",
+        "CVX",
         "DIS",
-        "DOW",
-        "HD",
-        "IBM",
-        "JNJ",
-        "JPM",
+        "GS",
+        "HON",
+        "KO",
         "MCD",
         "MMM",
+        "MRK",
         "PG",
-        "TRV"
+        "TRV",
+        "UNH"
       ],
       "window": [
         "2022-11-30",
@@ -2112,46 +2799,585 @@
         "2024-09-04"
       ],
       "neutral_opt": [
-        "IBM",
-        "JPM",
+        "KO",
+        "MRK",
         "PG",
         "TRV"
       ],
       "view_opt": [
-        "AMGN",
-        "DOW",
-        "HD",
-        "JPM"
+        "BA",
+        "KO",
+        "PG",
+        "TRV"
       ],
       "qaoa_sel": [
+        "KO",
+        "MRK",
+        "PG",
+        "TRV"
+      ],
+      "Q1_rank_pct": 1.0,
+      "Q1_p_opt": 0.011747143231332302,
+      "Q1_best_is_opt": true,
+      "Q1_conc": 48.11629867553711,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.029272806693787734,
+      "Q3_ret_view": 0.019324418568694268,
+      "Q3_ret_diff": -0.009948388125093466,
+      "nonzero_views": 3
+    },
+    {
+      "assets": [
+        "AAPL",
+        "AMGN",
+        "CSCO",
         "DIS",
+        "DOW",
+        "GS",
+        "JNJ",
         "JPM",
         "MMM",
-        "PG"
+        "NVDA",
+        "VZ",
+        "WMT"
       ],
-      "Q1_rank_pct": 0.696969696969697,
-      "Q1_p_opt": 0.001452024793252349,
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "JPM",
+        "NVDA",
+        "VZ",
+        "WMT"
+      ],
+      "view_opt": [
+        "JNJ",
+        "JPM",
+        "NVDA",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "JPM",
+        "MMM",
+        "VZ",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.597979797979798,
+      "Q1_p_opt": 0.021040674299001694,
       "Q1_best_is_opt": false,
-      "Q1_conc": 5.947493553161621,
+      "Q1_conc": 86.18260192871094,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.04924104026130349,
+      "Q3_ret_view": 0.08092229707369558,
+      "Q3_ret_diff": 0.03168125681239209,
+      "nonzero_views": 3
+    },
+    {
+      "assets": [
+        "AAPL",
+        "BA",
+        "CAT",
+        "CRM",
+        "DIS",
+        "DOW",
+        "HD",
+        "IBM",
+        "NKE",
+        "NVDA",
+        "TRV",
+        "VZ"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "CAT",
+        "IBM",
+        "NVDA",
+        "VZ"
+      ],
+      "view_opt": [
+        "BA",
+        "CAT",
+        "NKE",
+        "NVDA"
+      ],
+      "qaoa_sel": [
+        "AAPL",
+        "IBM",
+        "NVDA",
+        "VZ"
+      ],
+      "Q1_rank_pct": 0.9959595959595959,
+      "Q1_p_opt": 0.0237251129001379,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 97.17806243896484,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.05009502222468387,
+      "Q3_ret_view": -0.08278999466631021,
+      "Q3_ret_diff": -0.13288501689099408,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AAPL",
+        "CRM",
+        "CSCO",
+        "DOW",
+        "HD",
+        "HON",
+        "JNJ",
+        "JPM",
+        "MMM",
+        "MSFT",
+        "VZ",
+        "WMT"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "JPM",
+        "MSFT",
+        "VZ",
+        "WMT"
+      ],
+      "view_opt": [
+        "AAPL",
+        "JNJ",
+        "JPM",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "CSCO",
+        "HD",
+        "HON",
+        "MMM"
+      ],
+      "Q1_rank_pct": 0.00404040404040404,
+      "Q1_p_opt": 0.0007238674443215132,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 2.964961051940918,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.06730979541909088,
+      "Q3_ret_view": 0.13727640457396495,
+      "Q3_ret_diff": 0.06996660915487407,
+      "nonzero_views": 4
+    },
+    {
+      "assets": [
+        "AXP",
+        "BA",
+        "CRM",
+        "CVX",
+        "DOW",
+        "HD",
+        "HON",
+        "KO",
+        "MCD",
+        "NKE",
+        "UNH",
+        "V"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "CRM",
+        "KO",
+        "V"
+      ],
+      "view_opt": [
+        "AXP",
+        "BA",
+        "NKE",
+        "V"
+      ],
+      "qaoa_sel": [
+        "AXP",
+        "CRM",
+        "NKE",
+        "V"
+      ],
+      "Q1_rank_pct": 0.7676767676767676,
+      "Q1_p_opt": 0.0073884292505681515,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 30.26300621032715,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.0739455604284931,
+      "Q3_ret_view": -0.04491984247066716,
+      "Q3_ret_diff": -0.11886540289916026,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AAPL",
+        "BA",
+        "CAT",
+        "CVX",
+        "DIS",
+        "HD",
+        "JNJ",
+        "KO",
+        "MMM",
+        "MRK",
+        "UNH",
+        "VZ"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AAPL",
+        "CAT",
+        "MRK",
+        "VZ"
+      ],
+      "view_opt": [
+        "AAPL",
+        "BA",
+        "CAT",
+        "JNJ"
+      ],
+      "qaoa_sel": [
+        "JNJ",
+        "KO",
+        "MRK",
+        "UNH"
+      ],
+      "Q1_rank_pct": 0.4262626262626263,
+      "Q1_p_opt": 0.000710552092641592,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 2.910421371459961,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.022301569856331582,
+      "Q3_ret_view": 0.044034438543630205,
+      "Q3_ret_diff": 0.021732868687298623,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "CAT",
+        "CVX",
+        "DOW",
+        "JNJ",
+        "KO",
+        "MSFT",
+        "NKE",
+        "NVDA",
+        "PG",
+        "UNH",
+        "VZ",
+        "WMT"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "NVDA",
+        "PG",
+        "VZ",
+        "WMT"
+      ],
+      "view_opt": [
+        "CAT",
+        "JNJ",
+        "NKE",
+        "NVDA"
+      ],
+      "qaoa_sel": [
+        "MSFT",
+        "PG",
+        "VZ",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.6707070707070707,
+      "Q1_p_opt": 0.005409427918493748,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 22.15701675415039,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.10438233789512474,
-      "Q3_ret_view": 0.06397838580801585,
-      "Q3_ret_diff": -0.040403952087108896,
+      "Q3_ret_neutral": 0.03726117638112503,
+      "Q3_ret_view": -0.013885222536869524,
+      "Q3_ret_diff": -0.05114639891799455,
       "nonzero_views": 7
     },
     {
       "assets": [
-        "BA",
-        "CAT",
-        "CVX",
-        "DIS",
+        "AMGN",
+        "AXP",
         "GS",
         "HON",
+        "IBM",
+        "JNJ",
         "JPM",
-        "KO",
+        "MMM",
+        "MSFT",
         "NVDA",
         "PG",
+        "V"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "JPM",
+        "NVDA",
+        "PG"
+      ],
+      "view_opt": [
+        "JNJ",
+        "JPM",
+        "NVDA",
+        "PG"
+      ],
+      "qaoa_sel": [
+        "GS",
+        "HON",
+        "JNJ",
+        "MMM"
+      ],
+      "Q1_rank_pct": 0.00202020202020202,
+      "Q1_p_opt": 0.0004740773292724043,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 1.941820740699768,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.035867430374047604,
+      "Q3_ret_view": 0.055049502922942084,
+      "Q3_ret_diff": 0.01918207254889448,
+      "nonzero_views": 3
+    },
+    {
+      "assets": [
+        "BA",
+        "CSCO",
+        "DIS",
+        "IBM",
+        "JNJ",
+        "JPM",
+        "MMM",
+        "MRK",
+        "MSFT",
+        "PG",
+        "V",
+        "WMT"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "JPM",
+        "MRK",
+        "MSFT",
+        "WMT"
+      ],
+      "view_opt": [
+        "BA",
+        "JNJ",
+        "JPM",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "JPM",
+        "MRK",
+        "MSFT",
+        "WMT"
+      ],
+      "Q1_rank_pct": 1.0,
+      "Q1_p_opt": 0.0640190839767456,
+      "Q1_best_is_opt": true,
+      "Q1_conc": 262.22216796875,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.04003466822713553,
+      "Q3_ret_view": 0.0691956593967944,
+      "Q3_ret_diff": 0.029160991169658868,
+      "nonzero_views": 4
+    },
+    {
+      "assets": [
+        "AMZN",
+        "CAT",
+        "CRM",
+        "CSCO",
+        "CVX",
+        "HON",
+        "KO",
+        "MCD",
+        "MRK",
+        "MSFT",
+        "TRV",
+        "WMT"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AMZN",
+        "MRK",
+        "MSFT",
+        "WMT"
+      ],
+      "view_opt": [
+        "AMZN",
+        "CAT",
+        "KO",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "CVX",
+        "MRK",
+        "MSFT",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.8828282828282829,
+      "Q1_p_opt": 0.0013555627083405852,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 5.552384853363037,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.004792296300086374,
+      "Q3_ret_view": 0.0763318214262858,
+      "Q3_ret_diff": 0.07153952512619943,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AMZN",
+        "AXP",
+        "BA",
+        "CSCO",
+        "CVX",
+        "IBM",
+        "JNJ",
+        "JPM",
+        "MRK",
+        "NKE",
+        "TRV",
+        "V"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AMZN",
+        "AXP",
+        "JPM",
+        "MRK"
+      ],
+      "view_opt": [
+        "AMZN",
+        "BA",
+        "JNJ",
+        "NKE"
+      ],
+      "qaoa_sel": [
+        "AMZN",
+        "JPM",
+        "MRK",
+        "V"
+      ],
+      "Q1_rank_pct": 0.997979797979798,
+      "Q1_p_opt": 0.017806733027100563,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 72.9363784790039,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.8571428571428572,
+      "Q3_ret_neutral": 0.010826672775368973,
+      "Q3_ret_view": -0.04203663410721248,
+      "Q3_ret_diff": -0.05286330688258145,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AXP",
+        "CAT",
+        "CRM",
+        "CVX",
+        "DOW",
+        "HD",
+        "JNJ",
+        "JPM",
+        "MCD",
+        "TRV",
+        "V",
+        "WMT"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "JPM",
+        "V",
+        "WMT"
+      ],
+      "view_opt": [
+        "CAT",
+        "JNJ",
+        "JPM",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "AXP",
+        "JPM",
+        "V",
+        "WMT"
+      ],
+      "Q1_rank_pct": 1.0,
+      "Q1_p_opt": 0.012031744234263897,
+      "Q1_best_is_opt": true,
+      "Q1_conc": 49.28202438354492,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.09160151683244266,
+      "Q3_ret_view": 0.11090949908933911,
+      "Q3_ret_diff": 0.01930798225689645,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AXP",
+        "BA",
+        "CAT",
+        "CRM",
+        "CVX",
+        "DIS",
+        "DOW",
+        "KO",
+        "MCD",
+        "NKE",
         "UNH",
         "VZ"
       ],
@@ -2161,48 +3387,97 @@
         "2024-09-04"
       ],
       "neutral_opt": [
-        "JPM",
+        "AXP",
+        "CAT",
+        "KO",
+        "VZ"
+      ],
+      "view_opt": [
+        "BA",
+        "CAT",
+        "NKE",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "BA",
+        "CVX",
+        "DIS",
+        "DOW"
+      ],
+      "Q1_rank_pct": 0.044444444444444446,
+      "Q1_p_opt": 1.163410388471675e-06,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 0.004765328951179981,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.06356460252805052,
+      "Q3_ret_view": -0.0572931170261628,
+      "Q3_ret_diff": -0.12085771955421332,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AXP",
+        "CAT",
+        "CSCO",
+        "CVX",
+        "GS",
+        "HD",
+        "JNJ",
+        "KO",
+        "MMM",
+        "NVDA",
+        "PG",
+        "VZ"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
         "NVDA",
         "PG",
         "VZ"
       ],
       "view_opt": [
-        "DIS",
-        "HON",
-        "JPM",
-        "NVDA"
+        "CAT",
+        "JNJ",
+        "NVDA",
+        "PG"
       ],
       "qaoa_sel": [
-        "JPM",
+        "AXP",
         "NVDA",
         "PG",
         "VZ"
       ],
       "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.02311299368739128,
+      "Q1_p_opt": 0.027049096301198006,
       "Q1_best_is_opt": true,
-      "Q1_conc": 94.67082214355469,
+      "Q1_conc": 110.79309844970703,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.6666666666666667,
-      "Q3_ret_neutral": 0.023368246110549995,
-      "Q3_ret_view": -0.028830438567279293,
-      "Q3_ret_diff": -0.05219868467782929,
+      "Q3_ret_neutral": 0.012559507964944094,
+      "Q3_ret_view": 0.036231904889334476,
+      "Q3_ret_diff": 0.023672396924390382,
       "nonzero_views": 4
     },
     {
       "assets": [
+        "AAPL",
         "AMGN",
         "AXP",
-        "BA",
+        "CAT",
+        "CSCO",
+        "CVX",
+        "DOW",
         "GS",
-        "HD",
-        "JNJ",
-        "JPM",
-        "MMM",
-        "MSFT",
-        "NVDA",
+        "IBM",
+        "MCD",
         "PG",
-        "VZ"
+        "WMT"
       ],
       "window": [
         "2022-11-30",
@@ -2210,195 +3485,293 @@
         "2024-09-04"
       ],
       "neutral_opt": [
-        "JPM",
-        "NVDA",
+        "AAPL",
+        "AXP",
         "PG",
-        "VZ"
+        "WMT"
       ],
       "view_opt": [
-        "AMGN",
         "AXP",
-        "HD",
-        "JPM"
+        "CAT",
+        "PG",
+        "WMT"
       ],
       "qaoa_sel": [
         "AXP",
-        "JPM",
-        "MSFT",
-        "NVDA"
+        "CAT",
+        "PG",
+        "WMT"
       ],
-      "Q1_rank_pct": 0.9717171717171718,
-      "Q1_p_opt": 0.003635805333033204,
+      "Q1_rank_pct": 0.997979797979798,
+      "Q1_p_opt": 0.0010145442793145776,
       "Q1_best_is_opt": false,
-      "Q1_conc": 14.892258644104004,
+      "Q1_conc": 4.15557336807251,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.023368246110549995,
-      "Q3_ret_view": 0.09316335590451263,
-      "Q3_ret_diff": 0.06979510979396264,
-      "nonzero_views": 6
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.106114468144892,
+      "Q3_ret_view": 0.07974756266026595,
+      "Q3_ret_diff": -0.026366905484626058,
+      "nonzero_views": 3
     },
     {
       "assets": [
+        "AMGN",
+        "AXP",
+        "CAT",
+        "CSCO",
+        "DIS",
+        "DOW",
+        "HD",
+        "JNJ",
+        "MCD",
+        "NKE",
+        "V",
+        "WMT"
+      ],
+      "window": [
+        "2022-11-30",
+        "2024-06-04",
+        "2024-09-04"
+      ],
+      "neutral_opt": [
+        "AXP",
+        "CAT",
+        "V",
+        "WMT"
+      ],
+      "view_opt": [
+        "CAT",
+        "JNJ",
+        "NKE",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "AXP",
+        "NKE",
+        "V",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.8707070707070707,
+      "Q1_p_opt": 0.007897034287452698,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 32.34625244140625,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.07278391879883506,
+      "Q3_ret_view": 0.04881250778295643,
+      "Q3_ret_diff": -0.02397141101587863,
+      "nonzero_views": 4
+    },
+    {
+      "assets": [
+        "AAPL",
+        "AMZN",
+        "CRM",
+        "CSCO",
+        "CVX",
+        "DIS",
+        "HD",
+        "MCD",
+        "MMM",
+        "NKE",
+        "NVDA",
+        "VZ"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "AMZN",
+        "MMM",
+        "NVDA",
+        "VZ"
+      ],
+      "view_opt": [
+        "AAPL",
+        "AMZN",
+        "CRM",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "AAPL",
+        "AMZN",
+        "NKE",
+        "NVDA"
+      ],
+      "Q1_rank_pct": 0.6222222222222222,
+      "Q1_p_opt": 0.0003235359617974609,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 1.3252032995224,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.15580463598290017,
+      "Q3_ret_view": 0.18622815814662497,
+      "Q3_ret_diff": 0.030423522163724792,
+      "nonzero_views": 7
+    },
+    {
+      "assets": [
+        "AMGN",
         "BA",
         "CSCO",
         "DOW",
         "GS",
         "HD",
+        "HON",
+        "IBM",
+        "MCD",
+        "MMM",
+        "UNH",
+        "V"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "AMGN",
+        "IBM",
+        "UNH",
+        "V"
+      ],
+      "view_opt": [
+        "HON",
+        "IBM",
+        "UNH",
+        "V"
+      ],
+      "qaoa_sel": [
+        "BA",
+        "CSCO",
+        "DOW",
+        "HON"
+      ],
+      "Q1_rank_pct": 0.00202020202020202,
+      "Q1_p_opt": 0.0001599485258338973,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 0.6551491618156433,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.025690481553466427,
+      "Q3_ret_view": 0.09096700649301459,
+      "Q3_ret_diff": 0.06527652493954816,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AAPL",
+        "CAT",
+        "CSCO",
+        "DOW",
+        "HON",
+        "JPM",
+        "KO",
+        "MCD",
+        "NKE",
+        "PG",
+        "VZ",
+        "WMT"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "AAPL",
+        "JPM",
+        "PG",
+        "WMT"
+      ],
+      "view_opt": [
+        "AAPL",
+        "CAT",
+        "HON",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "AAPL",
+        "JPM",
+        "KO",
+        "PG"
+      ],
+      "Q1_rank_pct": 0.9757575757575757,
+      "Q1_p_opt": 0.0018761176615953445,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 7.684577941894531,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.8571428571428572,
+      "Q3_ret_neutral": 0.1091301011624577,
+      "Q3_ret_view": 0.11820321186714189,
+      "Q3_ret_diff": 0.009073110704684195,
+      "nonzero_views": 8
+    },
+    {
+      "assets": [
+        "AXP",
+        "DIS",
+        "GS",
+        "HON",
         "IBM",
         "JNJ",
-        "MSFT",
-        "NVDA",
+        "MMM",
+        "MRK",
+        "NKE",
         "V",
         "VZ",
         "WMT"
       ],
       "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
       ],
       "neutral_opt": [
-        "MSFT",
-        "NVDA",
-        "VZ",
+        "GS",
+        "IBM",
+        "V",
         "WMT"
       ],
       "view_opt": [
-        "DOW",
-        "HD",
-        "JNJ",
-        "NVDA"
+        "HON",
+        "IBM",
+        "VZ",
+        "WMT"
       ],
       "qaoa_sel": [
-        "BA",
-        "NVDA",
-        "VZ",
+        "IBM",
+        "JNJ",
+        "MRK",
         "WMT"
       ],
       "Q1_rank_pct": 0.9515151515151515,
-      "Q1_p_opt": 0.002680696314200759,
+      "Q1_p_opt": 0.0020484845153987408,
       "Q1_best_is_opt": false,
-      "Q1_conc": 10.980132102966309,
+      "Q1_conc": 8.390592575073242,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.01850499536983996,
-      "Q3_ret_view": 0.029603216772285723,
-      "Q3_ret_diff": 0.011098221402445763,
-      "nonzero_views": 3
-    },
-    {
-      "assets": [
-        "BA",
-        "CAT",
-        "CSCO",
-        "DIS",
-        "HD",
-        "JNJ",
-        "MCD",
-        "MRK",
-        "MSFT",
-        "NKE",
-        "TRV",
-        "V"
-      ],
-      "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
-      ],
-      "neutral_opt": [
-        "CAT",
-        "MRK",
-        "MSFT",
-        "V"
-      ],
-      "view_opt": [
-        "DIS",
-        "HD",
-        "JNJ",
-        "MSFT"
-      ],
-      "qaoa_sel": [
-        "MCD",
-        "MRK",
-        "MSFT",
-        "V"
-      ],
-      "Q1_rank_pct": 0.98989898989899,
-      "Q1_p_opt": 0.03806240111589432,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 155.90359497070312,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": -0.011619367818656245,
-      "Q3_ret_view": 0.02773376590340937,
-      "Q3_ret_diff": 0.039353133722065614,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.17319790111185696,
+      "Q3_ret_view": 0.13111467558382617,
+      "Q3_ret_diff": -0.04208322552803079,
       "nonzero_views": 4
     },
     {
       "assets": [
+        "AAPL",
         "AXP",
-        "BA",
-        "CRM",
-        "CSCO",
         "CVX",
         "DIS",
         "GS",
-        "IBM",
-        "JPM",
-        "MMM",
-        "V",
-        "VZ"
-      ],
-      "window": [
-        "2022-11-30",
-        "2024-06-04",
-        "2024-09-04"
-      ],
-      "neutral_opt": [
-        "AXP",
-        "JPM",
-        "V",
-        "VZ"
-      ],
-      "view_opt": [
-        "AXP",
-        "DIS",
-        "JPM",
-        "MMM"
-      ],
-      "qaoa_sel": [
-        "JPM",
-        "MMM",
-        "V",
-        "VZ"
-      ],
-      "Q1_rank_pct": 0.8909090909090909,
-      "Q1_p_opt": 0.002255897270515561,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 9.240155220031738,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.6666666666666667,
-      "Q3_ret_neutral": 0.05440066415276412,
-      "Q3_ret_view": 0.0966668184364472,
-      "Q3_ret_diff": 0.04226615428368308,
-      "nonzero_views": 4
-    },
-    {
-      "assets": [
-        "AMGN",
-        "AXP",
-        "CAT",
-        "CRM",
-        "CVX",
         "HON",
-        "JNJ",
+        "IBM",
+        "MMM",
         "MSFT",
+        "NKE",
         "NVDA",
-        "PG",
-        "TRV",
-        "WMT"
+        "V"
       ],
       "window": [
         "2023-03-03",
@@ -2406,48 +3779,97 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "AMGN",
-        "NVDA",
-        "PG",
-        "WMT"
+        "AAPL",
+        "IBM",
+        "MMM",
+        "NVDA"
       ],
       "view_opt": [
-        "AMGN",
-        "AXP",
+        "AAPL",
         "HON",
-        "JNJ"
+        "IBM",
+        "V"
       ],
       "qaoa_sel": [
-        "MSFT",
-        "NVDA",
-        "PG",
-        "WMT"
+        "DIS",
+        "IBM",
+        "NKE",
+        "NVDA"
       ],
-      "Q1_rank_pct": 0.9919191919191919,
-      "Q1_p_opt": 0.02313414216041565,
+      "Q1_rank_pct": 0.42424242424242425,
+      "Q1_p_opt": 0.0011045982828363776,
       "Q1_best_is_opt": false,
-      "Q1_conc": 94.7574462890625,
+      "Q1_conc": 4.524434566497803,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.0957581896393791,
-      "Q3_ret_view": 0.019756346422151738,
-      "Q3_ret_diff": -0.07600184321722736,
-      "nonzero_views": 4
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.1373105684585043,
+      "Q3_ret_view": 0.11461948165632996,
+      "Q3_ret_diff": -0.022691086802174354,
+      "nonzero_views": 5
     },
     {
       "assets": [
-        "AMGN",
-        "AMZN",
-        "AXP",
-        "BA",
-        "CSCO",
-        "HON",
+        "DIS",
+        "DOW",
+        "HD",
         "IBM",
+        "KO",
         "MCD",
         "MRK",
         "MSFT",
+        "NKE",
         "NVDA",
-        "VZ"
+        "PG",
+        "UNH"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "IBM",
+        "KO",
+        "NVDA",
+        "PG"
+      ],
+      "view_opt": [
+        "HD",
+        "IBM",
+        "MRK",
+        "UNH"
+      ],
+      "qaoa_sel": [
+        "HD",
+        "IBM",
+        "MSFT",
+        "NVDA"
+      ],
+      "Q1_rank_pct": 0.9333333333333333,
+      "Q1_p_opt": 0.0017100292025133967,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 7.004279613494873,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.8571428571428572,
+      "Q3_ret_neutral": 0.08567315334710512,
+      "Q3_ret_view": 0.05124562450316961,
+      "Q3_ret_diff": -0.03442752884393552,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AMGN",
+        "CAT",
+        "DIS",
+        "GS",
+        "HD",
+        "JNJ",
+        "MCD",
+        "NKE",
+        "PG",
+        "V",
+        "VZ",
+        "WMT"
       ],
       "window": [
         "2023-03-03",
@@ -2456,47 +3878,47 @@
       ],
       "neutral_opt": [
         "AMGN",
-        "IBM",
-        "NVDA",
-        "VZ"
+        "GS",
+        "PG",
+        "WMT"
       ],
       "view_opt": [
-        "AMGN",
-        "AXP",
-        "HON",
-        "NVDA"
+        "CAT",
+        "V",
+        "VZ",
+        "WMT"
       ],
       "qaoa_sel": [
-        "BA",
-        "CSCO",
-        "HON",
-        "MCD"
+        "AMGN",
+        "NKE",
+        "PG",
+        "WMT"
       ],
-      "Q1_rank_pct": 0.00202020202020202,
-      "Q1_p_opt": 0.0006554942228831351,
+      "Q1_rank_pct": 0.5272727272727272,
+      "Q1_p_opt": 0.006651474162936211,
       "Q1_best_is_opt": false,
-      "Q1_conc": 2.6849043369293213,
+      "Q1_conc": 27.24443817138672,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.6666666666666667,
-      "Q3_ret_neutral": 0.09335311128965551,
-      "Q3_ret_view": 0.12051224793082627,
-      "Q3_ret_diff": 0.027159136641170756,
-      "nonzero_views": 3
+      "Q2_jaccard": 0.8571428571428572,
+      "Q3_ret_neutral": 0.07389459314444391,
+      "Q3_ret_view": 0.14798618011735964,
+      "Q3_ret_diff": 0.07409158697291574,
+      "nonzero_views": 6
     },
     {
       "assets": [
-        "CAT",
-        "DIS",
-        "DOW",
-        "JNJ",
+        "AXP",
+        "CRM",
+        "CSCO",
+        "CVX",
+        "JPM",
         "KO",
         "MCD",
-        "MMM",
         "MRK",
         "NKE",
         "PG",
-        "TRV",
-        "UNH"
+        "V",
+        "WMT"
       ],
       "window": [
         "2023-03-03",
@@ -2504,32 +3926,130 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "CAT",
+        "JPM",
         "KO",
         "PG",
-        "UNH"
+        "WMT"
       ],
       "view_opt": [
-        "DIS",
-        "DOW",
-        "JNJ",
-        "MMM"
+        "CRM",
+        "JPM",
+        "V",
+        "WMT"
       ],
       "qaoa_sel": [
+        "JPM",
         "KO",
-        "MRK",
         "PG",
-        "UNH"
+        "WMT"
       ],
-      "Q1_rank_pct": 0.9333333333333333,
-      "Q1_p_opt": 0.0019341291626915336,
+      "Q1_rank_pct": 1.0,
+      "Q1_p_opt": 0.022178081795573235,
+      "Q1_best_is_opt": true,
+      "Q1_conc": 90.84142303466797,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.056156368958530045,
+      "Q3_ret_view": 0.19794965515764518,
+      "Q3_ret_diff": 0.14179328619911513,
+      "nonzero_views": 5
+    },
+    {
+      "assets": [
+        "AAPL",
+        "AMGN",
+        "AMZN",
+        "CRM",
+        "CSCO",
+        "GS",
+        "HON",
+        "JNJ",
+        "MSFT",
+        "NKE",
+        "PG",
+        "VZ"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "AMGN",
+        "AMZN",
+        "MSFT",
+        "PG"
+      ],
+      "view_opt": [
+        "AAPL",
+        "CRM",
+        "HON",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "CRM",
+        "CSCO",
+        "GS",
+        "HON"
+      ],
+      "Q1_rank_pct": 0.301010101010101,
+      "Q1_p_opt": 7.0183814386837184e-06,
       "Q1_best_is_opt": false,
-      "Q1_conc": 7.9221930503845215,
+      "Q1_conc": 0.02874729037284851,
       "Q2_selection_changed": true,
       "Q2_jaccard": 1.0,
-      "Q3_ret_neutral": 0.02159425382172775,
-      "Q3_ret_view": 0.021054861641897515,
-      "Q3_ret_diff": -0.0005393921798302337,
+      "Q3_ret_neutral": 0.034936415022420064,
+      "Q3_ret_view": 0.15579228885601282,
+      "Q3_ret_diff": 0.12085587383359275,
+      "nonzero_views": 9
+    },
+    {
+      "assets": [
+        "AAPL",
+        "BA",
+        "DOW",
+        "GS",
+        "HON",
+        "JPM",
+        "MMM",
+        "MRK",
+        "MSFT",
+        "NVDA",
+        "PG",
+        "WMT"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "JPM",
+        "NVDA",
+        "PG",
+        "WMT"
+      ],
+      "view_opt": [
+        "AAPL",
+        "HON",
+        "JPM",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "BA",
+        "DOW",
+        "GS",
+        "HON"
+      ],
+      "Q1_rank_pct": 0.00404040404040404,
+      "Q1_p_opt": 2.868247293008608e-07,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 0.0011748340912163258,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.16432579947457548,
+      "Q3_ret_view": 0.1357617449679991,
+      "Q3_ret_diff": -0.028564054506576397,
       "nonzero_views": 6
     },
     {
@@ -2537,14 +4057,63 @@
         "AMGN",
         "AMZN",
         "CVX",
-        "DOW",
-        "GS",
-        "HON",
-        "KO",
+        "HD",
+        "IBM",
+        "JNJ",
         "MCD",
+        "MMM",
+        "MSFT",
+        "V",
+        "VZ",
+        "WMT"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "AMGN",
+        "AMZN",
+        "IBM",
+        "WMT"
+      ],
+      "view_opt": [
+        "AMZN",
+        "IBM",
+        "VZ",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "CVX",
+        "HD",
+        "MCD",
+        "MMM"
+      ],
+      "Q1_rank_pct": 0.00808080808080808,
+      "Q1_p_opt": 0.0002626563364174217,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 1.0758403539657593,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.10535733309065676,
+      "Q3_ret_view": 0.16155054487443854,
+      "Q3_ret_diff": 0.05619321178378178,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AAPL",
+        "AMGN",
+        "CSCO",
+        "CVX",
+        "DIS",
+        "IBM",
+        "JNJ",
         "MRK",
-        "NVDA",
+        "MSFT",
         "TRV",
+        "UNH",
         "V"
       ],
       "window": [
@@ -2554,95 +4123,46 @@
       ],
       "neutral_opt": [
         "AMGN",
-        "AMZN",
-        "KO",
-        "NVDA"
-      ],
-      "view_opt": [
-        "AMGN",
-        "DOW",
-        "HON",
-        "NVDA"
-      ],
-      "qaoa_sel": [
-        "AMGN",
-        "AMZN",
-        "KO",
-        "NVDA"
-      ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.018421720713377,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 75.45536804199219,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.6666666666666667,
-      "Q3_ret_neutral": 0.07217123286486471,
-      "Q3_ret_view": 0.03572667619648073,
-      "Q3_ret_diff": -0.036444556668383976,
-      "nonzero_views": 4
-    },
-    {
-      "assets": [
-        "AAPL",
-        "AXP",
-        "CAT",
-        "DIS",
-        "DOW",
         "IBM",
-        "KO",
-        "MCD",
-        "MMM",
-        "UNH",
-        "V",
-        "VZ"
-      ],
-      "window": [
-        "2023-03-03",
-        "2024-09-04",
-        "2024-12-03"
-      ],
-      "neutral_opt": [
-        "AAPL",
-        "AXP",
-        "IBM",
-        "KO"
-      ],
-      "view_opt": [
-        "AXP",
-        "DIS",
-        "DOW",
-        "MMM"
-      ],
-      "qaoa_sel": [
-        "AAPL",
-        "IBM",
-        "KO",
+        "MSFT",
         "UNH"
       ],
-      "Q1_rank_pct": 0.997979797979798,
-      "Q1_p_opt": 0.010149803943932056,
+      "view_opt": [
+        "AAPL",
+        "IBM",
+        "UNH",
+        "V"
+      ],
+      "qaoa_sel": [
+        "AAPL",
+        "IBM",
+        "MSFT",
+        "UNH"
+      ],
+      "Q1_rank_pct": 0.9959595959595959,
+      "Q1_p_opt": 0.005758010316640139,
       "Q1_best_is_opt": false,
-      "Q1_conc": 41.5735969543457,
+      "Q1_conc": 23.584810256958008,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.08047783096477867,
-      "Q3_ret_view": 0.09241821699109987,
-      "Q3_ret_diff": 0.011940386026321193,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.010338202984483402,
+      "Q3_ret_view": 0.0885325864646187,
+      "Q3_ret_diff": 0.0781943834801353,
       "nonzero_views": 5
     },
     {
       "assets": [
         "AMZN",
         "AXP",
+        "CRM",
         "CVX",
-        "GS",
-        "IBM",
+        "HON",
         "JPM",
+        "KO",
         "MCD",
-        "NKE",
-        "NVDA",
-        "TRV",
+        "PG",
         "UNH",
+        "V",
         "VZ"
       ],
       "window": [
@@ -2651,47 +4171,96 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "IBM",
+        "AMZN",
         "JPM",
-        "NVDA",
-        "UNH"
+        "KO",
+        "PG"
       ],
       "view_opt": [
-        "AXP",
-        "IBM",
+        "CRM",
+        "HON",
         "JPM",
-        "NVDA"
+        "VZ"
       ],
       "qaoa_sel": [
-        "AMZN",
-        "GS",
-        "IBM",
-        "JPM"
+        "AXP",
+        "CRM",
+        "CVX",
+        "HON"
       ],
-      "Q1_rank_pct": 0.8202020202020202,
-      "Q1_p_opt": 0.00281679630279541,
+      "Q1_rank_pct": 0.006060606060606061,
+      "Q1_p_opt": 4.9784803195507266e-06,
       "Q1_best_is_opt": false,
-      "Q1_conc": 11.53759765625,
+      "Q1_conc": 0.020391855388879776,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.4,
-      "Q3_ret_neutral": 0.14491713908890702,
-      "Q3_ret_view": 0.19437276640486822,
-      "Q3_ret_diff": 0.049455627315961204,
-      "nonzero_views": 3
+      "Q2_jaccard": 0.8571428571428572,
+      "Q3_ret_neutral": 0.06134592061079802,
+      "Q3_ret_view": 0.1615177937800567,
+      "Q3_ret_diff": 0.10017187316925869,
+      "nonzero_views": 6
     },
     {
       "assets": [
+        "AMGN",
+        "AXP",
+        "CVX",
+        "DIS",
+        "GS",
+        "HON",
+        "IBM",
+        "KO",
+        "NKE",
+        "PG",
+        "UNH",
+        "WMT"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "GS",
+        "IBM",
+        "PG",
+        "WMT"
+      ],
+      "view_opt": [
+        "HON",
+        "IBM",
+        "UNH",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "AMGN",
+        "IBM",
+        "PG",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.997979797979798,
+      "Q1_p_opt": 0.01801946759223938,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 73.8077392578125,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.1444640267228381,
+      "Q3_ret_view": 0.11411109354788129,
+      "Q3_ret_diff": -0.030352933174956798,
+      "nonzero_views": 4
+    },
+    {
+      "assets": [
+        "AAPL",
         "AXP",
         "BA",
         "CAT",
-        "CSCO",
         "CVX",
-        "DIS",
-        "DOW",
+        "HD",
+        "IBM",
         "JNJ",
-        "MMM",
-        "MRK",
-        "PG",
+        "JPM",
+        "MCD",
+        "MSFT",
         "TRV"
       ],
       "window": [
@@ -2700,48 +4269,48 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "AXP",
-        "JNJ",
-        "MMM",
-        "PG"
+        "AAPL",
+        "IBM",
+        "JPM",
+        "MSFT"
       ],
       "view_opt": [
-        "AXP",
-        "DOW",
-        "JNJ",
-        "MMM"
+        "AAPL",
+        "CAT",
+        "IBM",
+        "JPM"
       ],
       "qaoa_sel": [
-        "CSCO",
+        "CAT",
         "JNJ",
-        "MRK",
-        "PG"
+        "MSFT",
+        "TRV"
       ],
-      "Q1_rank_pct": 0.901010101010101,
-      "Q1_p_opt": 0.0051839943043887615,
+      "Q1_rank_pct": 0.6707070707070707,
+      "Q1_p_opt": 0.00017445191042497754,
       "Q1_best_is_opt": false,
-      "Q1_conc": 21.233640670776367,
+      "Q1_conc": 0.714555025100708,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.4,
-      "Q3_ret_neutral": 0.030433266658088876,
-      "Q3_ret_view": -0.0043519291464653165,
-      "Q3_ret_diff": -0.03478519580455419,
+      "Q3_ret_neutral": 0.10255828798299538,
+      "Q3_ret_view": 0.1358705185574023,
+      "Q3_ret_diff": 0.03331223057440691,
       "nonzero_views": 5
     },
     {
       "assets": [
         "AAPL",
-        "AXP",
-        "CAT",
-        "CVX",
-        "HON",
+        "CSCO",
+        "DOW",
+        "GS",
         "IBM",
-        "MCD",
-        "MMM",
-        "NVDA",
-        "TRV",
+        "JPM",
+        "KO",
+        "MSFT",
+        "PG",
         "UNH",
-        "V"
+        "VZ",
+        "WMT"
       ],
       "window": [
         "2023-03-03",
@@ -2749,96 +4318,243 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "AAPL",
         "IBM",
-        "NVDA",
-        "UNH"
+        "JPM",
+        "MSFT",
+        "WMT"
       ],
       "view_opt": [
-        "AXP",
-        "HON",
-        "MMM",
-        "NVDA"
+        "AAPL",
+        "IBM",
+        "VZ",
+        "WMT"
       ],
       "qaoa_sel": [
         "AAPL",
         "IBM",
+        "MSFT",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.9919191919191919,
+      "Q1_p_opt": 0.002296020742505789,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 9.404500961303711,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.13023902564973566,
+      "Q3_ret_view": 0.12868025555543028,
+      "Q3_ret_diff": -0.001558770094305384,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AMGN",
+        "AMZN",
+        "AXP",
+        "BA",
+        "CAT",
+        "GS",
+        "KO",
+        "NVDA",
+        "PG",
+        "UNH",
+        "V",
+        "VZ"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "AMGN",
+        "KO",
+        "NVDA",
+        "PG"
+      ],
+      "view_opt": [
+        "AMZN",
+        "CAT",
+        "UNH",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "AMGN",
+        "AMZN",
+        "BA",
+        "NVDA"
+      ],
+      "Q1_rank_pct": 0.4666666666666667,
+      "Q1_p_opt": 0.0008058079984039068,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 3.3005895614624023,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 1.0,
+      "Q3_ret_neutral": 0.015103719768711166,
+      "Q3_ret_view": 0.12498660599443845,
+      "Q3_ret_diff": 0.10988288622572728,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AAPL",
+        "AXP",
+        "CVX",
+        "DIS",
+        "JNJ",
+        "JPM",
+        "MRK",
+        "NKE",
+        "NVDA",
+        "UNH",
+        "V",
+        "VZ"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "JNJ",
+        "JPM",
         "NVDA",
         "UNH"
       ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.05617775395512581,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 230.1040802001953,
+      "view_opt": [
+        "AAPL",
+        "JPM",
+        "UNH",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "AAPL",
+        "JPM",
+        "NVDA",
+        "UNH"
+      ],
+      "Q1_rank_pct": 0.9959595959595959,
+      "Q1_p_opt": 0.008354293182492256,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 34.21918487548828,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.1391916341648627,
-      "Q3_ret_view": 0.15782081197230435,
-      "Q3_ret_diff": 0.018629177807441666,
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.0916296072251086,
+      "Q3_ret_view": 0.07534521898217683,
+      "Q3_ret_diff": -0.01628438824293177,
+      "nonzero_views": 4
+    },
+    {
+      "assets": [
+        "AMGN",
+        "AXP",
+        "BA",
+        "CAT",
+        "CRM",
+        "GS",
+        "HD",
+        "HON",
+        "MRK",
+        "PG",
+        "V",
+        "VZ"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "AMGN",
+        "AXP",
+        "PG",
+        "V"
+      ],
+      "view_opt": [
+        "CAT",
+        "CRM",
+        "HON",
+        "VZ"
+      ],
+      "qaoa_sel": [
+        "AMGN",
+        "BA",
+        "MRK",
+        "PG"
+      ],
+      "Q1_rank_pct": 0.32323232323232326,
+      "Q1_p_opt": 0.00027081024018116295,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 1.1092387437820435,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 1.0,
+      "Q3_ret_neutral": 0.043221556425040664,
+      "Q3_ret_view": 0.1782888914733105,
+      "Q3_ret_diff": 0.13506733504826984,
+      "nonzero_views": 6
+    },
+    {
+      "assets": [
+        "AMZN",
+        "AXP",
+        "BA",
+        "CSCO",
+        "DIS",
+        "HD",
+        "HON",
+        "IBM",
+        "MMM",
+        "MRK",
+        "UNH",
+        "WMT"
+      ],
+      "window": [
+        "2023-03-03",
+        "2024-09-04",
+        "2024-12-03"
+      ],
+      "neutral_opt": [
+        "AMZN",
+        "IBM",
+        "UNH",
+        "WMT"
+      ],
+      "view_opt": [
+        "AMZN",
+        "HON",
+        "IBM",
+        "WMT"
+      ],
+      "qaoa_sel": [
+        "AMZN",
+        "BA",
+        "IBM",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.7878787878787878,
+      "Q1_p_opt": 0.05427120625972748,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 222.29486083984375,
+      "Q2_selection_changed": true,
+      "Q2_jaccard": 0.4,
+      "Q3_ret_neutral": 0.14454696283849344,
+      "Q3_ret_view": 0.17063385803020492,
+      "Q3_ret_diff": 0.02608689519171148,
       "nonzero_views": 3
     },
     {
       "assets": [
-        "BA",
-        "CVX",
-        "DIS",
-        "GS",
-        "HON",
-        "KO",
-        "MCD",
-        "MMM",
-        "MRK",
-        "PG",
-        "TRV",
-        "UNH"
-      ],
-      "window": [
-        "2023-03-03",
-        "2024-09-04",
-        "2024-12-03"
-      ],
-      "neutral_opt": [
-        "GS",
-        "KO",
-        "PG",
-        "UNH"
-      ],
-      "view_opt": [
-        "DIS",
-        "HON",
-        "MMM",
-        "PG"
-      ],
-      "qaoa_sel": [
-        "BA",
-        "MCD",
-        "MMM",
-        "MRK"
-      ],
-      "Q1_rank_pct": 0.298989898989899,
-      "Q1_p_opt": 0.00027902572765015066,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 1.142889380455017,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.03242975302161266,
-      "Q3_ret_view": 0.10383468067140411,
-      "Q3_ret_diff": 0.07140492764979145,
-      "nonzero_views": 4
-    },
-    {
-      "assets": [
         "AAPL",
-        "AMGN",
-        "CSCO",
-        "DIS",
+        "AMZN",
+        "CRM",
+        "CVX",
         "DOW",
         "GS",
-        "JNJ",
         "JPM",
-        "MMM",
-        "NVDA",
-        "VZ",
+        "NKE",
+        "PG",
+        "TRV",
+        "UNH",
         "WMT"
       ],
       "window": [
@@ -2847,48 +4563,48 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "AMGN",
+        "AMZN",
         "JPM",
-        "NVDA",
+        "PG",
         "WMT"
       ],
       "view_opt": [
-        "AMGN",
-        "JNJ",
+        "AAPL",
+        "CRM",
         "JPM",
-        "MMM"
-      ],
-      "qaoa_sel": [
-        "AMGN",
-        "JPM",
-        "NVDA",
         "WMT"
       ],
-      "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.024707406759262085,
-      "Q1_best_is_opt": true,
-      "Q1_conc": 101.2015380859375,
+      "qaoa_sel": [
+        "AAPL",
+        "PG",
+        "UNH",
+        "WMT"
+      ],
+      "Q1_rank_pct": 0.9555555555555556,
+      "Q1_p_opt": 0.0034564281813800335,
+      "Q1_best_is_opt": false,
+      "Q1_conc": 14.157529830932617,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.6666666666666667,
-      "Q3_ret_neutral": 0.12568091834056871,
-      "Q3_ret_view": -0.028289261704520063,
-      "Q3_ret_diff": -0.15397018004508878,
-      "nonzero_views": 6
+      "Q3_ret_neutral": 0.14200039048146595,
+      "Q3_ret_view": 0.1934130045457716,
+      "Q3_ret_diff": 0.05141261406430564,
+      "nonzero_views": 3
     },
     {
       "assets": [
-        "AAPL",
-        "BA",
+        "AMGN",
+        "AMZN",
+        "AXP",
         "CAT",
-        "CRM",
-        "DIS",
-        "DOW",
-        "HD",
-        "IBM",
-        "NKE",
+        "CVX",
+        "GS",
+        "JNJ",
+        "MMM",
+        "MRK",
         "NVDA",
         "TRV",
-        "VZ"
+        "V"
       ],
       "window": [
         "2023-03-03",
@@ -2896,195 +4612,48 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "AAPL",
-        "IBM",
-        "NVDA",
-        "VZ"
-      ],
-      "view_opt": [
-        "DIS",
-        "DOW",
-        "HD",
+        "AMGN",
+        "AMZN",
+        "JNJ",
         "NVDA"
       ],
+      "view_opt": [
+        "AMZN",
+        "CAT",
+        "MRK",
+        "V"
+      ],
       "qaoa_sel": [
-        "AAPL",
-        "IBM",
-        "NVDA",
-        "VZ"
+        "AMGN",
+        "AMZN",
+        "JNJ",
+        "NVDA"
       ],
       "Q1_rank_pct": 1.0,
-      "Q1_p_opt": 0.08440977334976196,
+      "Q1_p_opt": 0.024402378126978874,
       "Q1_best_is_opt": true,
-      "Q1_conc": 345.742431640625,
+      "Q1_conc": 99.95214080810547,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.15619521620080778,
-      "Q3_ret_view": 0.1682557665837603,
-      "Q3_ret_diff": 0.012060550382952506,
-      "nonzero_views": 4
-    },
-    {
-      "assets": [
-        "AAPL",
-        "CRM",
-        "CSCO",
-        "DOW",
-        "HD",
-        "HON",
-        "JNJ",
-        "JPM",
-        "MMM",
-        "MSFT",
-        "VZ",
-        "WMT"
-      ],
-      "window": [
-        "2023-03-03",
-        "2024-09-04",
-        "2024-12-03"
-      ],
-      "neutral_opt": [
-        "AAPL",
-        "JPM",
-        "MSFT",
-        "WMT"
-      ],
-      "view_opt": [
-        "HD",
-        "JNJ",
-        "JPM",
-        "MMM"
-      ],
-      "qaoa_sel": [
-        "AAPL",
-        "DOW",
-        "JNJ",
-        "JPM"
-      ],
-      "Q1_rank_pct": 0.5151515151515151,
-      "Q1_p_opt": 0.0016197157092392445,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 6.634355545043945,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.12251169698249376,
-      "Q3_ret_view": 0.055464305770146716,
-      "Q3_ret_diff": -0.06704739121234704,
-      "nonzero_views": 6
-    },
-    {
-      "assets": [
-        "AXP",
-        "BA",
-        "CRM",
-        "CVX",
-        "DOW",
-        "HD",
-        "HON",
-        "KO",
-        "MCD",
-        "NKE",
-        "UNH",
-        "V"
-      ],
-      "window": [
-        "2023-03-03",
-        "2024-09-04",
-        "2024-12-03"
-      ],
-      "neutral_opt": [
-        "AXP",
-        "KO",
-        "UNH",
-        "V"
-      ],
-      "view_opt": [
-        "AXP",
-        "DOW",
-        "HD",
-        "HON"
-      ],
-      "qaoa_sel": [
-        "BA",
-        "KO",
-        "NKE",
-        "UNH"
-      ],
-      "Q1_rank_pct": 0.15353535353535352,
-      "Q1_p_opt": 0.00978767964988947,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 40.090335845947266,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.053634677746095205,
-      "Q3_ret_view": 0.09008769751167556,
-      "Q3_ret_diff": 0.03645301976558035,
-      "nonzero_views": 6
-    },
-    {
-      "assets": [
-        "AAPL",
-        "BA",
-        "CAT",
-        "CVX",
-        "DIS",
-        "HD",
-        "JNJ",
-        "KO",
-        "MMM",
-        "MRK",
-        "UNH",
-        "VZ"
-      ],
-      "window": [
-        "2023-03-03",
-        "2024-09-04",
-        "2024-12-03"
-      ],
-      "neutral_opt": [
-        "AAPL",
-        "KO",
-        "MMM",
-        "UNH"
-      ],
-      "view_opt": [
-        "DIS",
-        "HD",
-        "JNJ",
-        "MMM"
-      ],
-      "qaoa_sel": [
-        "JNJ",
-        "KO",
-        "MRK",
-        "UNH"
-      ],
-      "Q1_rank_pct": 0.7696969696969697,
-      "Q1_p_opt": 0.004557063337415457,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 18.66573143005371,
-      "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": -0.002238665888098401,
-      "Q3_ret_view": 0.10094874378711127,
-      "Q3_ret_diff": 0.10318740967520967,
+      "Q3_ret_neutral": 0.07958476187223584,
+      "Q3_ret_view": 0.10616285098390854,
+      "Q3_ret_diff": 0.026578089111672698,
       "nonzero_views": 5
     },
     {
       "assets": [
+        "AAPL",
+        "AMZN",
+        "AXP",
+        "BA",
         "CAT",
         "CVX",
+        "DIS",
         "DOW",
-        "JNJ",
+        "HD",
         "KO",
-        "MSFT",
-        "NKE",
-        "NVDA",
-        "PG",
-        "UNH",
-        "VZ",
-        "WMT"
+        "MRK",
+        "NKE"
       ],
       "window": [
         "2023-03-03",
@@ -3092,47 +4661,47 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "KO",
-        "NVDA",
-        "PG",
-        "WMT"
+        "AAPL",
+        "AMZN",
+        "AXP",
+        "KO"
       ],
       "view_opt": [
-        "DOW",
-        "JNJ",
-        "NVDA",
-        "WMT"
+        "AAPL",
+        "AMZN",
+        "CAT",
+        "MRK"
       ],
       "qaoa_sel": [
-        "CVX",
-        "DOW",
-        "NKE",
-        "NVDA"
+        "AAPL",
+        "AMZN",
+        "KO",
+        "MRK"
       ],
-      "Q1_rank_pct": 0.1595959595959596,
-      "Q1_p_opt": 0.0003082828479819,
+      "Q1_rank_pct": 0.9959595959595959,
+      "Q1_p_opt": 0.022454354912042618,
       "Q1_best_is_opt": false,
-      "Q1_conc": 1.2627265453338623,
+      "Q1_conc": 91.97303771972656,
       "Q2_selection_changed": true,
       "Q2_jaccard": 0.6666666666666667,
-      "Q3_ret_neutral": 0.10562656234660373,
-      "Q3_ret_view": 0.07825489554942067,
-      "Q3_ret_diff": -0.02737166679718306,
-      "nonzero_views": 4
+      "Q3_ret_neutral": 0.10562079161654525,
+      "Q3_ret_view": 0.10162620037203496,
+      "Q3_ret_diff": -0.003994591244510293,
+      "nonzero_views": 3
     },
     {
       "assets": [
+        "AAPL",
         "AMGN",
         "AXP",
-        "GS",
-        "HON",
-        "IBM",
-        "JNJ",
+        "CAT",
+        "CRM",
+        "DIS",
+        "HD",
         "JPM",
-        "MMM",
-        "MSFT",
-        "NVDA",
+        "MRK",
         "PG",
+        "TRV",
         "V"
       ],
       "window": [
@@ -3141,51 +4710,51 @@
         "2024-12-03"
       ],
       "neutral_opt": [
-        "IBM",
+        "AAPL",
+        "AMGN",
         "JPM",
-        "NVDA",
         "PG"
       ],
       "view_opt": [
-        "AMGN",
-        "AXP",
-        "JNJ",
+        "AAPL",
+        "CAT",
+        "CRM",
         "JPM"
       ],
       "qaoa_sel": [
-        "AXP",
-        "GS",
-        "HON",
-        "MMM"
+        "AAPL",
+        "AMGN",
+        "JPM",
+        "PG"
       ],
-      "Q1_rank_pct": 0.00202020202020202,
-      "Q1_p_opt": 0.00036520263529382646,
-      "Q1_best_is_opt": false,
-      "Q1_conc": 1.4958699941635132,
+      "Q1_rank_pct": 1.0,
+      "Q1_p_opt": 0.01985093019902706,
+      "Q1_best_is_opt": true,
+      "Q1_conc": 81.30941009521484,
       "Q2_selection_changed": true,
-      "Q2_jaccard": 0.8571428571428572,
-      "Q3_ret_neutral": 0.14437239047507688,
-      "Q3_ret_view": 0.02304743131779996,
-      "Q3_ret_diff": -0.12132495915727692,
-      "nonzero_views": 6
+      "Q2_jaccard": 0.6666666666666667,
+      "Q3_ret_neutral": 0.018607258584565134,
+      "Q3_ret_view": 0.188228869496329,
+      "Q3_ret_diff": 0.16962161091176386,
+      "nonzero_views": 5
     }
   ],
   "summary": {
-    "Q1_rank_pct_median": 0.9424242424242424,
-    "Q1_rank_pct_mean": 0.7313762626262625,
-    "Q1_p_opt_mean": 0.016068002748024668,
-    "Q1_concentration_mean": 65.81453925590904,
-    "Q1_pct_best_is_optimum": 0.265625,
-    "Q2_pct_selection_changed": 0.984375,
-    "Q2_jaccard_mean_when_changed": 0.7854875283446711,
-    "Q3_n_changed": 63,
-    "Q3_oos_diff_mean_when_changed": -0.0041460309803340555,
+    "Q1_rank_pct_median": 0.8343434343434344,
+    "Q1_rank_pct_mean": 0.6508838383838383,
+    "Q1_p_opt_mean": 0.009482987408159005,
+    "Q1_concentration_mean": 38.842316423819284,
+    "Q1_pct_best_is_optimum": 0.16666666666666666,
+    "Q2_pct_selection_changed": 0.9895833333333334,
+    "Q2_jaccard_mean_when_changed": 0.6078195488721804,
+    "Q3_n_changed": 95,
+    "Q3_oos_diff_mean_when_changed": -0.007065464508906227,
     "Q3_oos_diff_ci95_when_changed": [
-      -0.02247955188675123,
-      0.012209101607149652
+      -0.02265349833709764,
+      0.008734183619716774
     ],
-    "Q3_wilcoxon_p_when_changed": 0.7789479737104802,
-    "Q3_pct_view_beats_neutral_when_changed": 0.5714285714285714,
-    "n_instances": 64
+    "Q3_wilcoxon_p_when_changed": 0.9822316417064625,
+    "Q3_pct_view_beats_neutral_when_changed": 0.5368421052631579,
+    "n_instances": 96
   }
 }

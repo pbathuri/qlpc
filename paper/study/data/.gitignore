@@ -1,3 +1,6 @@
 *_log.txt
 conc_scan*.txt
 study_results.shard*.json
+
+# raw RavenPack headline text — licensed, do not redistribute
+headlines_raw.json

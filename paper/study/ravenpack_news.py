@@ -25,6 +25,7 @@ from paper.study.universe import DOW30, load_prices
 
 HERE = os.path.dirname(__file__)
 PIT = os.path.join(HERE, "data", "pit_news_views.json")
+RAW = os.path.join(HERE, "data", "headlines_raw.json")   # raw RavenPack headlines (gitignored — licensed text)
 EQUITY_LIB = "ravenpack_full"            # full edition; rpa_full_equities_<YEAR>
 MAP_LIB = "ravenpack_common"
 
@@ -84,7 +85,7 @@ def headlines_asof(db, entity_id, asof, year, schema, lookback=30, min_rel=90, l
     return [h for h in df["headline"].tolist() if isinstance(h, str) and h.strip()]
 
 
-def build(db, tickers, lookback=30):
+def build(db, tickers, lookback=30, model=LV.DEFAULT_MODEL):
     prices = load_prices()
     dates = decision_dates(prices)
     emap, _ = entity_map(db, tickers)
@@ -96,19 +97,65 @@ def build(db, tickers, lookback=30):
               "relevance": _pick(eq_cols, "relevance")}
     print("equities schema ->", schema, flush=True)
 
-    cache = {}
+    cache = {}; raw = {}
     for asof in dates:
         y = pd.Timestamp(asof).year; key = pd.Timestamp(asof).strftime("%Y-%m-%d")
-        cache[key] = {}
+        cache[key] = {}; raw[key] = {}
         for t in tickers:
             eid = emap.get(t.upper())
             hls = headlines_asof(db, eid, asof, y, schema, lookback) if eid else []
-            cache[key][t] = {"conviction": conviction_from_headlines(t, hls), "n_headlines": len(hls)}
+            raw[key][t] = hls                              # cache raw text for offline re-extraction
+            cache[key][t] = {"conviction": conviction_from_headlines(t, hls, model),
+                             "n_headlines": len(hls)}
         nz = sum(1 for t in tickers if abs(cache[key][t]["conviction"]) > 0.01)
         print(f"  {key}: {nz}/{len(tickers)} nonzero convictions", flush=True)
-    json.dump({"lookback_days": lookback, "decision_dates": list(cache), "views": cache},
+    json.dump({"lookback_days": lookback, "model": model, "decision_dates": list(cache), "views": cache},
               open(PIT, "w"), indent=2)
-    print("wrote", PIT, flush=True)
+    json.dump({"lookback_days": lookback, "headlines": raw}, open(RAW, "w"), indent=2)
+    print(f"wrote {PIT} and cached raw headlines to {RAW} (re-extract any model offline)", flush=True)
+
+
+def cache_headlines(db, tickers, lookback=30):
+    """Pull raw pre-decision headlines to RAW (WRDS only, NO LLM — fast). Then re-extract any model
+    offline with --reextract. Lets us swap LLMs without re-querying WRDS or re-running the slow LLM."""
+    prices = load_prices(); dates = decision_dates(prices)
+    emap, _ = entity_map(db, tickers)
+    yr = pd.Timestamp(dates[-1]).year
+    eq_cols = _cols(db, EQUITY_LIB, f"rpa_full_equities_{yr}")
+    schema = {"ts": _pick(eq_cols, "timestamp_utc", "rpa_date_utc", "timestamp", "date"),
+              "headline": _pick(eq_cols, "headline", "news_text", "title"),
+              "eid": _pick(eq_cols, "rp_entity_id", "entity_id"),
+              "relevance": _pick(eq_cols, "relevance")}
+    raw = {}
+    for asof in dates:
+        y = pd.Timestamp(asof).year; key = pd.Timestamp(asof).strftime("%Y-%m-%d"); raw[key] = {}
+        for t in tickers:
+            eid = emap.get(t.upper())
+            raw[key][t] = headlines_asof(db, eid, asof, y, schema, lookback) if eid else []
+        print(f"  {key}: cached headlines for {len(tickers)} tickers", flush=True)
+    json.dump({"lookback_days": lookback, "headlines": raw}, open(RAW, "w"), indent=2)
+    print("wrote", RAW, "(now run --reextract --model <m> offline)", flush=True)
+
+
+def reextract(model, out):
+    """Offline: re-run convictions with a DIFFERENT LLM from the cached raw headlines (no WRDS). Used to
+    swap in a pre-2023-cutoff model (e.g. Llama 2) so convictions are genuinely out-of-sample, and to
+    compare against a model whose training horizon overlaps the evaluation window."""
+    raw = json.load(open(RAW))["headlines"]
+    ess_src = json.load(open(PIT))["views"] if os.path.exists(PIT) else {}
+    views = {}
+    for date, tk in raw.items():
+        views[date] = {}
+        for t, hls in tk.items():
+            cv = conviction_from_headlines(t, hls, model=model)
+            v = {"conviction": cv, "n_headlines": len(hls)}
+            if date in ess_src and t in ess_src[date] and "ess" in ess_src[date][t]:
+                v["ess"] = ess_src[date][t]["ess"]         # carry over RavenPack ESS (model-independent)
+            views[date][t] = v
+        nz = sum(1 for t in tk if abs(views[date][t]["conviction"]) > 0.01)
+        print(f"  {date}: {nz}/{len(tk)} nonzero ({model})", flush=True)
+    json.dump({"model": model, "decision_dates": list(views), "views": views}, open(out, "w"), indent=2)
+    print("wrote", out, flush=True)
 
 
 def add_ess(db, tickers, lookback=30):
@@ -158,19 +205,28 @@ def inspect(db):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--user", required=True)
+    ap.add_argument("--user", default=None, help="WRDS username (not needed for --reextract)")
     ap.add_argument("--inspect", action="store_true")
     ap.add_argument("--build", action="store_true")
     ap.add_argument("--add-ess", action="store_true", help="add RavenPack ESS to the existing cache (no LLM)")
+    ap.add_argument("--model", default=LV.DEFAULT_MODEL, help="Ollama model for conviction extraction")
+    ap.add_argument("--cache-only", action="store_true", help="WRDS only: cache raw headlines, no LLM (fast)")
+    ap.add_argument("--reextract", action="store_true", help="OFFLINE: re-run convictions on cached headlines")
+    ap.add_argument("--out", default=PIT, help="output cache path (for --reextract)")
     ap.add_argument("--lookback", type=int, default=30)
     a = ap.parse_args()
+    if a.reextract:                                        # offline path — no WRDS needed
+        reextract(a.model, a.out)
+        return
     import wrds
-    db = wrds.Connection(wrds_username=a.user)
+    db = wrds.Connection(wrds_username=a.user) if a.user else wrds.Connection()
     try:
         if a.inspect:
             inspect(db)
+        if a.cache_only:
+            cache_headlines(db, DOW30, a.lookback)
         if a.build:
-            build(db, DOW30, a.lookback)
+            build(db, DOW30, a.lookback, a.model)
         if a.add_ess:
             add_ess(db, DOW30, a.lookback)
     finally:

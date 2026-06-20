@@ -71,6 +71,8 @@ def main():
     ap.add_argument("--instances", type=int, default=400); ap.add_argument("--q", type=float, default=2.0)
     ap.add_argument("--strength", type=float, default=0.10); ap.add_argument("--random-draws", type=int, default=200)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--pit", default="pit_news_views.json", help="conviction cache (e.g. pit_news_views_llama2.json)")
+    ap.add_argument("--out", default="control_results.json")
     a = ap.parse_args()
 
     prices = load_prices(); pool = list(prices.columns); dates = prices.index
@@ -78,7 +80,7 @@ def main():
     windows = [(str(dates[s])[:10], str(dates[s + tr])[:10], str(dates[s + tr + te])[:10])
                for s in range(0, len(dates) - tr - te, te)]
     instances = make_instances(pool, a.n, a.instances, windows, a.seed)
-    pit = json.load(open(os.path.join(OUT, "pit_news_views.json")))["views"]
+    pit = json.load(open(os.path.join(OUT, a.pit)))["views"]
     allc = [abs(v["conviction"]) > 0.01 for d in pit.values() for v in d.values()]
     p_nonzero = float(np.mean(allc))
 
@@ -158,7 +160,7 @@ def main():
            "verdict": (f"LLM tilt beats matched random tilts at the instance level (p={p_two:.2f}) and is "
                        f"{robust} across the {n_dates} dates ({pos_dates}/{n_dates} positive) — promising "
                        f"but NOT yet robust with so few periods")}
-    json.dump({**res, "random_means": rand_means.tolist()}, open(os.path.join(OUT, "control_results.json"), "w"), indent=2)
+    json.dump({**res, "random_means": rand_means.tolist()}, open(os.path.join(OUT, a.out), "w"), indent=2)
 
     # figure: (left) placebo null vs LLM effect; (right) per-date effect — is it consistent or fragile?
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt

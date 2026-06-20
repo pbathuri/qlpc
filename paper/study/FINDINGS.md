@@ -49,6 +49,19 @@ demonstrates the evaluation machinery only. The directionally-negative signal is
 finance literature that naive news/sentiment chasing tends to underperform, but we make **no claim** until
 the valid test is run. **Q1 and Q2 are valid as reported.**
 
+## Placebo / ablation control (`control.py`) — does the LANGUAGE matter, or would any tilt?
+Because Q2/Q3 are classical (a tilt either does or doesn't change the exact optimum), we can run thousands
+of instances locally and compare the real LLM tilt against matched **random** tilts (same sparsity +
+magnitude, language removed), drawn 300×. On 1,600 instances (point-in-time news, n=12, 4 decision dates):
+- **LLM OOS effect +1.29%**, sitting **outside the entire random-tilt null** (instance-level perm. p≈0).
+  Random tilts that change the portfolio average +0.35%, so the *language-specific* premium is ~+0.9%.
+- **BUT the honest unit is the decision date, not the instance** (subsets within a date are correlated).
+  Per-date effect: 2023-12 **−5.5%**, 2024-03 +2.1%, 2024-06 +1.8%, 2024-09 +5.5% → **3/4 positive,
+  MIXED**. The instance-level p is pseudo-replicated and overstated.
+- **Verdict:** the LLM language carries signal beyond random noise and helps in 3 of 4 quarters, but it is
+  **regime-dependent and NOT yet statistically robust** with only 4 periods. This is a pro-and-con finding,
+  not a win — and it directly motivates more decision dates.
+
 ## What makes Q3 valid (the BigRed200 run)
 Point-in-time news keyed to each decision date — **WRDS RavenPack** news analytics — plus the large
 `(subset × window)` sweep at higher `n` on A100s. Submit `slurm/run_array.slurm`; aggregate with

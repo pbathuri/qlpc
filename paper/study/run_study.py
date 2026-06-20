@@ -75,7 +75,11 @@ def make_instances(pool, n, n_inst, windows, seed=0):
 # view, following the sentiment->Black-Litterman-view convention (cf. Riskfolio-Lib's
 # sentiment_to_black_litterman_views): a realistic, non-dominating tilt, NOT a magnitude tuned to flip the
 # optimum. 0.10 = a 10% annual view at full conviction.
-def run(n=12, budget=4, n_inst=20, reps=3, q=2.0, strength=0.10, seed=0, shard=None):
+def run(n=12, budget=4, n_inst=20, reps=3, q=2.0, strength=0.10, seed=0, shard=None,
+        view_source="llm", placebo_seed=0):
+    """view_source: 'llm' (point-in-time RavenPack->LLM convictions), 'random' (PLACEBO: random tilts of
+    matched sparsity/magnitude — tests whether the LANGUAGE matters vs any tilt), or 'ess' (RavenPack's
+    own event-sentiment score, if cached) — an ablation of the LLM against off-the-shelf sentiment."""
     xp, dev = BK.get_xp()
     prices = load_prices(); pool = list(prices.columns)
     dates = prices.index
@@ -88,8 +92,14 @@ def run(n=12, budget=4, n_inst=20, reps=3, q=2.0, strength=0.10, seed=0, shard=N
     # headlines (look-ahead; Q3 then preliminary only).
     pit_path = os.path.join(OUT, "pit_news_views.json")
     pit = json.load(open(pit_path))["views"] if os.path.exists(pit_path) else None
-    views = None if pit else build_views(pool)
+    views = None if (pit or view_source != "llm") else build_views(pool)
     news_mode = "point-in-time(ravenpack)" if pit else "recent(lookahead-confounded)"
+    # placebo: match the LLM's empirical nonzero rate so 'random' differs from 'llm' ONLY in *which* names
+    p_nonzero = 0.4
+    if pit:
+        allc = [abs(v["conviction"]) > 0.01 for d in pit.values() for v in d.values()]
+        p_nonzero = float(np.mean(allc)) if allc else 0.4
+    prng = np.random.default_rng(1000 + placebo_seed)
     instances = make_instances(pool, n, n_inst, windows, seed)
     if shard:
         k, total = shard
@@ -106,7 +116,13 @@ def run(n=12, budget=4, n_inst=20, reps=3, q=2.0, strength=0.10, seed=0, shard=N
 
         # LANGUAGE EFFECT measured at the EXACT optimum (clean of QAOA stochasticity). QAOA quality is
         # reported separately in Q1; the economic question should not inherit optimizer noise.
-        if pit:
+        if view_source == "random":                        # PLACEBO control: matched-size random tilts
+            cv = {i: float(prng.choice([-1.0, 1.0])) if prng.random() < p_nonzero else 0.0
+                  for i in range(n)}
+        elif view_source == "ess" and pit:                 # ablation: RavenPack's own sentiment, if cached
+            vmap = pit.get(inst["window"][1], {})
+            cv = {i: float(vmap.get(assets[i], {}).get("ess", 0.0)) for i in range(n)}
+        elif pit:
             vmap = pit.get(inst["window"][1], {})          # convictions known AT the decision date
             cv = {i: float(vmap.get(assets[i], {}).get("conviction", 0.0)) for i in range(n)}
         else:
@@ -132,7 +148,8 @@ def run(n=12, budget=4, n_inst=20, reps=3, q=2.0, strength=0.10, seed=0, shard=N
             print(f"  instance {j+1}/{len(instances)} done", flush=True)
     return {"config": {"n": n, "budget": budget, "reps": reps, "q": q, "strength": strength,
                        "device": dev, "n_instances": len(instances), "windows": windows,
-                       "universe": "Dow30-CRSP", "news_mode": news_mode, "seed": seed},
+                       "universe": "Dow30-CRSP", "news_mode": news_mode, "view_source": view_source,
+                       "seed": seed},
             "rows": rows}
 
 

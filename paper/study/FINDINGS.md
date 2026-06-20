@@ -1,5 +1,18 @@
 # Research-grade study — design, bias controls, and honest findings
 
+## HEADLINE (cautionary): the apparent LLM signal is training-horizon hindsight
+Same bias-controlled pipeline, two LLMs reading the SAME point-in-time headlines:
+| LLM | training vs eval window | OOS premium over random tilts | perm. p | positive quarters |
+|-----|-------------------------|-------------------------------|---------|-------------------|
+| qwen2.5-14B (rel. 2024) | **overlaps** 2024 | **+0.76%** | 0.00 | 3/4 |
+| Llama 2 (Sept-2022 cutoff) | **before** eval window | **−0.23%** | 0.94 | 2/4 |
+The premium **collapses to indistinguishable-from-random (p=0.94)** with a genuinely out-of-sample LLM.
+=> the apparent out-of-sample value of LLM-news-sentiment conditioning is largely an artifact of the
+model's training-horizon look-ahead, not predictive signal. This is the paper's core (cautionary) finding;
+it warns the QNLP/LLM-for-finance area about a subtle, pervasive backtest confound. (Both results are
+further limited to 4 decision dates — see below.)
+
+
 This study replaces the earlier hand-picked, single-instance demo with an unbiased, out-of-sample
 evaluation over an objective universe, designed to survive a hostile peer review. It is HPC-ready
 (BigRed200 + A100 via cupy); locally we validate the pipeline at moderate scale on CPU.

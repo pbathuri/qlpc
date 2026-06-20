@@ -36,9 +36,9 @@ Two recent lines sit either side of a gap: Lee et al.~\cite{lee2025llmbl} drive 
 with an LLM but optimize \emph{classically}, while Chen et al.~\cite{chen2023qbl} bring numerically
 predicted views into a \emph{quantum} pipeline with no language. We occupy the middle and treat ``do LLM
 news views help?'' as a \emph{measurement problem}. The universe is an index (Dow~30), not author-chosen;
-returns are CRSP total returns with Ledoit--Wolf covariance~\cite{ledoit2004}. Holding $B$ of $n$ assets
-to maximize $\mu^\top x - q\,x^\top\Sigma x$~\cite{markowitz1952}, we map the penalized binary problem to
-a diagonal Ising Hamiltonian solved by QAOA~\cite{farhi2014qaoa}. An LLM reads RavenPack headlines
+returns are CRSP total returns with shrinkage covariance. Holding $B$ of $n$ assets to maximize the
+mean--variance objective $\mu^\top x - q\,x^\top\Sigma x$, we map the penalized binary problem to a
+diagonal Ising Hamiltonian solved by QAOA~\cite{farhi2014qaoa}. An LLM reads RavenPack headlines
 time-stamped \emph{strictly before} each quarterly decision date into convictions $v_i\in[-1,1]$; a
 $\pm10\%$ view tilts $\mu\to\mu+s\,v$ (the sentiment-to-view convention~\cite{black1992litterman}).
 Estimation uses the train window only; evaluation the held-out next quarter. Bias controls: hundreds of
@@ -50,7 +50,7 @@ it from optimizer noise.
 
 \section{Results and Contribution}
 \begin{figure}[t]\centering
-\includegraphics[width=0.72\textwidth]{compare_clean_vs_contaminated.pdf}
+\includegraphics[width=0.66\textwidth]{compare_clean_vs_contaminated.pdf}
 \caption{The out-of-sample premium of LLM-conditioned tilts over matched random tilts collapses from
 $+0.76\%$ ($p\!\approx\!0$) with a training-overlapping LLM to $-0.23\%$ ($p=0.94$) with a pre-cutoff LLM
 on the same headlines (left); per-quarter effects over four decision dates (right).}
@@ -68,7 +68,7 @@ large-cap US, no transaction costs---none inflating the central result. \textbf{
 transparent, bias-controlled pipeline linking language to a quantum portfolio optimizer and a quantified
 warning: LLM training-horizon look-ahead can manufacture out-of-sample ``alpha'' that vanishes with a
 pre-cutoff model---LLM-for-finance studies should date their model against their backtest. All results
-are reproducible from released code and scale on HPC for the many-period study significance needs.
+are reproducible from released code with fixed seeds.
 
 \begin{credits}
 \subsubsection{\ackname} The author thanks Professor Yuxi Hong for helpful guidance. Implementation and

@@ -32,7 +32,8 @@ def main():
     # Panel A — language-specific premium over random, with significance
     labels = ["qwen2.5-14B\n(train overlaps 2024)", "Llama 2\n(Sept-2022 cutoff)"]
     prem = [q_prem, l_prem]; ps = [qpp, lpp]
-    bars = a1.bar(labels, prem, color=["#f0683c", "#3fb6a8"], edgecolor="#11151f")
+    bars = a1.bar(labels, prem, color=["#f0683c", "#3fb6a8"], edgecolor="#11151f",
+                  hatch=["//", ".."])                      # patterns -> legible in B&W (Springer rule)
     a1.axhline(0, color="#888", lw=1)
     for b, p, v in zip(bars, ps, prem):
         a1.text(b.get_x() + b.get_width() / 2, v + (0.04 if v >= 0 else -0.08),
@@ -46,8 +47,8 @@ def main():
     dts = list(ql["per_date_oos_effect"]); x = np.arange(len(dts)); w = 0.38
     qv = [ql["per_date_oos_effect"][d] * 100 for d in dts]
     lv = [ll["per_date_oos_effect"][d] * 100 for d in dts]
-    a2.bar(x - w / 2, qv, w, color="#f0683c", label="qwen2.5 (contaminated)")
-    a2.bar(x + w / 2, lv, w, color="#3fb6a8", label="Llama 2 (clean)")
+    a2.bar(x - w / 2, qv, w, color="#f0683c", edgecolor="#11151f", hatch="//", label="qwen2.5 (contaminated)")
+    a2.bar(x + w / 2, lv, w, color="#3fb6a8", edgecolor="#11151f", hatch="..", label="Llama 2 (clean)")
     a2.axhline(0, color="#888", lw=1); a2.set_xticks(x)
     a2.set_xticklabels(dts, rotation=30, fontsize=7); a2.set_ylabel("OOS effect (%)")
     a2.set_title("Per decision date (only 4 — not robust either way)", fontsize=10)

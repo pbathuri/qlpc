@@ -136,7 +136,7 @@ def add_ess(db, tickers, lookback=30):
                                 f"where {eid}='{e}' and {ts} >= '{start}' and {ts} < '{end}' "
                                 f"and {rel} >= 90")
                 m = df["m"].iloc[0]
-            raw[(date, t)] = float(m) if m is not None else None
+            raw[(date, t)] = float(m) if not pd.isna(m) else None
     # detect scale: RavenPack ESS is usually 0-100 (50 neutral); some feeds give [-1,1]
     vals = [v for v in raw.values() if v is not None]
     hi = max(abs(v) for v in vals) if vals else 1.0

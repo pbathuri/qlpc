@@ -59,8 +59,23 @@ def main():
     fig.tight_layout()
     for ext in ("png", "pdf"):
         fig.savefig(os.path.join(FIG, f"compare_clean_vs_contaminated.{ext}"))
+
+    # compact single-panel version for the 2-page abstract (premium collapse only)
+    f2, ax = plt.subplots(figsize=(5.2, 3.0))
+    bars = ax.bar(labels, prem, color=["#f0683c", "#3fb6a8"], edgecolor="#11151f", hatch=["//", ".."])
+    ax.axhline(0, color="#888", lw=1)
+    for b, p, v in zip(bars, ps, prem):
+        ax.text(b.get_x() + b.get_width() / 2, v + (0.04 if v >= 0 else -0.10),
+                f"{v:+.2f}%\n(p={p:.2f})", ha="center", fontsize=9, fontweight="bold")
+    ax.set_ylabel("OOS premium over random tilts (%)")
+    ax.set_title("Out-of-sample 'alpha' vanishes with a pre-cutoff LLM", fontsize=10)
+    ax.set_ylim(min(prem) - 0.45, max(prem) + 0.5)
+    f2.tight_layout()
+    for ext in ("png", "pdf"):
+        f2.savefig(os.path.join(FIG, f"compare_premium.{ext}"))
+
     print(f"qwen2.5 premium {q_prem:+.2f}% (p={qpp:.2f}) -> Llama2 premium {l_prem:+.2f}% (p={lpp:.2f})")
-    print("wrote figures/compare_clean_vs_contaminated.*")
+    print("wrote compare_clean_vs_contaminated.* (2-panel) + compare_premium.* (compact 1-panel)")
 
 
 if __name__ == "__main__":

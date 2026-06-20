@@ -41,20 +41,31 @@ def main():
     fig.suptitle(f"Optimizer quality over {len(R)} instances (n={C['n']}, p={C['reps']}, {C['device']})")
     fig.tight_layout(); save(fig, "study_q1_quality")
 
-    # Q3 — the honest headline: out-of-sample value of language tilt (only where it changed the portfolio)
-    fig, ax = plt.subplots(figsize=(6.6, 3.6))
-    if len(diff) > 0:
-        ax.hist(diff, bins=20, color="#9aa7bd", edgecolor="#11151f")
-        m = diff.mean(); lo, hi = np.array(S["Q3_oos_diff_ci95_when_changed"]) * 100
-        ax.axvline(m, color="#f0683c", lw=2, label=f"mean {m:+.2f}%  (95% CI [{lo:+.2f},{hi:+.2f}])")
-        sig = "significant" if (lo > 0 or hi < 0) else "CI spans 0"
-        ax.set_title(f"Q3 (PRELIMINARY — needs point-in-time news): OOS view−neutral, "
-                     f"n={S['Q3_n_changed']}\n{S['Q3_pct_view_beats_neutral_when_changed']*100:.0f}% favor "
-                     f"the view · {sig} · recent-news/historical-window mismatch not yet controlled")
-        ax.legend(fontsize=8)
-    ax.axvline(0, color="#888", lw=1); ax.set_xlabel("realized test-window return difference (%)")
+    # Q3 — honest headline: OOS value, clustered by DECISION DATE (the real unit of replication).
+    dates = np.array([r["window"][1] for r in R])          # decision date per instance
+    pit = C.get("news_mode", "").startswith("point-in-time")
+    per_date = {}
+    for dt in sorted(set(dates)):
+        m = changed & (dates == dt)
+        per_date[dt] = float(np.mean([r["Q3_ret_diff"] for r, mm in zip(R, m) if mm]) * 100) if m.any() else 0.0
+    pos = sum(v > 0 for v in per_date.values()); nd = len(per_date)
+
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(10, 3.6))
+    a1.hist(diff, bins=22, color="#9aa7bd", edgecolor="#11151f")
+    m = diff.mean(); lo, hi = np.array(S["Q3_oos_diff_ci95_when_changed"]) * 100
+    a1.axvline(0, color="#888", lw=1); a1.axvline(m, color="#f0683c", lw=2, label=f"mean {m:+.2f}%")
+    a1.set_xlabel("OOS return diff, view−neutral (%)"); a1.legend(fontsize=8)
+    a1.set_title(f"Per-instance (n={S['Q3_n_changed']}) — instance-level p is pseudo-replicated", fontsize=8)
+    dts = list(per_date); vals = [per_date[d] for d in dts]
+    a2.bar(range(len(dts)), vals, color=["#3fb6a8" if v > 0 else "#f0683c" for v in vals])
+    a2.axhline(0, color="#888", lw=1); a2.set_xticks(range(len(dts)))
+    a2.set_xticklabels(dts, rotation=30, fontsize=7); a2.set_ylabel("OOS effect (%)")
+    a2.set_title(f"Per decision date ({pos}/{nd} positive) — the honest unit", fontsize=8)
+    src = "point-in-time RavenPack news (valid)" if pit else "recent news (look-ahead — preliminary)"
+    fig.suptitle(f"Q3  Out-of-sample value of the language tilt · {src}", fontsize=10)
     fig.tight_layout(); save(fig, "study_q3_oos_value")
 
+    print(f"Q3 per-date (%): {{{', '.join(f'{d}:{v:+.2f}' for d,v in per_date.items())}}} -> {pos}/{nd} positive")
     print("wrote study_q1_quality + study_q3_oos_value (png/pdf)")
     print("headline:", {k: S[k] for k in ("Q1_rank_pct_median", "Q1_pct_best_is_optimum",
                                           "Q2_pct_selection_changed", "Q3_oos_diff_mean_when_changed",

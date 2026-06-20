@@ -31,9 +31,10 @@ BUDGET=5
 REPS=4
 INSTANCES=400                            # subsets per rolling window, per shard-set (sharded below)
 Q=2.0
+STRENGTH=0.10                            # realistic +-10% annual view per unit LLM conviction
 
 python -m paper.study.run_study \
-  --n $N --budget $BUDGET --reps $REPS --instances $INSTANCES --q $Q \
+  --n $N --budget $BUDGET --reps $REPS --instances $INSTANCES --q $Q --strength $STRENGTH \
   --shard ${SLURM_ARRAY_TASK_ID}/${SLURM_ARRAY_TASK_COUNT} \
   --out paper/study/data/study_results.json
 

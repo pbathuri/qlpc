@@ -1,4 +1,6 @@
 {
+  "model": "qwen2.5:14b-instruct-q4_K_M",
+  "provider": "Ollama",
   "lookback_days": 30,
   "decision_dates": [
     "2023-12-01",

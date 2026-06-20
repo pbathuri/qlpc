@@ -6,7 +6,7 @@
     "q": 2.0,
     "strength": 0.1,
     "device": "cpu",
-    "n_instances": 200,
+    "n_instances": 1600,
     "windows": [
       [
         "2022-06-01",
@@ -32,7 +32,8 @@
     "universe": "Dow30-CRSP",
     "news_mode": "point-in-time(ravenpack)",
     "view_source": "llm",
-    "seed": 0
+    "seed": 0,
+    "n_instances_note": "total (subset x window) instances aggregated across shards"
   },
   "rows": [
     {

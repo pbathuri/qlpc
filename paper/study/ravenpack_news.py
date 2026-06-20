@@ -20,6 +20,7 @@ import os
 
 import pandas as pd
 
+from paper import llm_views as LV
 from paper.study.news_views import conviction_from_headlines
 from paper.study.universe import DOW30, load_prices
 

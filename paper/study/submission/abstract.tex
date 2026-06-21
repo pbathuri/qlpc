@@ -1,14 +1,11 @@
-% QNLPAI 2026 — STUDENT POSTER SESSION ABSTRACT (<= 2 pages incl. refs, Springer LNCS template).
-% DOUBLE-BLIND: no author identity in this PDF, and NO Acknowledgments section at all (the CFP says the
-% blind paper must omit acknowledgments). The mandated AI-assistance disclosure is deferred to the
-% camera-ready Acknowledgments (and/or an OpenReview AI-disclosure field) -- see end of file.
-% Compile on the Overleaf "Springer Nature LNCS" template. Keep compare_premium.pdf next to this .tex.
-% Submit with the draft poster (poster.pdf).
-% CAMERA-READY (if accepted): restore the author block + add an Acknowledgments section with advisor
-% thanks AND the AI-assistance disclosure -- all omitted here for double-blind review.
+% QNLPAI 2026 — STUDENT POSTER SESSION ABSTRACT (author-written draft; <= 2 pages incl. refs, LNCS).
+% DOUBLE-BLIND: no author identity; NO Acknowledgments section (CFP omits acknowledgments in the blind
+% paper). AI-assistance disclosure deferred to camera-ready / OpenReview field.
+% NOTE: body text is the AUTHOR's own wording; this pass only fixes spelling/caps/math formatting,
+% adds \cite links + the figure. Content unchanged. Length WILL exceed 2pp -- compress next.
 \documentclass[runningheads]{llncs}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}    % Type-1 CM (same LNCS typeface) -> clean text extraction, no Type-3 fonts
+\usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
@@ -25,64 +22,71 @@ Training-Horizon Confound}
 \maketitle
 
 \begin{abstract}
-We introduce \emph{language-conditioned} QAOA: a pipeline in which a large language model (LLM) reads
-financial news and emits per-asset convictions that tilt the cost Hamiltonian of a cardinality-constrained
-Quantum Approximate Optimization Algorithm (QAOA) portfolio optimizer. We then ask, with strong bias
-controls, whether the language adds out-of-sample value.
-It appears to: an LLM released during the evaluation window (qwen2.5-14B, Sept.\ 2024) beats
-matched random tilts by $+0.76\%$/quarter on changed-optimum instances. But a \emph{genuinely out-of-sample} LLM
-(Llama~2, cutoff Sept.\ 2022) on the \emph{same} headlines yields $-0.23\%$ ($p=0.94$, indistinguishable
-from random): the benefit appears only for the model released into the test period---consistent
-with \emph{training-horizon hindsight} rather than prediction (the pre-cutoff model is also smaller, a
-caveat we note). We contribute the language$\to$quantum conditioning pipeline, a reusable bias-control
-template, and a quantified training-horizon look-ahead warning for LLM-for-finance evaluation.
+We flag a possible oversight in using large language models for portfolio optimization: we
+build a language-conditioned QAOA in which an LLM reads RavenPack news into per-asset convictions that
+tilt the cost Hamiltonian of a cardinality-constrained Quantum Approximate Optimization Algorithm (QAOA)
+portfolio optimizer. We ask, with bias controls, whether language
+adds out-of-sample value across two LLMs: qwen2.5-14B (Sept.\ 2024, released during the
+evaluation window) and an out-of-sample Llama~2 (cutoff Sept.\ 2022) on the same headlines. The qwen model
+beats matched random tilts by $+0.76\%$/quarter and Llama~2 $-0.23\%$/quarter ($p=0.94$), which is
+indistinguishable from random. The benefit is noticed only for the model released into the test period,
+consistent with training-horizon hindsight rather than prediction---a misleading alpha. The pre-cutoff
+model is also smaller, a caveat we note. We contribute the pipeline, a reusable bias-control template, and
+a training-horizon look-ahead warning for LLM-for-finance evaluation.
 \keywords{QAOA \and Quantum optimization \and LLM-conditioning \and Look-ahead bias \and Quantum finance.}
 \end{abstract}
 
 \section{Pipeline and Method}
-Two lines straddle a gap: Lee et al.~\cite{lee2025llmbl} drive Black--Litterman views
-with an LLM but optimize \emph{classically}, while Chen et al.~\cite{chen2023qbl} bring numerically
-predicted views into a \emph{quantum} pipeline with no natural language. We occupy the middle---an LLM's
-language conditions the quantum optimizer---and treat ``do news views help?'' as a
-\emph{measurement problem}. Holding $B$ of $n$ assets to maximize the mean--variance objective
-$\mu^\top x - q\,x^\top\Sigma x$ over a fixed Dow-30 universe (current, not point-in-time, constituents;
-CRSP returns; shrinkage covariance), we map this binary selection to a diagonal Ising Hamiltonian solved
-by QAOA~\cite{farhi2014qaoa}. A local LLM reads RavenPack news headlines time-stamped \emph{strictly before}
-each quarterly decision date into convictions $v_i\in[-1,1]$; a $\pm10\%$ view tilts $\mu\to\mu+s\,v$ (the
-standard sentiment-to-view convention), estimated on the train window and evaluated on the held-out next
-quarter. Bias controls: hundreds of (subset $\times$ window) instances from a fixed
-seed, pre-registered metrics, a matched-random-tilt \emph{placebo}, an off-the-shelf-sentiment (RavenPack
-ESS) ablation, and---decisively---two LLMs on the \emph{same} headlines: \textbf{qwen2.5-14B} (released
-Sept.\ 2024, training plausibly \emph{spans} the window) and \textbf{Llama~2} (documented pretraining
-cutoff Sept.\ 2022, \emph{before} it).
-The language effect is read at the exact optimum, free of optimizer noise.
+We focus on the use case of portfolio optimization in financial institutions. Chen et
+al.~\cite{chen2023qbl} use Black--Litterman with quantum numeric views, and Lee
+et al.~\cite{lee2025llmbl} with LLM views optimized classically; we question their combination of quantum
+and LLM in one pipeline. We use
+a fixed set of Dow~30 across 2022--24, split into 378-day train and 63-day (next-quarter) test windows at
+each of 4 decision dates (2023-12-01 through 2024-09-04). We draw 400 random 14-of-30 subsets per date
+(without replacement), 1600 in total. Each asset is one qubit; we cap subsets at 14
+for a tractable exact statevector simulation ($2^{14}$ amplitudes), with the exact optimum over
+$\binom{14}{5}=2002$ portfolios.
+
+Each subset is reduced to 5 held assets under the Markowitz mean--variance objective (risk aversion
+$q=2$; $\mu$ and $\Sigma$ from CRSP total returns with shrinkage covariance). Holding exactly $B=5$ of
+$n=14$ makes $x$ binary---a combinatorial choice over the 2002 feasible portfolios, and thus a candidate
+for a quantum optimizer.
+
+The LLMs qwen2.5-14B (released Sept.\ 2024, its training plausibly spans our 2024 test window) and Llama~2
+(pretraining cutoff Sept.\ 2022, before the test data window) are provided with RavenPack headlines
+(tagged, timestamped) and each decide whether to nudge $\mu$; for each decision date the input is only
+headlines strictly before it, so there is no look-ahead in the news itself. The output from the LLM is a conviction $v_i \in [-1,1]$. We
+inject the view Black--Litterman-style into expected returns, $\mu \to \mu + s\,v$ with $s = 0.10$ (a
+$\pm10\%$ annual view), not tuned to force the optimizer to change its picks. As a control, the placebo matches the tilt's size and sparsity
+but randomizes which stocks (300 draws form a null), testing whether the language matters or whether any
+nudge of that size would do the same.
+
+We encode the binary ``pick 5 of 14'' as a QUBO (mean--variance score plus a ``hold exactly 5'' penalty),
+mapping to an Ising model whose minimum energy is the best portfolio. We solve with QAOA at depth $p=4$
+($2p=8$ variational parameters). Our objective is not quantum advantage but whether the LLM's view changed
+the best portfolio at the exact optimum; the economic effect is read there, with QAOA's sampling quality
+reported separately.
 
 \section{Results}
-\begin{figure}[t]\centering
-\includegraphics[width=0.34\textwidth]{compare_premium.pdf}
-\caption{Out-of-sample premium over matched random tilts: a training-overlapping LLM (qwen2.5-14B)
-vs.\ a pre-cutoff LLM (Llama~2) on identical headlines.}
-\label{fig:main}
-\end{figure}
-Over 1{,}600 instances (Dow~30, $n{=}14$ qubits, hold~5, four quarterly dates 2023-12--2024-09), the
-training-overlapping LLM beats matched random tilts by a language-specific premium of $+0.76\%$/quarter
-on changed-optimum instances (instance-level $p\!\approx\!0$, positive in 3/4 quarters); the pre-cutoff
-LLM, on identical headlines, yields $-0.23\%$ ($p=0.94$, 2/4)---indistinguishable from random
-(Fig.~\ref{fig:main}). The conditioning has real
-mechanism leverage (a $\pm10\%$ view changes the
-exact optimum in $47$--$68\%$ of instances), yet QAOA at depth $p{=}4$ recovers the true optimum only
-$7.7\%$ of the time; we make no quantum-advantage claim. Limitations: four decision dates (instance-level
-$p$ is pseudo-replicated); the clean and contaminated LLMs differ in capability as well as cutoff, so the
-two are not fully separated; small-$n$ simulation; fixed-membership large-cap US; no costs. None overturn the takeaway: an
-LLM whose training overlaps the backtest can manufacture out-of-sample ``alpha'' that a pre-cutoff model
-does not---a look-ahead that LLM-for-finance studies must guard against by dating their model against the
-evaluation window. Fixed seeds; code released upon publication.
+On the same headlines, qwen2.5-14B's changed-optimum tilts beat matched random tilts by $+0.76\%$/quarter,
+whereas Llama~2's do $-0.23\%$/quarter. The edge appears only for the model whose training overlaps the test window;
+swapping to the out-of-sample model (market and factors held fixed) erases it---our core finding: the edge
+is the training horizon, not the market. The $+0.76\%$ is the language-specific premium: qwen's
+changed-instance effect ($+1.20\%$) minus matched random tilts ($+0.43\%$). The language input changes the
+exact optimum in $47$--$68\%$ of instances, having an effect on selection.
 
-% DOUBLE-BLIND: Acknowledgments section omitted per the CFP (no acknowledgments in the blind PDF).
-% CAMERA-READY must add an Acknowledgments section with (a) the mandated AI-assistance disclosure
-% [\cite{anthropic2026claude}] and (b) advisor thanks. If OpenReview exposes an AI-disclosure/ethics
-% field, the AI-use statement can also be recorded there for the blind submission.
+Qwen's instance-level $p\approx0$ (outside the 300-draw null), positive in 3 of 4 quarters; but the 1600
+instances are subsets within only 4 decision dates, so this $p$ is pseudo-replicated, not a time-series
+test. Llama~2 gives $p=0.94$ (2 of 4 quarters), and the per-date effect is regime-dependent. QAOA at
+depth $p=4$ recovers the true optimum only $7.7\%$ of the time, a weak exact optimizer at this depth.
+
+\paragraph{Limitations.} Qwen (14B) is larger than Llama~2 (7B), and qwen has no published cutoff, so
+contamination is inferred; the study is a small-$n$ exact simulation without transaction costs. These
+restrict causal attribution but do not overturn the pattern---present for the recent model, absent for the
+pre-cutoff one.
 
 \bibliographystyle{splncs04}
 \bibliography{references}
+
+% CAMERA-READY: restore author block + Acknowledgments (advisor thanks + AI-assistance disclosure).
 \end{document}

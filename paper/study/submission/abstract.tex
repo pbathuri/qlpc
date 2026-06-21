@@ -1,0 +1,69 @@
+% QNLPAI 2026 Student Poster Session — final 2-page abstract (Springer LNCS, double-blind).
+% Author-written prose; AI assistance limited to LaTeX/formatting and length editing.
+% DOUBLE-BLIND: anonymous; no Acknowledgments in the blind PDF (add the AI-assistance disclosure at
+% camera-ready). Build file: references.bib (cited: Chen, Lee). No figure in the abstract -- it lives on the poster.
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\title{Language-Conditioned QAOA for Portfolio Selection: A Bias-Controlled Study Reveals a
+Training-Horizon Confound}
+\titlerunning{Language-Conditioned QAOA: A Training-Horizon Confound}
+\author{Anonymous Author(s)}
+\authorrunning{Anonymous}
+\institute{Affiliation withheld for double-blind review}
+\maketitle
+
+\begin{abstract}
+We express the possible oversight of using large language models in portfolio optimization pipelines, we
+include in the pipeline a language-conditioned QAOA with the LLM's role to read financial news from
+RavenPack and per-asset conviction that tilt the cost Hamiltonian of a cardinality-constrained Quantum
+Approximate Optimization Algorithm (QAOA) portfolio optimizer. With strong bias controls, we ask whether
+the language adds out-of-sample value to two LLMs, qwen2.5-14B, Sept.\ 2024 released during the evaluation
+window and an out of sample Llama~2, cut off Sept.\ 2022 on the same headlines, the qwen model beats
+matched random tilts by $+0.76\%$/quarter and Llama~2 $-0.23\%$/quarter ($p=0.94$) which is
+indistinguishable from random. The benefit is noticed only for the model released into the test period
+consistent with training-horizon hindsight rather than prediction, a misleading alpha. The pre-cutoff
+model is also smaller, a caveat we note. We contribute the language to quantum conditioning pipeline, a
+reusable bias-control template, and a quantified training-horizon look-ahead warning for LLM-for-finance
+evaluation.
+\keywords{QAOA \and Quantum optimization \and LLM-conditioning \and Look-ahead bias \and Quantum finance.}
+\end{abstract}
+
+\section{Pipeline and Method}
+We bring attention in particular to the use case of portfolio optimization in financial
+institutions. A similar study has been undertaken by Chen et al.~\cite{chen2023qbl} and Lee et
+al.~\cite{lee2025llmbl}, we borrow their insights on using Black--Litterman in quantum numeric views and LLM optimized classically and question the combination of quantum and LLM in one pipeline. In this study
+we use a fixed set of Dow 30 applied across 2022-24, the dataset is split into 378 and 63
+trading days as train and test window respectively, we perform 400 random assignments where 14 of the 30 names are made into a subset without replacement totaling 1600 unique subsets. QAOA assigns each asset as one qubit and the exact statevector simulation costs $2^{14}$ amplitudes, the exact optimum over $\binom{14}{5}=2002$ portfolios. Quantum-simulation tractability is retained by limiting the sample size to 14 and drawing 1600 unbiased random subsets.
+
+Each subset is shortlisted into a portfolio of $B=5$ assets using the Markowitz
+model, $\mu$ a vector of expected returns and $x$ the stocks held against the risk minimized with covariance matrix $\Sigma$, later converted to a
+score to maximize with risk aversion $q=2$. The base $\mu$ and $\Sigma$ are estimated from CRSP total returns. We use $x$ in binary as a combinatorial of the 2002 feasible portfolios, a candidate for a quantum optimizer.
+
+The LLMs qwen 2.5-14B, its training plausibly spans our 2024 test window and Llama~2, pretraining cutoff Sept.\ 2022, before our test data window, are provided with the RavenPack (headlines tagged to companies with timestamps) and are assigned to determine whether to nudge $\mu$ given the news headline by $s$ ($\pm10\%$), added to the Black--Litterman expected returns $\mu \to \mu + s\,v$, shifting a stock's expected annual return. The output from the LLM is a conviction $v_i \in [-1,1]$. Two controls, the placebo keeps the same size and sparsity but randomizes which stocks, the LLM's choice of names and direction is removed, this tests the language vs the underlying training sample of the LLM.
+
+In the quantum layer, we hand the binary ``pick 5 of 14'' problem to a quantum optimizer and use QUBO to build our portfolio, given our mean variance score and ``hold exactly 5'' rule as the quadratic objective. We then use QAOA setting the layers or $p=4$. Our question is whether the LLM's view changes the best portfolio at that exact optimum.
+Upon measurement we note at $p=4$, QAOA's sampled portfolio
+equals the true optimum only $7.7\%$ of the time, a weak exact optimizer at this depth.
+
+\section{Results}
+The pipeline is that two LLMs read the same headlines and go through the same simulations, qwen 2.5-14B that is more recent on
+changed-optimum instances, those changes beat random changes of the same size by $+0.76\%$/quarter whereas
+Llama~2 the same kind of changes do $-0.23\%$/quarter. The edge appears to be
+apparent for the model whose training overlaps the test window. When swapped to an out of sample model
+holding the market and other factors the same, the edge disappears which points to one of our core
+findings that the edge is about the model's training horizon, not the market.
+Sentiment analysis comparison between qwen and ESS show qwen changes $68\%$ of optima, $+1.20\%$, ESS
+changes only $16\%$, $+0.14\%$, though the ESS is window-averaged and rarely crosses the $\pm10\%$ threshold, if ESS is matched in magnitude to qwen, at equal tilt strength, the LLM extracts stronger, more actionable views.
+\paragraph{Limitations.} The 1600 instances are subsets within 4 dates, pseudo-replicated and not a time series. Qwen is 14B parameter, Llama~2 is 7B parameter model, qwen has no published training cutoff. The limitations restrict causal attribution.
+
+\bibliographystyle{splncs04}
+\bibliography{references}
+\end{document}

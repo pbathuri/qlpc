@@ -1,0 +1,332 @@
+{
+  "AAPL": {
+    "conviction": 0.0,
+    "headlines": [
+      "Making $100K a Year? Here\u2019s the One Fund That Compounds Without the Research",
+      "The Memory Boom Has Been a Gift to Micron. For Apple, It's Becoming a Problem. Or Is It?",
+      "Making Six Figures but Betting Everything on U.S. Stocks? AVUV Fixes That Problem",
+      "If You\u2019re 38 With $500K Saved, AVUV Fixes Your Tech-Heavy Portfolio",
+      "ASML Faces Fresh China Export Scrutiny",
+      "Analyst Warns Intel Valuation \u2018Doesn\u2019t Make Sense.\u2019 Suggests NVIDIA, AMD, Micron, and Broadcom as Alternatives."
+    ]
+  },
+  "AMGN": {
+    "conviction": 1.0,
+    "headlines": [
+      "Amgen vs. NovoCure: Which Health Care Stock Is a Better Buy in 2026?",
+      "Amgen Inc. (AMGN) is Attracting Investor Attention: Here is What You Should Know",
+      "How One Partnership Profit Line Reframes The Regeneron Pharmaceuticals Stock Story",
+      "What If Amgen Stock's Patent Worries Are Hiding Its Real Growth Engine?",
+      "Amgen's Diversified Business, Emerging Pipeline Drives Positive View, RBC Says",
+      "Amgen (AMGN) Sees a More Significant Dip Than Broader Market: Some Facts to Know"
+    ]
+  },
+  "AMZN": {
+    "conviction": 0.0,
+    "headlines": [
+      "Making Six Figures but Betting Everything on U.S. Stocks? AVUV Fixes That Problem",
+      "If You\u2019re 38 With $500K Saved, AVUV Fixes Your Tech-Heavy Portfolio",
+      "Is Plug Power Inc. (PLUG) A Good Stock To Buy Now?",
+      "SpaceX stock joins AI bond frenzy",
+      "Amazon's Quantum Bet Nears Reality",
+      "Novo Nordisk Stock Rally as Owner Unveils $69 Million Obesity Research Push"
+    ]
+  },
+  "AXP": {
+    "conviction": 1.0,
+    "headlines": [
+      "American Express Just Signed a Multiyear Payments Deal With the NFL. Here's the Bigger Play.",
+      "1 Unpopular Stock That Deserves Some Love and 2 We Turn Down",
+      "American Express (AXP) Stock After 5-Year 118% Gain Is There Still Upside Potential",
+      "Mastercard vs. American Express: Which Stock Has More Upside Now?",
+      "American Express Stock Is Powering the Financial Sector to a Fresh Breakout",
+      "Energy Fuels Rallies After Securing Conditional $725 Million U.S. Government Loan Commitment (UUUU)"
+    ]
+  },
+  "BA": {
+    "conviction": 0.0,
+    "headlines": [
+      "Trump Displays Refitted Qatar-Gifted Jet to Be Air Force One",
+      "Boeing's Quantum Space Bet Moves Forward",
+      "Jim Cramer Believes \u201cGE Aerospace Is Fantastic\u201d",
+      "Under Dave Ricks, Lilly Is Minting Money on GLP-1 Drugs and Spending It Wisely",
+      "The Overlooked Signal In GE Stock's Shipping Delays",
+      "Is GE Stock's Large Backlog Enough To Out-Fly a Slowdown?"
+    ]
+  },
+  "CAT": {
+    "conviction": 0.0,
+    "headlines": [
+      "Caterpillar Inc (CAT): Meet Your Unlikely Data Center Stock",
+      "3 Market-Beating Stocks with Competitive Advantages",
+      "Buy 5 Non-Tech Wide Moat Stocks for a Stable Portfolio in 2H 2026",
+      "Caterpillar (CAT) Surges 3.1%: Is This an Indication of Further Gains?",
+      "3 Hidden AI Revolution Stocks to Buy Now",
+      "These 3 Stocks Just Raised Their Dividends"
+    ]
+  },
+  "CRM": {
+    "conviction": 0.0,
+    "headlines": [
+      "Stocks to Watch Recap: Intel, Accenture, Apple, SpaceX",
+      "Oracle vs. Salesforce: Which Tech Giant Is The Better Buy?",
+      "The Number That Puts Oracle Stock To The Test",
+      "Salesforce (CRM) Inks Definitive Agreement for Fin Acquisition",
+      "Can AI Control Tower Become ServiceNow's Next Growth Engine?",
+      "Exclusive: Gradial raises $65M for agentic marketing"
+    ]
+  },
+  "CSCO": {
+    "conviction": 0.0,
+    "headlines": [
+      "Nvidia's $6.9 billion side bet just paid off in a big way",
+      "Cisco is Overvalued at 7.01X P/S: Should You Still Buy the Stock?",
+      "Shorting Out-of-the-Money Cisco Puts and Calls Provides Shareholders Extra Income",
+      "Cisco Keeps Access to Restricted AI Model",
+      "Cisco (CSCO) Pushes Further Into Quantum Security And Enterprise AI",
+      "Why Cisco Systems (CSCO) Outpaced the Stock Market Today"
+    ]
+  },
+  "CVX": {
+    "conviction": 0.0,
+    "headlines": [
+      "Expert Warns: California Taxes Harming \u201cBig Wealth Driver in the State\u201d as Billionaires Flee",
+      "The SLB Paradox: Short-Term Friction, Long-Cycle Fuel",
+      "Stocks Supported as Geopolitical Risks Recede",
+      "2 Reasons to Like CVX and 1 to Stay Skeptical",
+      "Chevron (CVX) Buys 70% Of Greece Offshore Block 10 With HELLENiQ ENERGY",
+      "Western Midstream Expands Permian Water Recycling With New Treatment Plant"
+    ]
+  },
+  "DIS": {
+    "conviction": 1.0,
+    "headlines": [
+      "Donald Trump\u2019s Under-The-Radar Tech Stock Pick Everyone\u2019s Ignoring",
+      "The Core Disney Strategy Behind Its Empire, According to the Hosts of \u2018Acquired\u2019",
+      "Disney (DIS) Surges 3.0%: Is This an Indication of Further Gains?",
+      "Stock Market Today, June 18: Netflix Edges Higher as Investors Weigh Pricing Upside Before Earnings",
+      "Apple Joins Tech\u2019s Price Hike Party. Why it Stands Out from the Rest.",
+      "Disney Pixar\u2019s \u2018Toy Story 5\u2019 Set for Massive Opening Weekend. Here\u2019s Why."
+    ]
+  },
+  "DOW": {
+    "conviction": 1.0,
+    "headlines": [
+      "Nucor Projects Earnings to Increase in Q2 on Higher Prices",
+      "4 High-Potential PEG Value Stocks That You Can Buy Today",
+      "FMC and Corteva Partner to Expand Access to Rimisoxafen Technology",
+      "DOW's Stock Rallies 39% YTD: What's Driving the Upside?",
+      "Dow Inc. (DOW) Declines More Than Market: Some Information for Investors",
+      "Dow Reaches Historic Peak With Fed Decision Hours Away"
+    ]
+  },
+  "GS": {
+    "conviction": 0.0,
+    "headlines": [
+      "Goldman Sachs Cuts Year-End Gold Target by $500 to $4,900",
+      "Netflix Moves On Radford Studio At $400 Million",
+      "BGC Taps AI Boom With Compute Infrastructure Business Launch",
+      "Are these 3 Top-Ranked Mutual Funds In Your Retirement Portfolio?",
+      "3 Top-Ranked Mutual Funds for Your Retirement",
+      "The Dollar, Gold, and Bitcoin Are Taking Warsh\u2019s Fed Shift Seriously. Stocks Don\u2019t Care."
+    ]
+  },
+  "HD": {
+    "conviction": 1.0,
+    "headlines": [
+      "Is Plug Power Inc. (PLUG) A Good Stock To Buy Now?",
+      "3 Stocks Retirees Are Quietly Loading Up on in June",
+      "Why Is Lowe's (LOW) Up 2.2% Since Last Earnings Report?",
+      "Investors Heavily Search The Home Depot, Inc. (HD): Here is What You Need to Know",
+      "Home Depot (HD) Up 5.4% Since Last Earnings Report: Can It Continue?",
+      "Home Depot (HD) Named In HRC Survey On DEI Pullback Perceptions"
+    ]
+  },
+  "HON": {
+    "conviction": 1.0,
+    "headlines": [
+      "Honeywell Aerospace Separation Clears Key Milestone with Board Approval",
+      "Honeywell (HON) Stock Could Be 28.5% Undervalued on Its Automation and Energy Narrative",
+      "Honeywell (HON) Stock Weighs 2024 Rally Against DCF And P/E Valuation Signals",
+      "The Overlooked Signal In GE Stock's Shipping Delays",
+      "What GE Vernova Stock's Shadow Backlog Was Saying Before The Surge",
+      "Is GE Stock's Large Backlog Enough To Out-Fly a Slowdown?"
+    ]
+  },
+  "IBM": {
+    "conviction": 0.0,
+    "headlines": [
+      "IBM (IBM) Stock After Recent Pullback Is The Current Valuation Attractive?",
+      "Amazon's Quantum Bet Nears Reality",
+      "Better Quantum Computing Stock to Buy: IonQ vs. Rigetti",
+      "PLTR Stock: The Math Hidden In Its Price",
+      "Stocks Rally on Middle East Peace, Apple-Intel Deal: Stock Market Today",
+      "Tim Cook Says Chip Wars Will Take a Big Bite of Apple"
+    ]
+  },
+  "JNJ": {
+    "conviction": 1.0,
+    "headlines": [
+      "The $1 Million Retirement Mistake: Counting Income You\u2019ll Never Get to Spend",
+      "The Retirement Portfolio That Forks Over a $10,000 Check Every Month",
+      "Smart Money Is Fleeing Tech for Johnson & Johnson Ahead of the Next Market Storm",
+      "Johnson & Johnson (JNJ) Could Be a Great Choice",
+      "If You Think The Market Will Ever Fall, Buy This",
+      "J&J Stock Down 3% in 3 Months: Is the Dip a Buying Opportunity?"
+    ]
+  },
+  "JPM": {
+    "conviction": 1.0,
+    "headlines": [
+      "AirTrunk Pursues A$4.3 Billion Loan for 400MW Australia Data Center",
+      "JPMorgan and Anthropic lead massive new AI operational shift",
+      "Fed Holds Rates, Signals Possible Hike: What This Means for Citigroup",
+      "BGC Taps AI Boom With Compute Infrastructure Business Launch",
+      "Morningstar (MORN) Teams Up With Apollo, Franklin Templeton, And JPMorgan On New Models",
+      "If You Invested $1000 in JPMorgan Chase & Co. a Decade Ago, This is How Much It'd Be Worth Now"
+    ]
+  },
+  "KO": {
+    "conviction": -1.0,
+    "headlines": [
+      "Coca-Cola (KO) Stock Could Be 20% Overvalued After Recent Share Price Weakness",
+      "Coca-Cola FEMSA (KOF): A Long-Term Bet Facing Short-Term Trials",
+      "Here's How Many Shares of Coca-Cola You'd Need to Buy for $1,000 in Yearly Dividends",
+      "Buy 5 Non-Tech Wide Moat Stocks for a Stable Portfolio in 2H 2026",
+      "Monster Beverage Expands Product Portfolio: A Growth Catalyst?",
+      "Rising Cost-of-Living Pressures? Why Retirees Should Buy This High-Yield Dividend Legend and Never Look Back"
+    ]
+  },
+  "MCD": {
+    "conviction": 0.0,
+    "headlines": [
+      "EU Cloud Probe Puts Microsoft, Amazon on Watch",
+      "McDonald's Blends Value With Brand Activations: Is It Paying Off?",
+      "Trump Loves the Stock Market but Rally Needs More Than Iran Bump. And 5 Other Things to Know Today.",
+      "McDonald's (MCD) Sees a More Significant Dip Than Broader Market: Some Facts to Know",
+      "McDonald\u2019s (MCD) Brings Back Fried Apple Pie After More Than 30 Years",
+      "McDonald\u2019s and Cava Are Winning. Diners Are Going Value or Premium."
+    ]
+  },
+  "MMM": {
+    "conviction": 1.0,
+    "headlines": [
+      "Do Options Traders Know Something About 3M Stock We Don't?",
+      "3 Dow Jones Stocks We Find Risky",
+      "Datadog upgraded, Accenture downgraded: Wall Street's top analyst calls",
+      "Here Are Monday\u2019s Best Wall Street Analyst Research Calls: Accenture, Caesars Entertainment, Datadog, DuPont, EPAM Systems, Ferrari, Paychex, Rocket Lab, TeraWulf, and More",
+      "3M (MMM) Stock Looks 10% Undervalued After CEO Highlights Margin Progress And Efficiency Gains",
+      "Is 3M Company (MMM) A Good Stock To Buy Now?"
+    ]
+  },
+  "MRK": {
+    "conviction": 0.0,
+    "headlines": [
+      "How One Partnership Profit Line Reframes The Regeneron Pharmaceuticals Stock Story",
+      "Stock Market Today, June 18: Pfizer Falls as CFO Transition Tests Confidence in 2026 Outlook",
+      "Merck (MRK) Stock Falls Amid Market Uptick: What Investors Need to Know",
+      "What If Amgen Stock's Patent Worries Are Hiding Its Real Growth Engine?",
+      "Dow Jumps 200 Points After Fed-Related Sell-Off \u2013 Index On Track To Post Best Week In A Month",
+      "Biogen to Strengthen Immunology Pipeline With $1B RayThera Buyout"
+    ]
+  },
+  "MSFT": {
+    "conviction": 0.0,
+    "headlines": [
+      "Weekly Wrap: Bitcoin Slumps As Fed Turns Hawkish On Interest Rates",
+      "Making Six Figures but Betting Everything on U.S. Stocks? AVUV Fixes That Problem",
+      "If You\u2019re 38 With $500K Saved, AVUV Fixes Your Tech-Heavy Portfolio",
+      "Amazon's Quantum Bet Nears Reality",
+      "Google, SpaceX, Microsoft, and Amazon Are About to Spend \u2018Twice the Entire U.S. Defense Budget\u2019 on AI",
+      "Allbirds exposes a new test for the AI trade"
+    ]
+  },
+  "NKE": {
+    "conviction": -1.0,
+    "headlines": [
+      "A Look Back at Consumer Discretionary - Footwear Stocks\u2019 Q1 Earnings: Nike (NYSE:NKE) Vs The Rest Of The Pack",
+      "Headed Into Earnings, Nike Stock Is Trading Lower Than It Was a Decade Ago. But Is the Turnaround Finally Working?",
+      "UBS Trims Nike (NKE) Forecast, Cites Concerns over Upcoming Guidance",
+      "Nike (NKE) Outperforms Broader Market: What You Need to Know",
+      "4 Big Themes From Footwear Earnings Season So Far",
+      "Castore buys 160-year-old Northamptonshire shoe maker"
+    ]
+  },
+  "NVDA": {
+    "conviction": 0.0,
+    "headlines": [
+      "Better Buy: AMD vs. Intel After Intel's Monster Run",
+      "Should You Add Ethereum to Your Portfolio Right Now?",
+      "Weekly Wrap: Bitcoin Slumps As Fed Turns Hawkish On Interest Rates",
+      "Making $100K a Year? Here\u2019s the One Fund That Compounds Without the Research",
+      "The Simplest Way to Own Bitcoin Inside Your Regular Brokerage Account",
+      "Why Saia Stock Swooned This Week"
+    ]
+  },
+  "PG": {
+    "conviction": 0.0,
+    "headlines": [
+      "The $1 Million Retirement Mistake: Counting Income You\u2019ll Never Get to Spend",
+      "Retail Media Network Surprises As Cannes Lions Swings Into French Riviera",
+      "The Retirement Portfolio That Forks Over a $10,000 Check Every Month",
+      "Procter & Gamble vs. Colgate-Palmolive: One Dividend Giant Stands Above the Rest",
+      "If You Think The Market Will Ever Fall, Buy This",
+      "Stocks With 50 Years of Dividend Hikes"
+    ]
+  },
+  "TRV": {
+    "conviction": 0.0,
+    "headlines": [
+      "The 25 Biggest U.S. IPOs of All Time",
+      "Jim Cramer on Progressive Corporation: \u201cThat Group Is Under a Lot of Pressure\u201d",
+      "Stocks Rally on Hopes for a Near-term US-Iran Interim Peace Agreement",
+      "Stocks See Support from Hopes for a Near-term US-Iran Peace Agreement",
+      "Stocks See Support from Hopes for a Near-term US-Iran Agreement",
+      "Stocks See Downward Pressure Despite Hopes for a Near-term US-Iran Agreement"
+    ]
+  },
+  "UNH": {
+    "conviction": 0.0,
+    "headlines": [
+      "UnitedHealth Group Incorporated (UNH) is Attracting Investor Attention: Here is What You Should Know",
+      "UnitedHealth (UNH) Joins Optura As Former Humana And CVS Chiefs Sign On",
+      "2 Mega-Cap Stocks to Research Further and 1 We Avoid",
+      "Here's Why UnitedHealth Group (UNH) Fell More Than Broader Market",
+      "UnitedHealth Stock Gets a Target Price Increase. Wall Street Likes the Turnaround So Far.",
+      "Here\u2019s Why SGA Global Growth Fund Sold Its Stake in UnitedHealth (UNH)"
+    ]
+  },
+  "V": {
+    "conviction": 0.0,
+    "headlines": [
+      "Visa NA President Kim Lawrence on How Gen Z is Changing Payments",
+      "Buy 5 Non-Tech Wide Moat Stocks for a Stable Portfolio in 2H 2026",
+      "Can Bolt Partnership Accelerate Klarna's Payment Growth Strategy?",
+      "Money 2020 EU Visa's Tim Moncrieff on Stablecoins + Cross-Border Payments",
+      "Visa and Mastercard Reportedly Want to Run Stablecoins, Not Fight Them. Here's What It Means for Investors.",
+      "SOL Trades 75% Below ATH While Institutions Rebuild Capital Markets on Its Rails"
+    ]
+  },
+  "VZ": {
+    "conviction": 0.0,
+    "headlines": [
+      "The Retirement Portfolio That Forks Over a $10,000 Check Every Month",
+      "3 Stocks Retirees Are Quietly Loading Up on in June",
+      "This 6%-Yielding Stock Keeps Raising Its Payout No Matter What the Economy Does",
+      "Verizon customers can now avoid 2 major fees with new offer",
+      "Verizon Communications (VZ) Falls More Steeply Than Broader Market: What Investors Need to Know",
+      "The Biggest IPO in History Just Put Space Stocks on the Map. Here Are the Ones Built to Win."
+    ]
+  },
+  "WMT": {
+    "conviction": 0.0,
+    "headlines": [
+      "Is Plug Power Inc. (PLUG) A Good Stock To Buy Now?",
+      "Retail Media Network Surprises As Cannes Lions Swings Into French Riviera",
+      "Kroger's new CEO reveals the chain's biggest problems",
+      "Inside Bernstein\u2019s Latest Call on Walmart Inc (WMT) Stock",
+      "95-year-old beloved supermarket chain closes longtime stores",
+      "Walmart gives shoppers a new reason to visit stores"
+    ]
+  }
+}

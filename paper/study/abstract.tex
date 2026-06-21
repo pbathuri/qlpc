@@ -1,0 +1,88 @@
+% QNLPAI 2026 — STUDENT POSTER SESSION ABSTRACT (<= 2 pages incl. refs, Springer LNCS template).
+% DOUBLE-BLIND: no author identity in this PDF, and NO Acknowledgments section at all (the CFP says the
+% blind paper must omit acknowledgments). The mandated AI-assistance disclosure is deferred to the
+% camera-ready Acknowledgments (and/or an OpenReview AI-disclosure field) -- see end of file.
+% Compile on the Overleaf "Springer Nature LNCS" template. Keep compare_premium.pdf next to this .tex.
+% Submit with the draft poster (poster.pdf).
+% CAMERA-READY (if accepted): restore the author block + add an Acknowledgments section with advisor
+% thanks AND the AI-assistance disclosure -- all omitted here for double-blind review.
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}    % Type-1 CM (same LNCS typeface) -> clean text extraction, no Type-3 fonts
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\title{Language-Conditioned QAOA for Portfolio Selection: A Bias-Controlled Study Reveals a
+Training-Horizon Confound}
+\titlerunning{Language-Conditioned QAOA: A Training-Horizon Confound}
+\author{Anonymous Author(s)}
+\authorrunning{Anonymous}
+\institute{Affiliation withheld for double-blind review}
+\maketitle
+
+\begin{abstract}
+We introduce \emph{language-conditioned} QAOA: a pipeline in which a large language model (LLM) reads
+financial news and emits per-asset convictions that tilt the cost Hamiltonian of a cardinality-constrained
+Quantum Approximate Optimization Algorithm (QAOA) portfolio optimizer. We then ask, with strong bias
+controls, whether the language adds out-of-sample value.
+It appears to: an LLM released during the evaluation window (qwen2.5-14B, Sept.\ 2024) beats
+matched random tilts by $+0.76\%$/quarter on changed-optimum instances. But a \emph{genuinely out-of-sample} LLM
+(Llama~2, cutoff Sept.\ 2022) on the \emph{same} headlines yields $-0.23\%$ ($p=0.94$, indistinguishable
+from random): the benefit appears only for the model released into the test period---consistent
+with \emph{training-horizon hindsight} rather than prediction (the pre-cutoff model is also smaller, a
+caveat we note). We contribute the language$\to$quantum conditioning pipeline, a reusable bias-control
+template, and a quantified training-horizon look-ahead warning for LLM-for-finance evaluation.
+\keywords{QAOA \and Quantum optimization \and LLM-conditioning \and Look-ahead bias \and Quantum finance.}
+\end{abstract}
+
+\section{Pipeline and Method}
+Two lines straddle a gap: Lee et al.~\cite{lee2025llmbl} drive Black--Litterman views
+with an LLM but optimize \emph{classically}, while Chen et al.~\cite{chen2023qbl} bring numerically
+predicted views into a \emph{quantum} pipeline with no natural language. We occupy the middle---an LLM's
+language conditions the quantum optimizer---and treat ``do news views help?'' as a
+\emph{measurement problem}. Holding $B$ of $n$ assets to maximize the mean--variance objective
+$\mu^\top x - q\,x^\top\Sigma x$ over a fixed Dow-30 universe (current, not point-in-time, constituents;
+CRSP returns; shrinkage covariance), we map this binary selection to a diagonal Ising Hamiltonian solved
+by QAOA~\cite{farhi2014qaoa}. A local LLM reads RavenPack news headlines time-stamped \emph{strictly before}
+each quarterly decision date into convictions $v_i\in[-1,1]$; a $\pm10\%$ view tilts $\mu\to\mu+s\,v$ (the
+standard sentiment-to-view convention), estimated on the train window and evaluated on the held-out next
+quarter. Bias controls: hundreds of (subset $\times$ window) instances from a fixed
+seed, pre-registered metrics, a matched-random-tilt \emph{placebo}, an off-the-shelf-sentiment (RavenPack
+ESS) ablation, and---decisively---two LLMs on the \emph{same} headlines: \textbf{qwen2.5-14B} (released
+Sept.\ 2024, training plausibly \emph{spans} the window) and \textbf{Llama~2} (documented pretraining
+cutoff Sept.\ 2022, \emph{before} it).
+The language effect is read at the exact optimum, free of optimizer noise.
+
+\section{Results}
+\begin{figure}[t]\centering
+\includegraphics[width=0.34\textwidth]{compare_premium.pdf}
+\caption{Out-of-sample premium over matched random tilts: a training-overlapping LLM (qwen2.5-14B)
+vs.\ a pre-cutoff LLM (Llama~2) on identical headlines.}
+\label{fig:main}
+\end{figure}
+Over 1{,}600 instances (Dow~30, $n{=}14$ qubits, hold~5, four quarterly dates 2023-12--2024-09), the
+training-overlapping LLM beats matched random tilts by a language-specific premium of $+0.76\%$/quarter
+on changed-optimum instances (instance-level $p\!\approx\!0$, positive in 3/4 quarters); the pre-cutoff
+LLM, on identical headlines, yields $-0.23\%$ ($p=0.94$, 2/4)---indistinguishable from random
+(Fig.~\ref{fig:main}). The conditioning has real
+mechanism leverage (a $\pm10\%$ view changes the
+exact optimum in $47$--$68\%$ of instances), yet QAOA at depth $p{=}4$ recovers the true optimum only
+$7.7\%$ of the time; we make no quantum-advantage claim. Limitations: four decision dates (instance-level
+$p$ is pseudo-replicated); the clean and contaminated LLMs differ in capability as well as cutoff, so the
+two are not fully separated; small-$n$ simulation; fixed-membership large-cap US; no costs. None overturn the takeaway: an
+LLM whose training overlaps the backtest can manufacture out-of-sample ``alpha'' that a pre-cutoff model
+does not---a look-ahead that LLM-for-finance studies must guard against by dating their model against the
+evaluation window. Fixed seeds; code released upon publication.
+
+% DOUBLE-BLIND: Acknowledgments section omitted per the CFP (no acknowledgments in the blind PDF).
+% CAMERA-READY must add an Acknowledgments section with (a) the mandated AI-assistance disclosure
+% [\cite{anthropic2026claude}] and (b) advisor thanks. If OpenReview exposes an AI-disclosure/ethics
+% field, the AI-use statement can also be recorded there for the blind submission.
+
+\bibliographystyle{splncs04}
+\bibliography{references}
+\end{document}

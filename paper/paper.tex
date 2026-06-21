@@ -1,0 +1,173 @@
+% QNLPAI 2026 — SHORT PAPER (4 pages max, excl. references + appendix).
+% Springer LNCS. Compile on Overleaf with the "Springer Nature LNCS" template
+% (provides llncs.cls + splncs04.bst). Body kept to 4 pages; 3 supporting
+% figures live in the appendix (allowed as additional pages).
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% numbers emitted by paper/experiments.py (results.json)
+\newcommand{\Popt}{0.63}
+\newcommand{\Conc}{10.0}
+\newcommand{\AR}{0.92}
+\newcommand{\ARd}{0.93}
+\newcommand{\Poptd}{0.75}
+\newcommand{\Puniform}{0.0625}
+\newcommand{\TailErr}{0.07}
+
+\begin{document}
+
+\title{Watching Language Steer a Quantum Optimizer: State-Evolution Visualization of
+LLM-Conditioned QAOA for Cardinality-Constrained Portfolio Selection}
+\titlerunning{Watching Language Steer a Quantum Optimizer}
+
+\author{Pradyot Bathuri\inst{1}}              % add \orcidID{...} if your LNCS template version supports it
+\authorrunning{P. Bathuri}
+\institute{Indiana University, Bloomington, USA \\ \email{pbathuri@iu.edu}}
+
+\maketitle
+
+\begin{abstract}
+Variational quantum optimizers such as QAOA are usually judged by a single scalar---the approximation
+ratio---which hides \emph{how} the quantum state reaches its answer and leaves no room for the
+qualitative, language-shaped views that drive real financial decisions. We present a fully
+state-resolved, IBM-Qiskit implementation of the quantum core of QLPC, a personalized portfolio
+constructor. First, we expose the \emph{evolution of the quantum state} through every QAOA layer of a
+cardinality-constrained Markowitz problem, showing probability mass migrate from a uniform superposition
+onto the optimal portfolio (P(optimum) $=\Puniform\to\Popt$ at depth $p{=}2$, a $\Conc\times$
+concentration). Second, we introduce \emph{language-conditioned QAOA}: an LLM-extracted natural-language
+view is encoded as a tilt on expected returns, deforming the cost Hamiltonian and visibly
+re-concentrating the quantum ground state on a different portfolio as conviction rises. We pair the
+optimizer with an Iterative Quantum Amplitude Estimation circuit reproducing the Woerner--Egger tail/CVaR
+primitive. All experiments are exact on the statevector simulator with fixed seeds, giving a transparent,
+auditable bridge between language, quantum optimization, and finance.
+\keywords{QAOA \and Quantum optimization \and Portfolio selection \and Amplitude estimation \and
+LLM-conditioning \and Quantum finance.}
+\end{abstract}
+
+\section{Introduction}
+Quantum finance has focused on two kernels classical convex solvers handle poorly: discrete,
+cardinality-constrained \emph{selection}, attacked with QAOA~\cite{farhi2014qaoa}, and \emph{tail-risk
+estimation}, where amplitude estimation gives a quadratic sampling advantage over Monte-Carlo
+\cite{brassard2002amplitude,woerner2019risk,egger2020finance}. Two gaps persist. (i)~These optimizers are
+reported as black boxes---a bitstring and a ratio---with no view of the \emph{state evolution} that
+produced them, unhelpful where ``no room for error'' demands an auditable process. (ii)~Real allocation
+is driven by \emph{language}---theses, filings, news---which has no natural port into a QUBO.
+
+We close both gaps with an instrumented re-implementation of the quantum core of QLPC (Quantum--LLM
+Personalized portfolio Constructor). Our contributions are: (1)~\textbf{state-evolution visualization} of
+QAOA portfolio selection, snapshotting the full statevector after every layer and quantifying
+concentration on the optimum; (2)~\textbf{language-conditioned QAOA}, where an LLM conviction vector
+reshapes the Ising cost Hamiltonian and the quantum ground state migrates continuously with linguistic
+conviction; and (3)~a \textbf{reproducible IQAE risk replication}. All results are exact on small,
+well-separated instances with fixed seeds.
+
+\section{Method}
+\paragraph{Selection as an Ising Hamiltonian.}
+Holding exactly $B$ of $n$ assets to maximize $f(x)=\mu^\top x - q\,x^\top\Sigma x$, $x\in\{0,1\}^n$
+\cite{markowitz1952}, we minimize $C(x) = -\mu^\top x + q\,x^\top \Sigma x + P(\sum_i x_i - B)^2$ and
+substitute $x_i=(1-z_i)/2$ to obtain a diagonal Ising Hamiltonian $H_C$ over $I,Z_i,Z_iZ_j$ terms. The
+penalty $P$ is set \emph{just} above the largest marginal objective gain of adding or removing one asset:
+over-penalizing creates a near-degenerate feasible band that shallow QAOA cannot resolve, hiding the
+objective gradient from the optimizer.
+
+\paragraph{QAOA and state snapshots.}
+We prepare $|+\rangle^{n}$ and apply, per layer, $e^{-i\gamma_k H_C}$ then the transverse-field mixer
+$e^{-i\beta_k\sum_j X_j}$. As $H_C$ is diagonal, the Trotterized \texttt{PauliEvolutionGate} (Qiskit
+2.x~\cite{qiskit2024}) is exact.
+Angles are trained by COBYLA with multiple random restarts (the standard defense against QAOA's
+non-convex angle landscape); we then recompute the statevector incrementally, recording $|\psi|^2$ after
+each layer.
+
+\paragraph{Language conditioning (the QNLP bridge).}
+The LLM emits a signed per-asset conviction $v_i\in[-1,1]$ from natural-language views; we tilt
+$\mu\to\mu+s\,v$, echoing Black--Litterman view-blending~\cite{black1992litterman} but routed into the
+\emph{quantum} cost Hamiltonian. Changing the language changes $H_C$ and hence the ground state. For
+risk, following~\cite{woerner2019risk,grant2021iqae}, we discretize the loss onto $m$ qubits, load
+$\sqrt{\mathrm{pmf}}$, flag the tail above VaR with an \texttt{IntegerComparator}, and estimate
+$P(\mathrm{loss}\ge\mathrm{VaR})$ by IQAE at $O(1/\varepsilon)$ vs.\ $O(1/\varepsilon^2)$ scaling;
+CVaR (expected shortfall~\cite{rockafellar2000cvar}) follows from the loaded distribution.
+
+\section{Results}
+All numbers are emitted by \texttt{paper/experiments.py}; the demo is a well-separated 4-asset instance
+($B{=}2$). Supporting figures (depth, optimizer trace, risk) are in the appendix.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\textwidth]{figures/fig1_state_evolution.png}
+\caption{State evolution: probability over all $2^n$ candidate selections from the uniform superposition
+(top) onto the optimal feasible portfolio (gold, \texttt{1100}$=\{$A,B$\}$) across QAOA layers ($p{=}2$).}
+\label{fig:evo}
+\end{figure}
+
+\paragraph{The state concentrates on the optimum (Fig.~\ref{fig:evo}).}
+The output evolves from uniform (P(opt)$=\Puniform$; layers $0.062\!\to\!0.25\!\to\!\Popt$) to a sharp
+peak on the optimum at $p{=}2$: P(opt)$=\Popt$ ($\Conc\times$ a uniform guess), approximation ratio
+$\AR$, with best-sample recovery of the exact optimum. Depth $p{=}1$ is insufficient (AR $0.50$);
+$p{=}2$ already cracks the instance and $p{=}4$ sharpens it (P(opt)$=\Poptd$, AR $\ARd$; Fig.~\ref{fig:depth}).
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.92\textwidth]{figures/fig4_language.png}
+\caption{Language steers the optimizer: as LLM conviction on the lower-return pair rises, the optimum
+migrates $\{$A,B$\}\!\to\!\{$A,C$\}\!\to\!\{$C,D$\}$ and the QAOA modal selection (\,$\star$\,) tracks it.}
+\label{fig:lang}
+\end{figure}
+
+\paragraph{Language steers the ground state (Fig.~\ref{fig:lang}).}
+From the neutral optimum $\{$A,B$\}$, a graded LLM bullish view migrates the exact optimum
+$\{$A,B$\}\!\to\!\{$A,C$\}\!\to\!\{$C,D$\}$, and the QAOA modal selection tracks it in all three regimes
+(approximation ratios $0.92/0.92/0.85$). Concentration is naturally lower under a strong view
+(P(opt)$\,{\approx}\,0.16$--$0.19$) because the tilt creates near-ties among portfolios---an honest
+reflection of real ambiguity, not optimizer failure. To our knowledge this is the first demonstration of
+a natural-language view visibly deforming the state evolution of a quantum portfolio optimizer.
+
+\paragraph{Risk replication.}
+The IQAE circuit loads a fat-tailed (Student-$t$) loss onto 5 qubits at $\alpha{=}0.95$. The
+quantum-estimated quantity is the tail-exceedance probability $P(\mathrm{loss}\ge\mathrm{VaR})$, which
+IQAE recovers to within $\TailErr\%$ of the loaded distribution (Fig.~\ref{fig:risk}); CVaR then follows
+from that distribution, reproducing the Woerner--Egger primitive.
+
+\section{Related Work, Limitations, and Conclusion}
+Our core is QAOA~\cite{farhi2014qaoa}; the CVaR-objective variational idea is~\cite{barkoutsos2020cvar};
+the risk circuit replicates~\cite{woerner2019risk} with the IQAE estimator of~\cite{grant2021iqae}, in the
+lineage of quantum option pricing~\cite{stamatopoulos2020option} and the IBM survey~\cite{egger2020finance}.
+QNLP~\cite{coecke2010dispho,lorenz2023qnlp} motivates language as a first-class quantum input; we differ
+by routing \emph{LLM-derived} views into a finance optimizer's Hamiltonian and foregrounding
+\emph{visualization}. \textbf{Limitations:} results are on small ($n{=}4$--$8$), well-separated,
+exactly-simulated instances; we make no scaling or supremacy claim (brute force is our oracle), the
+language tilt is a simple additive mechanism, and the IQAE advantage is asymptotic in $\varepsilon$.
+\textbf{Conclusion:} making a quantum optimizer's state evolution visible---and showing language steer
+it---offers an auditable template for high-stakes quantum finance and a concrete QNLP $\times$
+quantum-optimization use case, reproducible from \texttt{python -m paper.experiments}.
+
+\begin{credits}
+\subsubsection{\ackname} Built on the QLPC project. The authors used a coding assistant for
+implementation and figure generation; all results are reproducible from the released code.
+\subsubsection{\discintname} The authors have no competing interests to declare.
+\end{credits}
+
+\bibliographystyle{splncs04}
+\bibliography{references}
+
+\newpage
+\appendix
+\section{Supporting Figures}
+\begin{figure}[h]\centering
+\includegraphics[width=0.78\textwidth]{figures/fig2_depth.png}
+\caption{Approximation ratio and P(optimum) rise with QAOA depth $p$.}\label{fig:depth}
+\end{figure}
+\begin{figure}[h]\centering
+\includegraphics[width=\textwidth]{figures/fig3_process.png}
+\caption{The optimizer's working process: COBYLA cost-expectation $\langle H_C\rangle$ descent (left) and
+per-layer single-qubit entanglement entropy, which builds then localizes (right).}\label{fig:proc}
+\end{figure}
+\begin{figure}[h]\centering
+\includegraphics[width=\textwidth]{figures/fig5_risk.png}
+\caption{IQAE risk: the loss distribution loaded into a 5-qubit register with the VaR threshold (left),
+and quantum vs.\ classical tail probability and CVaR (right).}\label{fig:risk}
+\end{figure}
+
+\end{document}

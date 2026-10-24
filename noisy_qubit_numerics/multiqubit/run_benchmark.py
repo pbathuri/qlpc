@@ -158,7 +158,7 @@ def main():
     (ROOT/'data/benchmark.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
     np.savez_compressed(ROOT/'data/trials.npz',**saved)
     with (ROOT/'data/all_results.csv').open('w',newline='') as f:
-        writer=csv.writer(f);writer.writerow(['case','qubits','time','steps','observable','method','target_digital','target_continuous','population_estimate','bias','rmse','rmse_continuous','ratio_raw','undefined','outside_range','cz_gate_shots'])
+        writer=csv.writer(f, lineterminator='\n');writer.writerow(['case','qubits','time','steps','observable','method','target_digital','target_continuous','population_estimate','bias','rmse','rmse_continuous','ratio_raw','undefined','outside_range','cz_gate_shots'])
         for row in rows:
             for o in row['observables']:
                 for method,s in o['methods'].items():

@@ -1,0 +1,20 @@
+{
+  "qiskit_aer_version": "0.18.0",
+  "qiskit_version": "2.6.0",
+  "qlpc_baseline": {
+    "alpha": 0.07,
+    "beta": 0.12,
+    "depolarizing_parameter": 0.02,
+    "p_after_depolarizing": 0.32244470030642997,
+    "p_ideal": 0.31882112276166324,
+    "readout_expected": 0.3311802072482083,
+    "readout_sampled": 0.33134,
+    "ry_angle_radians": 1.2,
+    "seed_simulator": 20261024,
+    "shots": 200000,
+    "standard_errors_from_expected": 0.1518396969774707
+  },
+  "status": "passed",
+  "strang_channel_comparisons": 138,
+  "strang_max_trace_error": 4.1427707167972856e-14
+}

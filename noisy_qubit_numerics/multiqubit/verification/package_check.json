@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "date": "2026-10-24",
+  "single_qubit_tests": 20,
+  "multiqubit_tests": 18,
+  "commands": [
+    {
+      "command": "python -m unittest discover -p test_*.py",
+      "folder": ".",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m unittest discover -p test_*.py",
+      "folder": "multiqubit",
+      "exit_code": 0
+    },
+    {
+      "command": "python generate_distributions.py",
+      "folder": "multiqubit",
+      "exit_code": 0
+    },
+    {
+      "command": "python run_benchmark.py",
+      "folder": "multiqubit",
+      "exit_code": 0
+    },
+    {
+      "command": "python plot_benchmark.py",
+      "folder": "multiqubit",
+      "exit_code": 0
+    }
+  ],
+  "fixed_circuit_cases": 27,
+  "observables_per_case": 2,
+  "synthetic_replicates_per_case": 500,
+  "pdf_pages": 3,
+  "regeneration_max_absolute_differences": {
+    "distributions.npz": 0.0,
+    "trials.npz": 0.0
+  },
+  "all_summary_metrics_match": true,
+  "figures_regenerated": 3,
+  "analysis_versions": {
+    "numpy": "2.4.5",
+    "scipy": "1.17.1"
+  },
+  "reproducibility_note": "Separate pinned simulator and analysis environments are required for exact seeded shot reproduction. NumPy2.5 and2.4 multinomial streams differ."
+}

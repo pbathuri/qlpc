@@ -1,0 +1,22 @@
+{
+  "score": 95,
+  "verdict": "pass",
+  "category_match": true,
+  "differences": [],
+  "suggestions": [],
+  "reasoning": "All three figures inspected. Axes, units, references and source caveats are readable; no legend hides data. All 54 case-observables and 38 quadratic-versus-linear failures retained.",
+  "figures": [
+    "mitigation_overview.png",
+    "depth_tradeoff.png",
+    "selective_extrapolation.png"
+  ],
+  "checks": [
+    "Explicit dimensionless axes and fixed time units",
+    "32,768 total shots including calibration noted",
+    "CZ gate-shot cost differences noted",
+    "Dated Aer simulation clearly distinguished from live hardware",
+    "Population curves have no sampling error bars",
+    "CZ-noise-off diagnostic excluded from fits",
+    "Four plotted fit intercepts agree with saved benchmark within 1e-12"
+  ]
+}

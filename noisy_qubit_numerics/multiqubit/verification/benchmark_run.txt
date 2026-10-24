@@ -1,0 +1,104 @@
+case 1/27: n=4, t=0.5, steps=2
+case 2/27: n=4, t=0.5, steps=4
+case 3/27: n=4, t=0.5, steps=8
+case 4/27: n=4, t=1.0, steps=2
+case 5/27: n=4, t=1.0, steps=4
+case 6/27: n=4, t=1.0, steps=8
+case 7/27: n=4, t=1.5, steps=2
+case 8/27: n=4, t=1.5, steps=4
+case 9/27: n=4, t=1.5, steps=8
+case 10/27: n=6, t=0.5, steps=2
+case 11/27: n=6, t=0.5, steps=4
+case 12/27: n=6, t=0.5, steps=8
+case 13/27: n=6, t=1.0, steps=2
+case 14/27: n=6, t=1.0, steps=4
+case 15/27: n=6, t=1.0, steps=8
+case 16/27: n=6, t=1.5, steps=2
+case 17/27: n=6, t=1.5, steps=4
+case 18/27: n=6, t=1.5, steps=8
+case 19/27: n=8, t=0.5, steps=2
+case 20/27: n=8, t=0.5, steps=4
+case 21/27: n=8, t=0.5, steps=8
+case 22/27: n=8, t=1.0, steps=2
+case 23/27: n=8, t=1.0, steps=4
+case 24/27: n=8, t=1.0, steps=8
+case 25/27: n=8, t=1.5, steps=2
+case 26/27: n=8, t=1.5, steps=4
+case 27/27: n=8, t=1.5, steps=8
+{
+  "raw": {
+    "undefined_estimate_count": 0,
+    "pooled_rmse": 0.14390175542805628,
+    "pooled_rmse_vs_continuous": 0.12091549866307083,
+    "case_observables_better_than_raw": 0,
+    "case_observables_worse_than_raw": 0,
+    "outside_physical_range_count": 0,
+    "pooled_rmse_ratio_vs_raw": 1.0,
+    "pooled_rmse_ratio_bootstrap_95": [
+      1.0,
+      1.0
+    ],
+    "worse_than_readout_count": 54,
+    "worse_than_combined_linear_count": 54
+  },
+  "readout": {
+    "undefined_estimate_count": 0,
+    "pooled_rmse": 0.036832502597871096,
+    "pooled_rmse_vs_continuous": 0.0676263188782549,
+    "case_observables_better_than_raw": 54,
+    "case_observables_worse_than_raw": 0,
+    "outside_physical_range_count": 0,
+    "pooled_rmse_ratio_vs_raw": 0.2559558949667262,
+    "pooled_rmse_ratio_bootstrap_95": [
+      0.25533107358845725,
+      0.25669191970671434
+    ],
+    "worse_than_readout_count": 0,
+    "worse_than_combined_linear_count": 54
+  },
+  "zne_linear": {
+    "undefined_estimate_count": 0,
+    "pooled_rmse": 0.1285087689270488,
+    "pooled_rmse_vs_continuous": 0.10714584312425819,
+    "case_observables_better_than_raw": 54,
+    "case_observables_worse_than_raw": 0,
+    "outside_physical_range_count": 0,
+    "pooled_rmse_ratio_vs_raw": 0.8930312805759815,
+    "pooled_rmse_ratio_bootstrap_95": [
+      0.8925158357313498,
+      0.8935559298770875
+    ],
+    "worse_than_readout_count": 54,
+    "worse_than_combined_linear_count": 54
+  },
+  "readout_zne_linear": {
+    "undefined_estimate_count": 0,
+    "pooled_rmse": 0.017972240845999028,
+    "pooled_rmse_vs_continuous": 0.068715002058123,
+    "case_observables_better_than_raw": 54,
+    "case_observables_worse_than_raw": 0,
+    "outside_physical_range_count": 0,
+    "pooled_rmse_ratio_vs_raw": 0.12489243645804067,
+    "pooled_rmse_ratio_bootstrap_95": [
+      0.12403471155578315,
+      0.12578629378181228
+    ],
+    "worse_than_readout_count": 0,
+    "worse_than_combined_linear_count": 0
+  },
+  "readout_zne_quadratic": {
+    "undefined_estimate_count": 0,
+    "pooled_rmse": 0.01694761436891988,
+    "pooled_rmse_vs_continuous": 0.06971627386721906,
+    "case_observables_better_than_raw": 54,
+    "case_observables_worse_than_raw": 0,
+    "outside_physical_range_count": 0,
+    "pooled_rmse_ratio_vs_raw": 0.11777211694538949,
+    "pooled_rmse_ratio_bootstrap_95": [
+      0.11648269311059693,
+      0.11900561486167278
+    ],
+    "worse_than_readout_count": 12,
+    "worse_than_combined_linear_count": 38
+  }
+}

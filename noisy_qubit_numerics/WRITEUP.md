@@ -1,5 +1,5 @@
 ---
-title: "A noisy qubit as a numerical evolution and inverse problem"
+title: "Multi-qubit noise mitigation at equal shot budgets"
 author: "Pradyot Bathuri"
 date: "24 October 2026"
 fontsize: 10pt
@@ -14,99 +14,88 @@ header-includes: |
   \setlength{\parskip}{4pt}
 ---
 
-## 1. Approximate the evolution without losing the state
+## 1. A calibrated circuit experiment with explicit targets
 
-This example asks when a numerical approximation and a subsequent noise correction can be trusted. It extends the one-qubit readout experiment in my earlier QLPC code into two explicit problems: integrating a noisy quantum evolution, and recovering a probability from imperfect measurements. The methods are established; no novelty, hardware performance or quantum speedup is claimed. **All observations are simulated with synthetic parameters.** They describe a physically motivated model, not a calibrated device or a quantum error-correcting code.
+I compare readout correction and zero-noise extrapolation on entangling 4-, 6- and 8-qubit circuits, accounting for calibration shots. The numerical question is whether correcting physical noise improves an estimate once approximation error and statistical amplification are included. **These are Qiskit Aer simulations of IBM Kingston's 15 April 2026 calibration snapshot, not live hardware experiments.** The methods are established; this study makes no novelty, scalability or quantum-advantage claim.
 
-Starting in $\rho(0)=|0\rangle\langle0|$, evolve a driven qubit for $10\,\mu\mathrm{s}$:
-
-$$
-\dot\rho=-i[H,\rho]+\sum_j\left(C_j\rho C_j^\dagger-\tfrac12\{C_j^\dagger C_j,\rho\}\right),
-\qquad H=\tfrac12(\Omega X+\Delta Z).
-$$
-
-Here $\Omega=0.6$, $\Delta=0.2$ in radians per microsecond; $X,Z$ are Pauli matrices. Zero-temperature relaxation has $T_1=50\,\mu\mathrm{s}$ and transverse decay $T_2=40\,\mu\mathrm{s}$, with
+The problem is an open transverse-field Ising chain, initially $|0\cdots0\rangle$, with $\hbar=1$:
 
 $$
-C_1=\sqrt{1/T_1}\,|0\rangle\langle1|,\qquad
-C_\phi=\sqrt{\gamma_\phi/2}\,Z,\qquad
-\gamma_\phi=1/T_2-1/(2T_1)=0.015\,\mu\mathrm{s}^{-1}.
+H=H_{ZZ}+H_X=\sum_{j=0}^{n-2}Z_jZ_{j+1}+0.7\sum_{j=0}^{n-1}X_j,
+\qquad
+S_2(\Delta)=e^{-i\Delta H_X/2}e^{-i\Delta H_{ZZ}}e^{-i\Delta H_X/2}.
 $$
 
-This assumes constant Hamiltonian and Markovian relaxation/dephasing. The relation $T_2\le2T_1$ is enforced. The reference is the exponential of the column-vectorized $4\times4$ Lindblad generator. An independently assembled affine Bloch formulation agrees within $2.30\times10^{-14}$ in half trace norm; it shares SciPy's exponential routine. A separate DOP853 integration agrees at the final time within $1.65\times10^{-13}$. These are floating-point cross-checks, not interval-arithmetic certificates or experimental validation of the noise model.
+I use $n\in\{4,6,8\}$, model times $T\in\{0.5,1,1.5\}$ in units $1/J$, and $s\in\{2,4,8\}$ product-formula steps, $\Delta=T/s$. These are 27 fixed cases, each with two observables: mean $Z$ magnetization and mean adjacent $ZZ$ correlation, both bounded by $[-1,1]$. Model time is distinct from hardware gate duration. The **primary mitigation target** is the ideal digital circuit $S_2(T/s)^s$; exact Hamiltonian evolution $e^{-iTH}$ is a separate reference for product-formula error. No fit or case is selected for its favorable result.
 
-Compare forward Euler, classical RK4 and Strang splitting. Strang composes an exact unitary half-step, the exact dissipative step, and another unitary half-step. For this model the relaxation/dephasing subchannels commute; each substep is completely positive and trace preserving. Euler and RK4 receive no clipping, projection or renormalization. Let $E_n=\tfrac12\|\rho_n-\rho_{\rm ref}\|_1$; the observed order is $\log_2(E_{n/2}/E_n)$.
+I map the circuits to physical qubits $0,1,\ldots,7$, using prefixes for smaller registers. This is the lexicographically first connected calibrated path passing the stated operational checks, selected before examining mitigation outcomes. The frozen model includes native-gate depolarization and thermal relaxation, gate durations, $T_1/T_2$, and independent directional readout errors. Source calibration files and the remapped model are hashed. Qubit 1 has substantial assignment errors: $P(1|0)=0.23022461$ and $P(0|1)=0.10620117$. Every case includes this site, so gains over raw data are partly readout-dominated and are not independent confirmations across devices.
 
-| Method | $E_{640}$ at $h=0.015625\,\mu\mathrm{s}$ | Observed order | Minimum eigenvalue over trajectory |
-| :--- | ---: | ---: | ---: |
-| Euler | 0.01200669 | 1.022924 | -0.000675529 |
-| RK4 | $1.903305\times10^{-10}$ | 4.000467 | 0 |
-| Strang | $1.362565\times10^{-8}$ | 2.000012 | 0 |
+For readout correction, I estimate each local assignment matrix from all-zero and all-one calibration circuits, with noisy $X$ preparation included. The factorized inverse estimates $Z_j$ as $(z_j-(\widehat e_{1j}-\widehat e_{0j}))/\widehat g_j$, where $\widehat g_j=1-\widehat e_{0j}-\widehat e_{1j}$; adjacent products give $ZZ$. This matches the model's independent readout assumption, but calibration preparation error can bias the inverse. It is not an implementation of M3's matrix-free algorithm.
 
-Source: `data/results.json`; all errors/eigenvalues are dimensionless. The minima include the initially pure state. RK4 stays physical on this sweep, but has no general positivity guarantee; Strang preserves positivity by construction, up to floating-point error.
+For extrapolation, each compiled native CZ is replaced by 1, 3 or 5 copies, separated by barriers. CZ squares to the identity, so the ideal computation is unchanged. Non-CZ operations and qubit mapping are fixed. **Only CZ noise is amplified**: the extrapolated intercept need not remove one-qubit or preparation noise. For fold means $y_1,y_3,y_5$, the fixed linear least-squares and quadratic intercepts are
 
-The Euler stability limit for the generator's decaying modes is $h<0.11360509\,\mu\mathrm{s}$. At 640 steps its decaying-mode amplification radius is $0.99969337$, yet negative state eigenvalues remain. **Linear stability alone does not ensure a physical density matrix.** At five steps, the retained minimum eigenvalue is $-4.22534038$. The noisy final population is $0.09320338$ versus the noiseless $0.00038503$: refining a solver removes neither this physical-noise shift nor measurement noise.
+$$
+\widehat y_{L}=\tfrac{13}{12}y_1+\tfrac13y_3-\tfrac5{12}y_5,
+\qquad
+\widehat y_{Q}=\tfrac{15}{8}y_1-\tfrac54y_3+\tfrac38y_5.
+$$
 
-Figures `dynamics.png` and `convergence.png`: population trajectories, convergence and positivity failures; source `data/results.json`, 24 October 2026, synthetic simulation.
+Each protocol receives **32,768 total shots**, including calibration when used. Both observables share the same measured bitstrings. Equal shots do not imply equal circuit-execution cost:
+
+| Protocol | Calibration shots | Measurement shots at folds (1,3,5) | CZ gate-shot cost / raw |
+| :--- | ---: | :--- | ---: |
+| Raw | 0 | (32768, 0, 0) | 1.000 |
+| Readout correction | 4096 | (28672, 0, 0) | 0.875 |
+| Linear ZNE | 0 | (10923, 10923, 10922) | 3.000 |
+| Readout + linear ZNE | 4096 | (9558, 9557, 9557) | 2.625 |
+| Readout + quadratic ZNE | 4096 | (9558, 9557, 9557) | 2.625 |
+
+Calibration uses 2,048 shots per preparation circuit, not per qubit. The unfolded circuits have 12-112 CZ gates; the largest folded circuit has 560. Gate counts, budgets and model details are saved in `multiqubit/data/`.
 
 \newpage
 
-## 2. Readout correction is an uncertain inverse problem
+## 2. Error reduction and the failures it can conceal
 
-Let $p$ denote the population **after physical evolution, before readout**. With $e_0=P(\text{report }1\mid0)$, $e_1=P(\text{report }0\mid1)$ and $g=1-e_0-e_1>0$,
+For each fixed circuit I generate 500 independent synthetic shot/calibration replicates from its saved density-matrix distributions. Nested shot prefixes couple methods for paired comparisons; each corrected method is still charged its full calibration cost, and a replicate's calibration is shared across its folds. These are statistical resamples of a fixed simulator model, not repeated hardware jobs. Pooled RMSE gives equal weight to all 27 cases and both observables. The 1,000-replicate bootstrap resamples rows within each fixed case while preserving method/observable dependence; its intervals describe conditional sampling uncertainty, not uncertainty in the noise model or simultaneous per-case coverage.
 
-$$
-q=e_0+gp,\qquad \widehat p=\frac{\widehat q-\widehat e_0}{\widehat g},
-\qquad \widehat g=1-\widehat e_0-\widehat e_1.
-$$
+| Protocol | Pooled RMSE vs digital target | RMSE / raw (95% bootstrap) | Pooled RMSE vs exact Hamiltonian |
+| :--- | ---: | :--- | ---: |
+| Raw | 0.143902 | 1.0000 | 0.120915 |
+| Readout correction | 0.036833 | 0.2560 [0.2553, 0.2567] | 0.067626 |
+| Linear ZNE | 0.128509 | 0.8930 [0.8925, 0.8936] | 0.107146 |
+| Readout + linear ZNE | 0.017972 | 0.1249 [0.1240, 0.1258] | 0.068715 |
+| Readout + quadratic ZNE | 0.016948 | 0.1178 [0.1165, 0.1190] | 0.069716 |
 
-The original QLPC example used $R_y(1.2)$, depolarization $\rho\mapsto0.98\rho+0.02I/2$, and readout errors $(e_0,e_1)=(0.07,0.12)$. Its ideal population is $0.31882112$, the depolarized population $0.32244470$, and the expected recorded frequency $0.33118021$. Perfect readout correction recovers $0.32244470$, leaving gate bias $0.00362358$. This package implements the transparent two-state inverse directly; it does **not** claim to run or benchmark M3, which the earlier demo called.
+Source: `multiqubit/data/benchmark.json`; all errors are dimensionless observable errors. All four mitigated protocols beat raw on the primary target in all 54 case-observable comparisons, for this path and snapshot. The quadratic combined method has the lowest pooled RMSE, but **is worse than the linear combined method in 38 of 54 comparisons**, and worse than readout-only in 12. Its negative extrapolation weights amplify sampling error. No undefined inversions or estimates outside $[-1,1]$ occurred here; the implementation reports them if they occur rather than clipping or silently omitting them.
 
-For each of five cases, run 5,000 independent complete experiments. Each uses $N=8,192$ measurement shots and $K=8,192$ calibration shots for **each** ideally prepared basis state: 24,576 shots total. Calibration is redrawn each trial. The comparison below gives the raw estimator the same total budget. All sampling uses physical reference probabilities, never an invalid Euler iterate. Point estimates outside $[0,1]$ are retained; exact zero denominators are reported as undefined, not discarded silently.
+A concrete retained failure is 4 qubits, $T=1$, 4 steps, mean $Z$: combined linear RMSE is $0.00924705$, while quadratic is $0.01472156$. Their ratio is $1.5920$ with paired bootstrap interval $[1.4898,1.7102]$. This case illustrates why a higher-order fit is not automatically better. The quadratic fit has three parameters and three points: it has no residual degrees of freedom, so residual-based fit confidence intervals would be inappropriate.
 
-An a priori confidence construction separates sampling from inversion. For failure probability $\delta=0.05$, allocate $\delta/3$ to each of $\widehat q,\widehat e_0,\widehat e_1$. [Hoeffding's inequality](https://www.tandfonline.com/doi/abs/10.1080/01621459.1963.10500830) gives radii
+![Equal-shot mitigation results and all quadratic-versus-linear comparisons](multiqubit/figures/mitigation_overview.png)
 
-$$
-r_N=\sqrt{\frac{\log(6/\delta)}{2N}},\qquad
-r_K=\sqrt{\frac{\log(6/\delta)}{2K}};
-\qquad r_N=r_K=0.01709401.
-$$
+Figure: all 54 comparisons retained; source `multiqubit/data/benchmark.json`, 24 October 2026. Kingston 15 April 2026 calibration in Aer; no live hardware.
 
-A union bound covers all three true probabilities with probability at least $0.95$. On that event, and whenever $\widehat g\ne0$, the stable forward model gives
-
-$$
-|\widehat p-p|\le\frac{r_N+(1-p)r_K+pr_K}{|\widehat g|}
-=\frac{r_N+r_K}{|\widehat g|}.
-$$
-
-The implementation also forms the three clipped probability intervals, evaluates the inverse at **all eight vertices** if the entire box has positive $g$, and intersects the result with $[0,1]$. This avoids assuming calibration-coordinate monotonicity outside the feasible region. If positive $g$ cannot be certified, it returns flagged $[0,1]$; empty intersections remain flagged. These are conservative, per-experiment confidence sets under stable Bernoulli readout and ideal calibration preparations, not simultaneous trajectory bands or drift guarantees. Estimated calibration inversion is generally a biased ratio estimator.
-
-| Case | Target $p$ | Raw RMSE, equal budget | Corrected RMSE | Covered / 5,000 |
-| :--- | ---: | ---: | ---: | ---: |
-| Driven qubit | 0.09320338 | 0.05238117 | 0.00578784 | 5,000 |
-| QLPC baseline | 0.32244470 | 0.00922360 | 0.00702962 | 5,000 |
-| Balanced, ill-conditioned | 0.50000000 | 0.00316096 | 0.06897328 | 5,000 |
-| Boundary, ill-conditioned | 0.02000000 | 0.43197240 | 0.07838645 | 5,000 |
-| Drifted calibration | 0.32244470 | 0.05589906 | 0.05871061 | 60 |
-
-Source: `data/results.json`; RMSE is in probability units against the pre-readout target. The confidence sets apply to corrected estimates; the drift row violates their model. Every trial here has a finite, positive estimated gap. Raw counts for all 25,000 trials are saved in `data/readout_trials.npz`.
+`depth_tradeoff.png` compares all five protocols at fixed $T=1/J$: more steps add noisy gates. The CSV retains all 270 rows (bias, both RMSE targets, costs, failures); the NPZ retains every replicate estimate and calibration marginal count.
 
 \newpage
 
-## 3. Failures, scope and a question about stability
+## 3. Approximation bias, residual noise and what is verified
 
-The first two cases use stable readout errors $(0.07,0.12)$. The ill-conditioned cases use $(0.45,0.45)$, so $g=0.1$. For the balanced state $p=0.5$, raw readout is already unbiased: even **known-rate** inversion multiplies its sampling variance by $1/g^2=100$ at the same measurement-shot count. Calibration uncertainty makes the observed RMSE worse still. In the boundary case, 1,971 of 5,000 corrected estimates fall outside $[0,1]$ and are kept. The positive-gap guard is tested separately; none of these trials happened to have a singular point estimate.
+For an observable, let $y$ be the exact Hamiltonian value and $y_s$ the ideal product-formula value. The error budget is
 
-The drift case calibrates at $(0.07,0.12)$ but measures at $(0.13,0.10)$. The failure is model mismatch, not a contradiction of the confidence theorem. Only 60 of 5,000 nominal intervals cover the target (1.2%). Conversely, 5,000/5,000 observed coverage in a stable case does not establish 100% population coverage: the construction is conservative and the simulation is finite. A small corrected error in one trial cannot establish reliability.
+$$
+\widehat y-y=(\widehat y-y_s)+(y_s-y).
+$$
 
-![Readout correction: error and confidence-set coverage](figures/mitigation.png)
+Noise mitigation targets the first term. The second is an approximation error, not a readout or gate-noise error. Its largest magnitude in this grid is $0.20431447$ (8 qubits, $T=1.5$, 2 steps, mean $Z$), much larger than the best pooled mitigation error. The table's Hamiltonian column therefore changes the apparent ranking: readout-only has lower pooled error against that target than either combined ZNE method. In 14 of 54 comparisons, each readout-based protocol is worse than raw against the Hamiltonian target because raw noise partly cancels product-formula bias. This is not evidence that the noisy circuit is generally a better dynamics solver. Both targets remain visible.
 
-Figure: equal-budget RMSE and observed coverage; source `data/results.json`, 24 October 2026, synthetic qubit simulation, not hardware measurements.
+I also calculate a diagnostic with CZ errors disabled but one-qubit/readout errors retained. It is **excluded from both fits**. For 8 qubits, $T=1$, 8 steps, mean $Z$, the ideal digital value is $0.63381245$. The CZ-noise-off value after population-level readout correction is $0.62385224$; combined linear and quadratic population intercepts are $0.60541245$ and $0.62126419$. Thus even an accurate extrapolation toward this selective endpoint retains unscaled noise. These population quantities use exact model distributions and effective calibration rates; they are not finite-shot estimates.
 
-The error budget has distinct terms: numerical approximation of the chosen dynamics; physical deviation from the ideal evolution; finite-shot and calibration error in the inverse; and mismatch between calibration and operation. Readout correction addresses only the readout component. The time-stepping study addresses only discretization of the assumed model. Neither certifies an actual device, and this dense one-qubit calculation is not evidence of scalability or a quantum computational advantage.
+Figure `selective_extrapolation.png`: fixed case, no sampling error bars on population means; source `multiqubit/data/benchmark.json`, 24 October 2026. Dated Kingston calibration in Aer, not live hardware.
 
-Could stability or perturbation estimates for evolving operators give a useful criterion for choosing a time step and deciding when an uncertain correction should be trusted? Zumbrun's work on stable numerical evolution of subspaces motivates asking this, but no Evans-function connection or new method is asserted. This example supplies an inspectable initial-value problem and an inverse problem on which such a discussion can start.
+**Verification.** Eighteen multi-qubit tests pass. The remapped 38 quantum channels agree with the source channel matrices within $3.0\times10^{-15}$, and eight readout channels match the directional calibration. All 81 folded ideal states preserve the computation and exact CZ scaling; the largest compiler probability discrepancy is $6.55\times10^{-15}$. Independent Kronecker-Hamiltonian reconstruction agrees with the saved continuous reference within $3.50\times10^{-15}$. A 131,072-shot Aer check validates measurement/readout ordering. Independent recomputation reproduces all 27 cases, replicate estimates and bootstrap summaries. The frozen model, seeds, configuration, tests and verification records are included.
 
-**Verification.** Twenty unit tests pass, covering analytic limits, independently assembled references, convergence, positivity failures, inverse-map edge cases and confidence coverage. Optional Qiskit/Aer checks agree with Strang across 138 channel-state comparisons to $4.15\times10^{-14}$ in half trace norm, and independently reproduce the QLPC forward-noise model. An Aer run of 200,000 shots gives $0.33134$ versus expected $0.33118021$. The optional check fails explicitly if dependencies or comparisons fail. Saved results were independently recomputed from all recorded seeds; no failing shots or nonphysical iterates were removed.
+Two implementation details matter numerically. BackendV2's default averaged readout errors are replaced by the snapshot's directional assignment probabilities. Also, equivalent consolidated channel representations avoid Aer truncation of very small probabilistic Kraus branches; channel equality is checked independently. Density-matrix normalization is checked before correcting only floating-point-scale residuals. These checks establish consistency of the implemented model, not fidelity to an actual device.
 
-**Sources.** Starting point: `qlpc/mitigation.py`, commit `63c325b` (provenance and exact parameters in `PROVENANCE.md`). Established background: [Nation et al., measurement-error mitigation (2021)](https://arxiv.org/abs/2108.12518); [Qiskit Aer relaxation channels](https://qiskit.github.io/qiskit-aer/stubs/qiskit_aer.noise.thermal_relaxation_error.html); [SciPy's matrix exponential and its algorithm references](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.expm.html); [Zumbrun, numerical error analysis for Evans-function computations (2009)](https://arxiv.org/abs/0904.0268). This package uses established methods as a numerical experiment.
+The model omits a timed idle schedule, crosstalk, correlated readout, leakage, calibration drift and coherent-error characterization beyond the supplied channel construction. Only one snapshot and one path are studied. This is an inspectable small-system benchmark, not a hardware result, a reproduction of IBM's large-scale experiments, or a new mitigation algorithm. Could stability and perturbation estimates for evolving operators guide the joint choice of product-formula resolution and extrapolation order? That is the question I would like to explore; no Evans-function method is claimed to apply here.
+
+**References:** [Nation et al., measurement mitigation (2021)](https://arxiv.org/abs/2108.12518); [Majumdar et al., digital ZNE best practices (2023)](https://arxiv.org/abs/2307.05203); [IBM's Ising-model mitigation experiment (2023)](https://www.nature.com/articles/s41586-023-06096-3); [Aer device-noise construction](https://qiskit.github.io/qiskit-aer/stubs/qiskit_aer.noise.NoiseModel.html); [Zumbrun, numerical error analysis (2009)](https://arxiv.org/abs/0904.0268). See `multiqubit/PROTOCOL.md` for the fixed comparison rules.

@@ -1,5 +1,7 @@
 # Provenance and scope
 
+## Earlier one-qubit example
+
 I prepared this example on 24 October 2026.
 
 I started from my QLPC function `readout_mitigation_demo` in
@@ -29,3 +31,23 @@ Core validation used Python 3.13.13, NumPy 2.4.5, SciPy 1.17.1 and Matplotlib
 3.11.0. The separate Qiskit check used Python 3.13.13, NumPy 2.5.4, SciPy 1.18.1,
 Qiskit 2.6.0 and Aer 0.18.0. The main results are reproducible from the included
 code, configuration and seeds. Last-bit differences can occur on other stacks.
+
+## Multi-qubit device-calibrated extension
+
+I extended the study to 4-, 6- and 8-qubit Ising circuits, factorized assignment
+mitigation and native CZ-fold extrapolation. The primary comparison uses fixed
+32,768-shot budgets including calibration; methods and circuit grid are in
+multiqubit/PROTOCOL.md. The original one-qubit files remain an introduction.
+
+For this extension I use the 15 April 2026 ibm_kingston calibration bundled
+with qiskit-ibm-runtime 0.50.0. The compact model preserves native quantum
+channels and explicitly restores the directional readout probabilities that
+BackendV2 averages by default. Package versions, source calibration hashes,
+selected physical qubits and frozen-model hashes are in
+multiqubit/data/device_calibration.json. The experiment is entirely simulated;
+there was no IBM hardware submission or cluster run.
+
+The extrapolation uses CZ folds 1,3,5 and fixed linear/quadratic intercepts.
+One-qubit and preparation noise survive. No circuit or fit was selected based
+on its favorable outcome, and all 54 case-observable results are retained.
+Neither the model nor the bootstrap supplies a hardware accuracy guarantee.

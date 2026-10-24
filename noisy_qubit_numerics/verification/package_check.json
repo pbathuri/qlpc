@@ -1,43 +1,48 @@
 {
-  "date": "2026-10-24",
   "status": "passed",
-  "extracted_package_commands": [
+  "date": "2026-10-24",
+  "single_qubit_tests": 20,
+  "multiqubit_tests": 18,
+  "commands": [
     {
       "command": "python -m unittest discover -p test_*.py",
+      "folder": ".",
       "exit_code": 0
     },
     {
-      "command": "python run_study.py",
+      "command": "python -m unittest discover -p test_*.py",
+      "folder": "multiqubit",
       "exit_code": 0
     },
     {
-      "command": "python plot_results.py",
+      "command": "python generate_distributions.py",
+      "folder": "multiqubit",
       "exit_code": 0
     },
     {
-      "command": "python check_qiskit.py",
+      "command": "python run_benchmark.py",
+      "folder": "multiqubit",
+      "exit_code": 0
+    },
+    {
+      "command": "python plot_benchmark.py",
+      "folder": "multiqubit",
       "exit_code": 0
     }
   ],
-  "unit_tests": 20,
-  "regenerated_json_exact_match": true,
-  "regenerated_count_arrays_exact_match": 20,
-  "repeated_trials": 25000,
+  "fixed_circuit_cases": 27,
+  "observables_per_case": 2,
+  "synthetic_replicates_per_case": 500,
   "pdf_pages": 3,
-  "regenerated_figure_dimensions": {
-    "dynamics.png": [
-      1512,
-      864
-    ],
-    "convergence.png": [
-      1980,
-      846
-    ],
-    "mitigation.png": [
-      2160,
-      864
-    ]
+  "regeneration_max_absolute_differences": {
+    "distributions.npz": 0.0,
+    "trials.npz": 0.0
   },
-  "qiskit_comparisons": 138,
-  "qiskit_max_trace_error": 4.1427707167972856e-14
+  "all_summary_metrics_match": true,
+  "figures_regenerated": 3,
+  "analysis_versions": {
+    "numpy": "2.4.5",
+    "scipy": "1.17.1"
+  },
+  "reproducibility_note": "Separate pinned simulator and analysis environments are required for exact seeded shot reproduction. NumPy2.5 and2.4 multinomial streams differ."
 }

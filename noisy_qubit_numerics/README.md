@@ -1,92 +1,81 @@
 # Noisy-qubit numerical methods
 
-I built this example to explore numerical stability and error propagation
-in noisy quantum systems.
-Start with **WRITEUP.pdf** (short note), then **run_study.py**.
+I study how numerical approximation, device noise and statistical correction
+interact in quantum circuits. Start with the updated [three-page note](WRITEUP.pdf)
+and the [multi-qubit study](multiqubit/). The earlier one-qubit example remains
+available as a smaller introduction.
 
-I compare numerical integration of a one-qubit Lindblad equation with
-readout-error mitigation and retain the failure cases: Euler can create nonphysical
-states, inversion can amplify sampling noise, and calibration drift can
-invalidate confidence sets. All data are simulated with synthetic parameters;
-there are no live-device measurements or hardware-calibration claims.
+## Multi-qubit study
 
-## Run the self-contained example
+I simulate 4-, 6- and 8-qubit transverse-field Ising circuits using a frozen
+IBM Kingston calibration dated **15 April 2026**. I compare raw estimates,
+factorized readout correction, and linear/quadratic CZ-fold zero-noise
+extrapolation at **32,768 total shots per protocol**, including calibration.
+These are calibrated Aer simulations, **not live hardware runs**.
 
-Python 3.13 was used for the recorded results. No account, external data or
-quantum SDK is needed for the core study.
+The fixed grid has 27 circuits and two observables, with 500 synthetic shot
+replicates per circuit. All cases are retained. The combined methods lower
+pooled error against the ideal digital circuit, but quadratic extrapolation
+is worse than linear in 38 of 54 comparisons. Accuracy against exact
+Hamiltonian evolution is reported separately: correcting noise does not
+remove product-formula error or the possibility of error cancellation.
+
+- [Methods, data and run instructions](multiqubit/README.md)
+- [Fixed protocol](multiqubit/PROTOCOL.md)
+- [Three figures](multiqubit/figures/)
+- [All 270 comparison rows](multiqubit/data/all_results.csv)
+- [Frozen calibration and results](multiqubit/data/)
+- [Verification record](multiqubit/verification/README.md)
+
+## Run the main study
+
+From this folder, with Python 3.13:
 
 ```sh
+cd multiqubit
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m unittest discover -p 'test_*.py'
-python run_study.py
-python plot_results.py
+python -m unittest discover -p 'test_estimators.py'
+python run_benchmark.py
+python plot_benchmark.py
 ```
 
-The commands regenerate the two files in data/ and the three PNGs in figures/.
-They run quickly on a laptop. The test suite has 20 tests and does not silently
-fall back to a different algorithm. Package versions and seeds are recorded in
-data/results.json. A requirements file with tested versions is included.
-
-## What to read
-
-- dynamics.py: Lindblad generator, independent Bloch formulation, Euler, RK4,
-  and exact-channel Strang splitting.
-- readout.py: the two-state inverse and Hoeffding confidence-box propagation.
-- run_study.py: fixed experiment definitions, diagnostics and saved trial counts.
-- plot_results.py: plots from saved JSON, without rerunning the experiment.
-- test_dynamics.py / test_readout.py: analytic checks and numerical failure cases.
-- verification/: recorded tests, optional channel validation and audit results.
-- PROVENANCE.md: relationship to the earlier QLPC one-qubit example.
-
-Time is in microseconds; angular frequencies are radians per microsecond.
-Probabilities, RMSE and density-matrix eigenvalues are dimensionless.
-
-## Optional independent Qiskit/Aer cross-check
+To regenerate the calibrated quantum-circuit distributions, use a separate
+simulator environment from that same directory:
 
 ```sh
-python -m pip install -r requirements-qiskit.txt
-python check_qiskit.py
+python3 -m venv .venv-simulator
+.venv-simulator/bin/python -m pip install -r requirements-simulator.txt
+.venv-simulator/bin/python -m unittest discover -p 'test_device_circuits.py'
+.venv-simulator/bin/python generate_distributions.py
+.venv/bin/python run_benchmark.py
+.venv/bin/python plot_benchmark.py
 ```
 
-This checks the Strang subchannels using Qiskit density matrices and independently
-checks the QLPC depolarization/readout baseline in Aer. It prints JSON and fails
-if unavailable or inconsistent; it does not silently substitute classical
-results. It does not run M3 or claim to verify the earlier project's M3 output.
-The saved successful output is verification/qiskit_check.json.
+The generator reuses the included frozen model by default. No IBM account,
+external dataset, cluster allocation or hardware submission is needed. The
+commands replace generated files in multiqubit/data/, figures/ and verification/.
+Use the included saved outputs to read the results without installing anything.
 
-## How to read the uncertainty results
+## Earlier one-qubit introduction
 
-Each readout case contains 5,000 independent complete trials, each with 8,192
-measurement shots and 8,192 calibration shots for each ideal basis state.
-Corrections and the raw equal-budget baseline each cost 24,576 shots per trial.
-An additional raw 8,192-shot result and a known-current-rate oracle are saved
-for diagnostic comparison. The oracle assumes calibration knowledge for free.
-Calibration is fresh within each simulated trial, not reused across trials.
+[SINGLE_QUBIT_WRITEUP.pdf](SINGLE_QUBIT_WRITEUP.pdf) and
+[SINGLE_QUBIT_README.md](SINGLE_QUBIT_README.md) document the original Lindblad,
+positivity and uncertain-readout examples. Their programs and 20 unit tests
+remain at this folder's top level. Their synthetic parameters are separate
+from the device-derived multi-qubit experiment.
 
-The four stable-model cases satisfy the assumptions of the conservative
-Hoeffding construction. The deliberate drift case does not. Observed coverage
-5000/5000 is not a claim of exact or perfect population coverage. These are
-per-experiment intervals, not simultaneous bands over many circuits or times.
+## Scope
 
-Point estimates are never clipped. The results count finite estimates, undefined
-zero-denominator estimates, negative estimated gaps and out-of-range estimates.
-RMSE fields are named rmse_finite: if undefined estimates occur in a changed
-experiment, those fields are conditional on the explicitly reported finite set.
-There are no undefined estimates in the recorded five cases. If an interval box
-is not wholly within positive assignment gaps, the implementation returns
-flagged [0,1]; this flag need not imply the actual channel is singular.
-Calibration preparations are assumed ideal. Preparation errors, correlated
-shots, non-Markovian noise, leakage and device drift need additional modelling.
+The readout model is independent per qubit, and CZ folding amplifies only
+CZ noise. Equal shots are not equal gate execution cost. The study does not
+model a timed idle schedule, crosstalk, leakage, correlated readout or changes
+in calibration. It is a reproducible small-system benchmark of established
+methods, not a new mitigation algorithm, hardware claim or quantum advantage.
 
-## Rebuild the PDF (optional)
-
-With Pandoc and XeLaTeX installed:
+From the package root, rebuild the updated note with Pandoc and XeLaTeX:
 
 ```sh
 pandoc WRITEUP.md --pdf-engine=xelatex -o WRITEUP.pdf
 ```
-
-The numerical programs do not require TeX. Figures are shipped separately and
-the mitigation figure is also embedded in the note.

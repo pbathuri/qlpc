@@ -1,4 +1,7 @@
-# Verification — 24 October 2026
+# Historical one-qubit verification — 24 October 2026
+
+Current multi-qubit verification is in `../multiqubit/verification/README.md`.
+The current extracted-package summary is `package_check.json`.
 
 The core unit suite passes 20 tests; stdout/stderr are in tests.txt. All seven
 Python files parse and compile. No Python lint/type checker was installed in
@@ -26,7 +29,7 @@ units, clipping and mathematical typesetting. All noisy figures explicitly
 say synthetic simulation. The write-up does not claim hardware validation,
 quantum error correction, novelty, scalability, or computational advantage.
 
-package_check.json records testing from an extracted ZIP: unit tests, complete
+single_qubit_package_check.json records testing from an extracted ZIP: unit tests, complete
 experiment regeneration, figure regeneration and optional Qiskit validation.
 It also compares regenerated JSON and all trial arrays with the shipped data.
 SHA256SUMS.txt at the package root covers every included payload file.

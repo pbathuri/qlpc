@@ -1,0 +1,238 @@
+{
+  "aer_forward_sample": {
+    "case": 0,
+    "fold": 3,
+    "max_absolute_probability_error": 0.0026987678693386474,
+    "max_fraction_of_seven_sigma_tolerance": 0.2778515436909994,
+    "seed": 24680,
+    "shots": 131072
+  },
+  "benchmark": {
+    "fold": 5,
+    "n_qubits": 8,
+    "seconds": 0.06283495800016681,
+    "steps": 8,
+    "time": 1.5
+  },
+  "case_count": 27,
+  "cases": [
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 8.049116928532385e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 0,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 4.440892098500626e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 1,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 2.55351295663786e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 2,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 4.996003610813204e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 3,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 1.0824674490095276e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 4,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 5.495603971894525e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 5,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 2.1094237467877974e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 6,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 8.326672684688674e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 7,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 4,
+      "compiler_probability_max_error": 1.4988010832439613e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 8,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 6.106226635438361e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 9,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 4.3298697960381105e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 10,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 2.067790383364354e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 11,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 3.885780586188048e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 12,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 8.604228440844963e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 13,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 3.6637359812630166e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 14,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 1.9984014443252818e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 15,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 2.3869795029440866e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 16,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 6,
+      "compiler_probability_max_error": 1.609823385706477e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 17,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 9.992007221626409e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 18,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 6.5503158452884236e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 19,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 1.8735013540549517e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 20,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 7.216449660063518e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 21,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 9.992007221626409e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 22,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 5.995204332975845e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 23,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 1.9984014443252818e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 24,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 2.3869795029440866e-15,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 25,
+      "noncz_sequence_unchanged": true
+    },
+    {
+      "compact_register": 8,
+      "compiler_probability_max_error": 9.43689570931383e-16,
+      "cz_scaling_exact": true,
+      "ideal_fold_max_error": 0.0,
+      "index": 26,
+      "noncz_sequence_unchanged": true
+    }
+  ],
+  "elapsed_seconds": 8.289588875000845,
+  "noise_sha256": "1f8d3a2bc25f9aa149cf858e2717e7d62ee5063b779076dd95c400896b98fcb6"
+}

@@ -64,18 +64,23 @@ your `captain-whiskers` quantum optimizer + `AutoResearchClaw` qiskit skill). Qu
 
 ## Noisy-qubit numerical methods
 
-I extended my earlier one-qubit readout demo into a standalone numerical
-example. I compare Euler, RK4 and Strang splitting for noisy qubit dynamics,
-then study readout correction with finite calibration data, ill-conditioning
-and calibration drift. The results are synthetic simulations, not hardware
-measurements or a demonstration of quantum error correction.
+I extended my earlier one-qubit demo into a device-calibrated multi-qubit
+study. I simulate 4-, 6- and 8-qubit Ising circuits and compare readout
+correction with linear and quadratic CZ-fold zero-noise extrapolation at
+32,768 total shots per protocol, including calibration. The noise model comes
+from IBM Kingston's 15 April 2026 calibration snapshot; these are Aer
+simulations, not live hardware measurements or quantum error correction.
 
-- [Three-page write-up](noisy_qubit_numerics/WRITEUP.pdf)
+- [Updated three-page write-up](noisy_qubit_numerics/WRITEUP.pdf)
 - [Code and setup instructions](noisy_qubit_numerics/README.md)
-- [Figures](noisy_qubit_numerics/figures/) and [saved results](noisy_qubit_numerics/data/)
-- [Verification record](noisy_qubit_numerics/verification/README.md): 20 unit tests,
-  25,000 simulated trials and 138 independent Qiskit channel comparisons.
+- [Multi-qubit methods and fixed protocol](noisy_qubit_numerics/multiqubit/README.md)
+- [Figures](noisy_qubit_numerics/multiqubit/figures/) and [all comparison rows](noisy_qubit_numerics/multiqubit/data/all_results.csv)
+- [Verification](noisy_qubit_numerics/multiqubit/verification/README.md): 18 multi-qubit tests,
+  27 circuits, two observables and 500 synthetic shot replicates per circuit.
 
-The example lives in [noisy_qubit_numerics/](noisy_qubit_numerics/) and runs
-independently of the main application. Its README includes the commands for
-reproducing the study and the optional Qiskit/Aer check.
+The comparisons retain failures: quadratic extrapolation is worse than the
+linear combined method in 38 of 54 cases. Error against the ideal digital
+circuit is separated from product-formula error against exact Hamiltonian
+evolution. The earlier one-qubit example and its 20 tests remain included.
+The study runs locally with separately pinned simulation and analysis
+environments; no quantum account or cluster login is required.

@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-24",
+  "status": "passed",
+  "trial_estimates_reconstructed_from_distributions_and_seeds": true,
+  "maximum_estimate_difference": 5.55e-16,
+  "saved_bootstrap_intervals_reproduced": true,
+  "independent_hamiltonian_reference_max_probability_difference": 3.50e-15,
+  "directional_readout_fold_distributions_matched": 81,
+  "quantum_channels_compared": 38,
+  "quantum_channel_max_matrix_difference": 3.00e-15,
+  "directional_readout_channels_compared": 8,
+  "fresh_bootstrap_replicates": 2000,
+  "fresh_bootstrap_max_interval_endpoint_shift": 8.64e-5,
+  "qualifications": [
+    "All registers share physical qubit 1 with substantial readout error.",
+    "Quadratic correction is worse than combined linear in 38/54 outcomes and readout-only in 12/54.",
+    "Readout-based methods worsen continuous-target error relative to raw in 14/54 outcomes due to cancellation.",
+    "Bootstrap uncertainty is conditional on the fixed circuits and noise model.",
+    "No undefined or out-of-range estimates occurred; implementation retains such failures if present."
+  ]
+}

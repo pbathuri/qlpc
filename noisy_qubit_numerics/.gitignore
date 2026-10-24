@@ -1,0 +1,6 @@
+.cache/
+.omx/
+.venv/
+.venv-simulator/
+__pycache__/
+*.pyc

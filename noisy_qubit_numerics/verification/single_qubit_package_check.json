@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-24",
+  "status": "passed",
+  "extracted_package_commands": [
+    {
+      "command": "python -m unittest discover -p test_*.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python run_study.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python plot_results.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python check_qiskit.py",
+      "exit_code": 0
+    }
+  ],
+  "unit_tests": 20,
+  "regenerated_json_exact_match": true,
+  "regenerated_count_arrays_exact_match": 20,
+  "repeated_trials": 25000,
+  "pdf_pages": 3,
+  "regenerated_figure_dimensions": {
+    "dynamics.png": [
+      1512,
+      864
+    ],
+    "convergence.png": [
+      1980,
+      846
+    ],
+    "mitigation.png": [
+      2160,
+      864
+    ]
+  },
+  "qiskit_comparisons": 138,
+  "qiskit_max_trace_error": 4.1427707167972856e-14
+}

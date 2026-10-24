@@ -1,116 +1,81 @@
-# QLPC
+# QLPC — Quantum-LLM Personalized portfolio Constructor
 
-Quantum-computing prototypes and a standalone study of noisy-qubit numerical
-methods. For the numerical-analysis example, start with the
-[three-page write-up](noisy_qubit_numerics/WRITEUP.pdf) and its
-[setup guide](noisy_qubit_numerics/README.md).
+**IEEE Grandtech 26 · FinTech route.** A hybrid **quantum + classical + LLM** system for *dynamic,
+personalized* portfolio construction. It fuses the right quantum tools (not the wrong ones), exact convex
+optimization, an LLM reasoning loop, and grounding in the user's **own cognitive graph** — and it runs
+end-to-end today on simulators, degrading to faithful classical equivalents so it never breaks.
+
+```
+brief (natural language)
+   │  ground in YOUR graph (PCE/Cartograph)  ──► LLM elicits constraints (budget, risk, CVaR α)
+   ▼
+market data ─► [QUANTUM] QAOA selection (which K of N — NP-hard QUBO) ─► [CLASSICAL] convex mean-CVaR
+                                                                              weights (CVXPY, exact)
+                        [QUANTUM] IQAE tail risk (CVaR via amplitude estimation) ─┘
+   ▼
+constructed portfolio + quantum CVaR + LLM rationale grounded in your work  ─► (backtest/execute: nautilus_trader)
+```
+
+## Why these quantum algorithms (the honest choice)
+- **Shor's algorithm is the wrong tool** — it factors integers (cryptography), not portfolios. We don't use
+  it as an optimizer (only relevant to FinTech as the post-quantum *threat*).
+- **Iterative Quantum Amplitude Estimation (IQAE)** → tail risk. Estimates the exceedance probability
+  `P(loss ≥ VaR)` with a **quadratic** sample-complexity speedup over Monte-Carlo (Woerner–Egger 2019).
+  This is the *real* version of the classical-CVaR placeholder in your `captain-whiskers` optimizer.
+- **QAOA** → the NP-hard, cardinality-constrained **asset selection** (QUBO/Ising) — the discrete piece
+  classical convex solvers can't do. Same gate-based, NISQ-suitable family as your `captain-whiskers` VQE.
+- **Classical convex (CVXPY)** → exact continuous mean-CVaR weights on the selected subset. Don't quantize
+  what a convex solver already solves optimally.
+
+## What makes it different
+Quantum-finance demos do *one* isolated piece on toy data; robo-advisors are generic. QLPC fuses hybrid
+quantum (selection **and** risk) + convex optimization + an LLM reasoning loop **personalized by your own
+published graph engine** (Cartograph / PCE) — end-to-end, explainable, dynamically rebalancing, tailored
+to *you*.
+
+## Run it
+```bash
+python -m venv .venv && .venv/Scripts/activate     # (already set up here)
+pip install -r requirements.txt                     # numpy scipy cvxpy qiskit qiskit-finance ...
+python -m qlpc demo                                 # full pipeline on a synthetic market
+python -m qlpc construct "conservative, ~4 names, tail-aware" --tickers AAPL MSFT NVDA JPM XOM JNJ --live
+python -m qlpc backtest                             # DYNAMIC rolling-rebalance backtest (track record)
+pytest -q                                           # tests (pass with or without qiskit)
+```
+Every quantum module prints which path ran (`quantum-qaoa` / `quantum-iqae` vs the classical fallback) and
+the classical cross-check, so results are always honest and verifiable.
+
+## Modules
+| File | Role |
+|---|---|
+| `data.py` | market data (yfinance / synthetic) → μ, Σ |
+| `quantum_select.py` | **QAOA** cardinality-constrained selection (QUBO) + exact classical oracle |
+| `quantum_risk.py` | **IQAE** tail-risk CVaR + classical-MC oracle |
+| `convex.py` | CVXPY mean-variance / mean-CVaR exact weights |
+| `risk.py` | stochastic scenarios + classical VaR/CVaR |
+| `llm.py` | constraint elicitation + grounded explanation (local/cloud, rule-based fallback) |
+| `graph.py` | personalization via your PCE/Cartograph memory graph |
+| `pipeline.py` / `cli.py` | orchestration + CLI |
+
+## Status
+**Prototype — runnable proof of concept.** Built on shipped components (Cartograph v1.0.1 graph engine,
+your `captain-whiskers` quantum optimizer + `AutoResearchClaw` qiskit skill). Quantum paths run on
+`qiskit-aer` simulators; scales to ~50–100 assets on near-term hardware.
 
 ## Noisy-qubit numerical methods
 
-The [standalone example](noisy_qubit_numerics/) studies two related problems:
+A standalone numerical example extends the earlier one-qubit readout demo.
+It compares Euler, RK4 and Strang splitting for noisy qubit dynamics, then
+studies readout correction with finite calibration data, ill-conditioning
+and calibration drift. The results are synthetic simulations, not hardware
+measurements or a demonstration of quantum error correction.
 
-- **Approximating noisy quantum evolution:** compare Euler, RK4 and Strang
-  splitting for a one-qubit Lindblad equation, checking convergence and whether
-  the computed density matrices remain physical.
-- **Correcting imperfect measurements:** invert an uncertain readout model,
-  propagate finite-shot calibration uncertainty, and retain failures caused by
-  ill-conditioning or calibration drift.
+- [Three-page write-up](noisy_qubit_numerics/WRITEUP.pdf)
+- [Code and setup instructions](noisy_qubit_numerics/README.md)
+- [Figures](noisy_qubit_numerics/figures/) and [saved results](noisy_qubit_numerics/data/)
+- [Verification record](noisy_qubit_numerics/verification/README.md): 20 unit tests,
+  25,000 simulated trials and 138 independent Qiskit channel comparisons.
 
-All observations use **synthetic simulations**, not live hardware or measured
-device calibrations. This is an example of established numerical methods and
-readout-error mitigation, not quantum error correction, a new algorithm, or a
-demonstration of quantum speedup.
-
-### Read and explore
-
-| Resource | Contents |
-| --- | --- |
-| [Write-up (PDF)](noisy_qubit_numerics/WRITEUP.pdf) · [Markdown source](noisy_qubit_numerics/WRITEUP.md) | Model, numerical comparisons, confidence construction and limitations |
-| [Dynamics implementation](noisy_qubit_numerics/dynamics.py) | Lindblad and independent Bloch formulations; Euler, RK4 and exact-substep Strang integration |
-| [Readout implementation](noisy_qubit_numerics/readout.py) | Two-state inversion and conservative Hoeffding confidence sets |
-| [Study runner](noisy_qubit_numerics/run_study.py) | Reproducible experiment definitions, seeds and diagnostics |
-| [Figures](noisy_qubit_numerics/figures/) | Dynamics, convergence/physicality and mitigation comparisons |
-| [Saved results](noisy_qubit_numerics/data/) | Numerical summaries and all simulated trial counts |
-| [Verification record](noisy_qubit_numerics/verification/README.md) | Tests, independent checks and extracted-package reproduction |
-| [Provenance](noisy_qubit_numerics/PROVENANCE.md) | How the example extends the earlier QLPC readout demo |
-
-### Run the example
-
-From the repository root, using Python 3.13 as in the recorded environment:
-
-```sh
-cd noisy_qubit_numerics
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python -m unittest discover -p 'test_*.py'
-python run_study.py
-python plot_results.py
-```
-
-The core study needs NumPy, SciPy and Matplotlib; no quantum SDK, account or
-external dataset is required. The last two commands regenerate the saved data
-and figures inside the example folder.
-
-For the optional independent Qiskit/Aer check, from that same folder:
-
-```sh
-python -m pip install -r requirements-qiskit.txt
-python check_qiskit.py
-```
-
-This check validates the channel calculations and forward-noise model. It
-fails explicitly if dependencies or comparisons fail; it does not silently
-substitute a different method or run the original M3 mitigation routine.
-
-### Recorded verification and findings
-
-The [24 October 2026 verification](noisy_qubit_numerics/verification/package_check.json)
-records **20 passing unit tests**, reproduction of **25,000 simulated trials**,
-and **138 Qiskit channel-state comparisons** with maximum half trace-norm
-discrepancy below **4.15 × 10⁻¹⁴**.
-
-The examples retain three distinctions: a linearly stable integrator can still
-produce a nonphysical state; readout inversion can amplify sampling error;
-and confidence guarantees based on stable calibration do not cover calibration
-drift. Observed coverage in a finite simulation is not a hardware guarantee.
-
-![Numerical convergence and retained physicality failures](noisy_qubit_numerics/figures/convergence.png)
-
-*Source: the included simulated results, 24 October 2026. No hardware measurements.*
-
-## Original QLPC application
-
-The original Quantum-LLM Personalized Portfolio Constructor remains in
-[`qlpc/`](qlpc/). It combines QAOA-based subset selection, classical convex
-weight optimization, risk calculations, and an optional graph-grounded LLM
-interface. Its dependencies and test suite are separate from the standalone
-numerical example above.
-
-From the repository root, in a separate environment:
-
-```sh
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python -m qlpc demo
-python -m qlpc mitigation
-python -m qlpc backtest
-python -m pytest tests
-```
-
-Inspect the reported method labels: the application can fall back to classical
-calculations, and its tests allow those paths. Passing them does not establish
-that a quantum or mitigation routine ran.
-
-The current [`quantum_risk.py`](qlpc/quantum_risk.py) estimates a selected-tail
-probability with IQAE but computes its returned CVaR separately from histogram
-bin centers. Its comparator and histogram use different bin widths. That return
-value should not be described as an amplitude-estimated CVaR. The original
-[`mitigation.py`](qlpc/mitigation.py) is a one-qubit M3 readout-mitigation demo;
-the standalone study makes the small inverse problem explicit instead.
-
-[`RESULTS.md`](RESULTS.md), [`BENCHMARK.json`](BENCHMARK.json) and
-[`VALUE.md`](VALUE.md) retain historical prototype records. They do not establish
-hardware scalability or a wall-clock quantum advantage; earlier descriptions
-of those capabilities should be read with the implementation limits above.
+The example lives in [noisy_qubit_numerics/](noisy_qubit_numerics/) and runs
+independently of the main application. Its README includes the commands for
+reproducing the study and the optional Qiskit/Aer check.

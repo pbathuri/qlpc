@@ -74,7 +74,7 @@ A concrete retained failure is 4 qubits, $T=1$, 4 steps, mean $Z$: combined line
 
 Figure: all 54 comparisons retained; source `multiqubit/data/benchmark.json`, 24 October 2026. Kingston 15 April 2026 calibration in Aer; no live hardware.
 
-`depth_tradeoff.png` compares all five protocols at fixed $T=1/J$: more steps add noisy gates. The CSV retains all 270 rows (bias, both RMSE targets, costs, failures); the NPZ retains every replicate estimate and calibration marginal count.
+[The depth figure](https://github.com/pbathuri/qlpc/blob/main/noisy_qubit_numerics/multiqubit/figures/depth_tradeoff.png) shows Hamiltonian-target RMSE and absolute product-formula bias versus steps at $T=1/J$. The CSV retains all 270 rows (bias, both RMSE targets, costs, failures); the NPZ retains all replicate estimates and calibration marginal counts.
 
 \newpage
 
@@ -90,12 +90,14 @@ Noise mitigation targets the first term. The second is an approximation error, n
 
 I also calculate a diagnostic with CZ errors disabled but one-qubit/readout errors retained. It is **excluded from both fits**. For 8 qubits, $T=1$, 8 steps, mean $Z$, the ideal digital value is $0.63381245$. The CZ-noise-off value after population-level readout correction is $0.62385224$; combined linear and quadratic population intercepts are $0.60541245$ and $0.62126419$. Thus even an accurate extrapolation toward this selective endpoint retains unscaled noise. These population quantities use exact model distributions and effective calibration rates; they are not finite-shot estimates.
 
-Figure `selective_extrapolation.png`: fixed case, no sampling error bars on population means; source `multiqubit/data/benchmark.json`, 24 October 2026. Dated Kingston calibration in Aer, not live hardware.
+[Selective extrapolation figure](https://github.com/pbathuri/qlpc/blob/main/noisy_qubit_numerics/multiqubit/figures/selective_extrapolation.png): population means for the fixed case, without sampling error bars.
+
+Source: `multiqubit/data/benchmark.json`, 24 October 2026; dated Kingston calibration in Aer, not live hardware.
 
 **Verification.** Eighteen multi-qubit tests pass. The remapped 38 quantum channels agree with the source channel matrices within $3.0\times10^{-15}$, and eight readout channels match the directional calibration. All 81 folded ideal states preserve the computation and exact CZ scaling; the largest compiler probability discrepancy is $6.55\times10^{-15}$. Independent Kronecker-Hamiltonian reconstruction agrees with the saved continuous reference within $3.50\times10^{-15}$. A 131,072-shot Aer check validates measurement/readout ordering. Independent recomputation reproduces all 27 cases, replicate estimates and bootstrap summaries. The frozen model, seeds, configuration, tests and verification records are included.
 
 Two implementation details matter numerically. BackendV2's default averaged readout errors are replaced by the snapshot's directional assignment probabilities. Also, equivalent consolidated channel representations avoid Aer truncation of very small probabilistic Kraus branches; channel equality is checked independently. Density-matrix normalization is checked before correcting only floating-point-scale residuals. These checks establish consistency of the implemented model, not fidelity to an actual device.
 
-The model omits a timed idle schedule, crosstalk, correlated readout, leakage, calibration drift and coherent-error characterization beyond the supplied channel construction. Only one snapshot and one path are studied. This is an inspectable small-system benchmark, not a hardware result, a reproduction of IBM's large-scale experiments, or a new mitigation algorithm. Could stability and perturbation estimates for evolving operators guide the joint choice of product-formula resolution and extrapolation order? That is the question I would like to explore; no Evans-function method is claimed to apply here.
+The model omits a timed idle schedule, crosstalk, correlated readout, leakage, calibration drift and coherent-error characterization beyond the supplied channel construction. Only one snapshot and one path are studied. This is an inspectable small-system benchmark, not a hardware result, a reproduction of IBM's large-scale experiments, or a new mitigation algorithm. Can we choose product-formula resolution and extrapolation order using a reliable error estimate, rather than knowing the exact answer? That is the question I would like to explore; no Evans-function method is claimed to apply here.
 
 **References:** [Nation et al., measurement mitigation (2021)](https://arxiv.org/abs/2108.12518); [Majumdar et al., digital ZNE best practices (2023)](https://arxiv.org/abs/2307.05203); [IBM's Ising-model mitigation experiment (2023)](https://www.nature.com/articles/s41586-023-06096-3); [Aer device-noise construction](https://qiskit.github.io/qiskit-aer/stubs/qiskit_aer.noise.NoiseModel.html); [Zumbrun, numerical error analysis (2009)](https://arxiv.org/abs/0904.0268). See `multiqubit/PROTOCOL.md` for the fixed comparison rules.

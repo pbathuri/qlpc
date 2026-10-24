@@ -62,6 +62,13 @@ the classical cross-check, so results are always honest and verifiable.
 your `captain-whiskers` quantum optimizer + `AutoResearchClaw` qiskit skill). Quantum paths run on
 `qiskit-aer` simulators; scales to ~50–100 assets on near-term hardware.
 
+**Scope clarification:** The earlier 50–100-asset hardware-scaling claim is
+not established by the results in this repository. In my current
+`qlpc/quantum_risk.py`, IQAE estimates a selected-tail probability; the returned
+CVaR is calculated separately from histogram bin centers, and the comparator
+and histogram use different bin widths. I retain this as a prototype; the
+returned CVaR should not be interpreted as an amplitude-estimated value.
+
 ## Noisy-qubit numerical methods
 
 I extended my earlier one-qubit demo into a device-calibrated multi-qubit

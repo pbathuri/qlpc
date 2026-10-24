@@ -106,23 +106,26 @@ def depth(data):
         cases=sorted([c for c in data['cases'] if c['n_qubits']==n and c['time']==1.0],key=lambda x:x['steps'])
         for row,observable in enumerate(('mean_z','mean_neighbor_zz')):
             ax=axes[row,col]
+            outcomes=[next(o for o in c['observables'] if o['observable']==observable) for c in cases]
             for method in data['methods']:
-                ys=[next(o for o in c['observables'] if o['observable']==observable)['methods'][method]['rmse_finite'] for c in cases]
+                ys=[o['methods'][method]['rmse_vs_continuous_finite'] for o in outcomes]
                 ax.plot([c['steps'] for c in cases],ys,color=COLORS[method],marker=MARKERS[method],
                         ms=4.5,lw=1.6,label=LABELS[method])
+            ax.plot([c['steps'] for c in cases],[abs(o['product_formula_bias']) for o in outcomes],
+                    color='#111111',marker='x',ms=5,lw=1.5,ls='--',label='Ideal product-formula |bias|')
             ax.set_yscale('log')
             ax.set_ylim(.0025,.3)
             ax.set_xticks([2,4,8])
             ax.grid(alpha=.2,which='major')
             ax.set_title(f'{n} qubits · {OBS[observable]}',pad=7)
             if col==0:
-                ax.set_ylabel('RMSE vs ideal digital\n(dimensionless; log scale)')
+                ax.set_ylabel('Error vs exact Hamiltonian\n(dimensionless; log scale)')
             if row==1:
                 ax.set_xlabel('Strang product-formula steps')
     handles,labels=axes[0,0].get_legend_handles_labels()
     fig.legend(handles,labels,ncol=3,loc='lower center',bbox_to_anchor=(.5,.075),frameon=False,
                columnspacing=1.6,handlelength=2)
-    fig.suptitle(r'More approximation steps also add noisy gates: fixed $T=1/J$',fontsize=13,y=.965)
+    fig.suptitle(r'Discretization bias and total estimation error: fixed $T=1/J$',fontsize=13,y=.965)
     fig.subplots_adjust(left=.095,right=.98,wspace=.18,hspace=.34,bottom=.26,top=.86)
     footer(fig)
     save(fig,'depth_tradeoff.png')

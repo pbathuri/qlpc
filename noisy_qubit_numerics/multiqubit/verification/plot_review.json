@@ -17,6 +17,7 @@
     "Dated Aer simulation clearly distinguished from live hardware",
     "Population curves have no sampling error bars",
     "CZ-noise-off diagnostic excluded from fits",
-    "Four plotted fit intercepts agree with saved benchmark within 1e-12"
+    "Four plotted fit intercepts agree with saved benchmark within 1e-12",
+    "Updated depth figure: all 36 Hamiltonian-target RMSE and absolute product-formula bias series match saved data; none clipped."
   ]
 }

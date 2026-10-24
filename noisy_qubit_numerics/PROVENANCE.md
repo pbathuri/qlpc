@@ -7,7 +7,7 @@ I prepared this example on 24 October 2026.
 I started from my QLPC function `readout_mitigation_demo` in
 [qlpc/mitigation.py](https://github.com/pbathuri/qlpc/blob/63c325baaf22fdcd5c09707963455fa37c78fc15/qlpc/mitigation.py),
 commit `63c325baaf22fdcd5c09707963455fa37c78fc15`.
-The source repository is private; this package is self-contained.
+The source repository is public; this package is also self-contained.
 
 The retained baseline is Ry(1.2), depolarization rho -> 0.98 rho + 0.02 I/2,
 and asymmetric readout errors e0=0.07 and e1=0.12. QLPC called the M3 package.

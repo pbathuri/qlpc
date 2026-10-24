@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-24",
+  "status": "passed",
+  "scope": "presentation corrections only; no new simulations",
+  "saved_data_files_unchanged": 9,
+  "plotted_series_checked": 36,
+  "depth_target": "Exact Hamiltonian RMSE for five protocols, plus absolute ideal product-formula bias",
+  "plotted_values_match_saved_data": true,
+  "plotted_points_within_limits": true,
+  "pdf_pages": 3,
+  "clickable_supporting_figure_links": 2,
+  "original_repository_readme_preserved": true,
+  "readme_change": "Additive scope clarification only",
+  "numerical_experiments_rerun": false
+}

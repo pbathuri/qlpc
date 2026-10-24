@@ -64,9 +64,9 @@ your `captain-whiskers` quantum optimizer + `AutoResearchClaw` qiskit skill). Qu
 
 ## Noisy-qubit numerical methods
 
-A standalone numerical example extends the earlier one-qubit readout demo.
-It compares Euler, RK4 and Strang splitting for noisy qubit dynamics, then
-studies readout correction with finite calibration data, ill-conditioning
+I extended my earlier one-qubit readout demo into a standalone numerical
+example. I compare Euler, RK4 and Strang splitting for noisy qubit dynamics,
+then study readout correction with finite calibration data, ill-conditioning
 and calibration drift. The results are synthetic simulations, not hardware
 measurements or a demonstration of quantum error correction.
 

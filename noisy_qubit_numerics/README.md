@@ -1,10 +1,11 @@
 # Noisy-qubit numerical methods
 
-A standalone example for Professor Kevin Zumbrun, prepared by Pradyot Bathuri.
+I built this example to explore numerical stability and error propagation
+in noisy quantum systems.
 Start with **WRITEUP.pdf** (short note), then **run_study.py**.
 
-The code compares numerical integration of a one-qubit Lindblad equation with
-readout-error mitigation. It retains failures: Euler can create nonphysical
+I compare numerical integration of a one-qubit Lindblad equation with
+readout-error mitigation and retain the failure cases: Euler can create nonphysical
 states, inversion can amplify sampling noise, and calibration drift can
 invalidate confidence sets. All data are simulated with synthetic parameters;
 there are no live-device measurements or hardware-calibration claims.
